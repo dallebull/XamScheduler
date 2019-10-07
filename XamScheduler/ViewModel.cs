@@ -32,9 +32,9 @@ namespace XamScheduler
 
             }
 
-            // Add events into a CalendarInlineEvents collection
-      
             }
+
+       
 
     
     }
