@@ -15,15 +15,15 @@ namespace XamScheduler
     {
         public MainPage()
         {
-      
+
             InitializeComponent();
 
         }
-      
+
 
         public async void OnDateCellHolding(object sender, EventArgs e)
         {
-  
+
             var ClickedTime = (DateTime)calendar.SelectedDate;
             NewAppointment appointment = new NewAppointment();
             appointment.startDateTime = ClickedTime;
@@ -36,13 +36,20 @@ namespace XamScheduler
             {
 
                 StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
-                
+
 
                 await client.PostAsync("https://timebookingapi.azurewebsites.net/api/timebooking", scontent);
-       
+
                 InitializeComponent();
             }
         }
-      
+      public void Handle_InlineToggled(object sender, InlineToggledEventArgs e)
+        {
+            if (e.selectedAppointment == null)
+            {
+                return;
+            }
+            
+        }
     }
-}
+    }
