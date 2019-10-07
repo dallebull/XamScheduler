@@ -27,7 +27,7 @@ namespace XamScheduler
                 event1.StartTime = item.startDateTime;
                 event1.EndTime = item.endDateTime;
                 event1.Subject = item.name;
-                event1.Color = Color.Fuchsia;
+                event1.Color = Color.Red;
                 CalendarInlineEvents.Add(event1);
 
             }
