@@ -34,6 +34,8 @@ namespace XamScheduler
                 calendar.BlackoutDates = blackoutDates;
             }
         }
+
+
     }
     }
 

@@ -23,6 +23,31 @@ namespace XamScheduler
 
         public async void OnDateCellHolding(object sender, EventArgs e)
         {
+         OnAlertYesNoClicked();
+
+
+       
+        }
+      public void Handle_InlineToggled(object sender, InlineToggledEventArgs e)
+        {
+            if (e.selectedAppointment == null)
+            {
+                return;
+            }
+            
+        }
+        
+        async void OnAlertYesNoClicked()
+        {
+            bool answer = await DisplayAlert("Question?", "Would you like to Book this Day", "Yes", "No");
+            if (answer == true)
+            {
+                BookIt();
+
+            }
+        }
+        public async void BookIt()
+        {
 
             var ClickedTime = (DateTime)calendar.SelectedDate;
             NewAppointment appointment = new NewAppointment();
@@ -35,21 +60,11 @@ namespace XamScheduler
             using (HttpClient client = new HttpClient())
             {
 
-                StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
-
-
+                StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");                
                 await client.PostAsync("https://timebookingapi.azurewebsites.net/api/timebooking", scontent);
 
                 InitializeComponent();
             }
         }
-      public void Handle_InlineToggled(object sender, InlineToggledEventArgs e)
-        {
-            if (e.selectedAppointment == null)
-            {
-                return;
-            }
-            
-        }
     }
-    }
+}
