@@ -23,11 +23,10 @@ namespace XamScheduler
 
         public async void OnDateCellHolding(object sender, EventArgs e)
         {
-         OnAlertYesNoClicked();
 
-
-       
+         OnAlertYesNoClicked(calendar.SelectedDate);       
         }
+
       public void Handle_InlineToggled(object sender, InlineToggledEventArgs e)
         {
             if (e.selectedAppointment == null)
@@ -37,34 +36,18 @@ namespace XamScheduler
             
         }
         
-        async void OnAlertYesNoClicked()
+        async void OnAlertYesNoClicked(object sender)
         {
-            bool answer = await DisplayAlert("Question?", "Would you like to Book this Day", "Yes", "No");
+            var tmpDate = calendar.SelectedDate.ToString();
+            var tmpDate2 = DateTime.Parse(tmpDate);
+            var DateDate = tmpDate2.Date.ToString("yyyy/MM/dd");
+            bool answer = await DisplayAlert(DateDate, "Would you like to Book this Day", "Yes", "No");
             if (answer == true)
             {
-                BookIt();
+                Navigation.PushAsync( new BookEvent((DateTime.Parse(calendar.SelectedDate.ToString()))));           
 
             }
         }
-        public async void BookIt()
-        {
-
-            var ClickedTime = (DateTime)calendar.SelectedDate;
-            NewAppointment appointment = new NewAppointment();
-            appointment.startDateTime = ClickedTime;
-            appointment.endDateTime = ClickedTime.AddMinutes(30);
-            appointment.name = "Björne Testar";
-
-            var content = JsonConvert.SerializeObject(appointment);
-
-            using (HttpClient client = new HttpClient())
-            {
-
-                StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");                
-                await client.PostAsync("https://timebookingapi.azurewebsites.net/api/timebooking", scontent);
-
-                InitializeComponent();
-            }
-        }
+      
     }
 }

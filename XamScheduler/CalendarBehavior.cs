@@ -15,7 +15,7 @@ namespace XamScheduler
  
         class CalendarBehavior : Behavior<ContentPage>
         {
-            SfCalendar calendar;
+          public  SfCalendar calendar;
 
             protected override void OnAttachedTo(ContentPage bindable)
             {

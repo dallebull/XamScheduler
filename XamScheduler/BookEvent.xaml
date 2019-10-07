@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="XamScheduler.BookEvent">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0, 20, 0, 0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+
+    <StackLayout Margin="10">
+        <Label Text="Book Event"
+               Style="{DynamicResource TitleStyle}"
+               Margin="0, 20"
+               HorizontalTextAlignment="Center" />
+
+        <Label Text="Start Time:" />
+        <Label Text="{Binding Date}" />
+
+        <TimePicker x:Name="startTimePicker"
+                    Margin="30, 0, 0, 30"         
+                    Format="T"
+                    PropertyChanged="OnTimePickerPropertyChanged" />
+
+        <Label Text="+ 30 Minutes!"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"/>
+
+
+        <Button Text="Ok"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="OnButtonClicked" />
+
+    </StackLayout>
+</ContentPage>
