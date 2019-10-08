@@ -13,9 +13,9 @@ namespace XamScheduler
 {
     public partial class MainPage : ContentPage
     {
+        public string Authorization { get; set; }
         public MainPage()
-        {
-
+        {           
             InitializeComponent();
 
         }
@@ -23,7 +23,6 @@ namespace XamScheduler
 
         public async void OnDateCellHolding(object sender, EventArgs e)
         {
-
          OnAlertYesNoClicked(calendar.SelectedDate);       
         }
 
@@ -38,6 +37,7 @@ namespace XamScheduler
         
         async void OnAlertYesNoClicked(object sender)
         {
+            
             var tmpDate = calendar.SelectedDate.ToString();
             var tmpDate2 = DateTime.Parse(tmpDate);
             var DateDate = tmpDate2.Date.ToString("yyyy/MM/dd");

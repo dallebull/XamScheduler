@@ -18,11 +18,14 @@
                HorizontalTextAlignment="Center" />
 
         <Label Text="Start Time:" />
-        <Label Text="{Binding Date}" />
 
-        <TimePicker x:Name="startTimePicker"
-                    Margin="30, 0, 0, 30"         
-                    Format="T"
+        <DatePicker Format="D"  MinimumDate="01/01/2018"
+            MaximumDate="12/31/2030"
+            Date="{Binding Date}" />
+
+
+        <TimePicker x:Name="startTimePicker"                         
+                    Format="HH:mm"
                     PropertyChanged="OnTimePickerPropertyChanged" />
 
         <Label Text="+ 30 Minutes!"

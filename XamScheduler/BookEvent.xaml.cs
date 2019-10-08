@@ -35,12 +35,10 @@ namespace XamScheduler
         {
             var startDate = this.Date.ToString("yyyy/MM/dd");
             var StartTime = startDate + " " + startTimePicker.Time;      
-
-
-
+                       
             NewAppointment appointment = new NewAppointment();
             appointment.startDateTime = DateTime.Parse(StartTime);
-           appointment.endDateTime = DateTime.Parse(StartTime).AddMinutes(30);
+            appointment.endDateTime = DateTime.Parse(StartTime).AddMinutes(30);
             appointment.name = "Björne Testar";
 
             var content = JsonConvert.SerializeObject(appointment);
@@ -49,7 +47,7 @@ namespace XamScheduler
             {
 
                 StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
-                await client.PostAsync("https://timebookingapi.azurewebsites.net/api/timebooking", scontent);
+                await client.PostAsync("https://timebooking.azurewebsites.net/", scontent);
 
                 Navigation.PushAsync( new XamScheduler.MainPage()); 
             }

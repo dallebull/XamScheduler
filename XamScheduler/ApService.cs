@@ -18,7 +18,7 @@ namespace XamScheduler
             Appointment data = new Appointment();
 
             HttpWebRequest apiRequest =
-            WebRequest.Create("https://timebookingapi.azurewebsites.net/api/timebooking") as HttpWebRequest;
+            WebRequest.Create("https://timebooking.azurewebsites.net/") as HttpWebRequest;
 
             string apiResponse = "";
             using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
