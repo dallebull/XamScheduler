@@ -13,13 +13,18 @@ namespace XamScheduler
 {
     public partial class MainPage : ContentPage
     {
-        public string Authorization { get; set; }
+        public string Auth { get; set; }
         public MainPage()
         {           
             InitializeComponent();
 
         }
+        public MainPage(string Auth)
+        {
+            this.Auth = Auth;
+            InitializeComponent();
 
+        }
 
         public async void OnDateCellHolding(object sender, EventArgs e)
         {
@@ -44,7 +49,7 @@ namespace XamScheduler
             bool answer = await DisplayAlert(DateDate, "Would you like to Book this Day", "Yes", "No");
             if (answer == true)
             {
-                Navigation.PushAsync( new BookEvent((DateTime.Parse(calendar.SelectedDate.ToString()))));           
+                Navigation.PushAsync( new BookEvent((DateTime.Parse(calendar.SelectedDate.ToString())), Auth));           
 
             }
         }

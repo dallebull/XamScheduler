@@ -11,7 +11,7 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="StartAndExpand">
             <Label Text="Email" />
-            <Entry x:Name="EmailnameEntry" Placeholder="Email" />
+            <Entry x:Name="EmailnameEntry" Placeholder="Email" Keyboard="Email" />
             <Label Text="Password" />
             <Entry x:Name="passwordEntry" IsPassword="true" />
             <Button Text="Login" Clicked="OnLoginButtonClicked" />
