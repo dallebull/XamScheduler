@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -14,16 +15,20 @@ namespace XamScheduler
     public partial class MainPage : ContentPage
     {
         public string Auth { get; set; }
+       
+
         public MainPage()
-        {           
-            InitializeComponent();
+        {
+            App.Auth = Auth;
+
+                InitializeComponent();
 
         }
         public MainPage(string Auth)
         {
             this.Auth = Auth;
-            InitializeComponent();
-
+            InitializeComponent();       
+            
         }
 
         public async void OnDateCellHolding(object sender, EventArgs e)
@@ -53,6 +58,7 @@ namespace XamScheduler
 
             }
         }
-      
+   
+        
     }
 }

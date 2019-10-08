@@ -10,6 +10,7 @@ using System.IO;
 using System.Collections.Generic;
 using Org.Json;
 using Org.Apache.Http.Util;
+using System.Threading.Tasks;
 
 namespace XamScheduler
 {
@@ -36,9 +37,10 @@ namespace XamScheduler
 
             };
 
-            var isValid = AreCredentialsCorrect(login);
-            if (isValid && Auth != null)
+           await Login(login);
+            if (Auth != null)
             {
+                App.Auth = Auth;
                 App.IsUserLoggedIn = true;
                 Navigation.InsertPageBefore(new MainPage(Auth), this);
                 await Navigation.PopAsync();
@@ -49,24 +51,9 @@ namespace XamScheduler
                 passwordEntry.Text = string.Empty;
             }
         }
+          
 
-        bool AreCredentialsCorrect(LoginModel login)
-        {
-            try
-            {
-                Login(login);
-                return true;
-
-            }
-            catch (Exception)
-            {
-
-                return false;
-            }
-
-        }
-
-        async void Login(LoginModel login)
+        async Task Login(LoginModel login)
         {
 
             var content = JsonConvert.SerializeObject(login);
@@ -74,30 +61,20 @@ namespace XamScheduler
 
             using (HttpClient client = new HttpClient())
             {
-              //  StringContent scontent = new StringContent(content, Encoding.UTF8, "application/x-www-form-urlencoded");
-             //   var apiResponse = await client.PostAsync("https://timebooking.azurewebsites.net/token", scontent);
-
-                var req = new HttpRequestMessage(HttpMethod.Post, "https://timebooking.azurewebsites.net/token") { Content = new FormUrlEncodedContent(dictionary) };
-              var res = await client.SendAsync(req);
+               var req = new HttpRequestMessage(HttpMethod.Post, "https://timebooking.azurewebsites.net/token") { Content = new FormUrlEncodedContent(dictionary) };
+                var res = await client.SendAsync(req);
               
                 var reqcontent = res.Content;
                 string jsonContent = reqcontent.ReadAsStringAsync().Result;
                 try
                 {
                     Token token = JsonConvert.DeserializeObject<Token>(jsonContent);
-
-                    //foreach (var item in Loginanswer)
-                    //{
-                    Auth = token.access_token;
-                    //}
-
-                    return;
-            
+                    Auth = token.access_token;   
                 }
                 catch (Exception)
                 {
                     DisplayAlert("Error!","Error!!", "Ok");
-                    throw;
+                   
                 }
            
             }

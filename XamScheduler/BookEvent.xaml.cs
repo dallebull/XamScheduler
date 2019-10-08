@@ -53,7 +53,7 @@ namespace XamScheduler
                 StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
                 await client.PostAsync("https://timebooking.azurewebsites.net/api/timebooking", scontent);
 
-                Navigation.PushAsync( new XamScheduler.MainPage()); 
+                Navigation.PushAsync( new XamScheduler.MainPage(Auth)); 
             }
         }
     }
