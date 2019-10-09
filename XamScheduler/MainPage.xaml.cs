@@ -39,7 +39,7 @@ namespace XamScheduler
 
         public void Handle_InlineToggled(object sender, InlineToggledEventArgs e)
         {
-            if (e.selectedAppointment == null)
+            if (e.SelectedAppointment == null)
             {
                 return;
             }
@@ -63,7 +63,7 @@ namespace XamScheduler
 
         public async void RemoveEvent(InlineToggledEventArgs e, string Auth)
         {
-            string errormsg = "if i could, " + e.SelectedAppointment.ToString() + " would be removed now";
+            string errormsg = "if i could, " + e.selectedAppointment.ToString() + " would be removed now";
             DisplayAlert("Void" , errormsg , "Ok");
         }
 

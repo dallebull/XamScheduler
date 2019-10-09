@@ -16,13 +16,13 @@ namespace XamScheduler
         public LoginPage()
         {
             Devmode = true;  //Set this to False to use regular Login
-
+            InitializeComponent();
             if (Devmode)
             {
                 DevLogin();
 
             }
-            InitializeComponent();
+          
         }
 
         async void OnSignUpButtonClicked(object sender, EventArgs e)
@@ -98,7 +98,7 @@ namespace XamScheduler
             if (Auth != null)
             {
                 App.Auth = Auth;
-                App.User = EmailnameEntry.Text;
+                App.User = "Admin";
                 App.IsUserLoggedIn = true;
                 Navigation.InsertPageBefore(new MainPage(Auth), this);
                 await Navigation.PopAsync();
