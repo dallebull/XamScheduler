@@ -8,9 +8,9 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="StartAndExpand">
             <Label Text="Email address" />
-            <Entry x:Name="emailEntry" />
+            <Entry x:Name="emailEntry"  Keyboard="Email" />
             <Label Text="Password" />
-            <Entry x:Name="passwordEntry" IsPassword="true" />
+            <Entry x:Name="passwordEntry" IsPassword="true"  />
             <Label Text="Confirm Password" />
             <Entry x:Name="ConfirmPasswordEntry" IsPassword="true" />
             <Button Text="Sign Up" Clicked="OnSignUpButtonClicked" />

@@ -1,73 +1,121 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XamScheduler.Model;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace XamScheduler
 {
 
-        public partial class SignUpPage : ContentPage
+    public partial class SignUpPage : ContentPage
+    {
+        public string Auth { get; set; }
+        public SignUpPage()
         {
-            public SignUpPage()
-            {
-                InitializeComponent();
-            }
+            InitializeComponent();
+        }
 
-            async void OnSignUpButtonClicked(object sender, EventArgs e)
+        async void OnSignUpButtonClicked(object sender, EventArgs e)
+        {
+            var user = new User()
             {
-                var user = new User()
-                {
-                
-                    Password = passwordEntry.Text,
-                    ConfirmPassword = ConfirmPasswordEntry.Text,
-                    Email = emailEntry.Text
-                };
-                                                
 
-     
-                   // Sign up logic goes here
+                Password = passwordEntry.Text,
+                ConfirmPassword = ConfirmPasswordEntry.Text,
+                Email = emailEntry.Text
+            };
+
+
 
             var signUpSucceeded = AreDetailsValid(user);
-                if (signUpSucceeded)
-                {
+            if (signUpSucceeded)
+            {
                 var content = JsonConvert.SerializeObject(user);
 
                 using (HttpClient client = new HttpClient())
                 {
 
                     StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
-                    var response = await client.PostAsync("https://timebooking.azurewebsites.net/api/account/register", scontent);
-                    
-                //Login
-             
-
+                    await client.PostAsync("https://timebooking.azurewebsites.net/api/account/register", scontent);
+                                  
                 }
+                //Assume it works and Log in
 
-                var rootPage = Navigation.NavigationStack.FirstOrDefault();
-                    if (rootPage != null)
-                    {
-                        App.IsUserLoggedIn = true;
-                        Navigation.InsertPageBefore(new MainPage(), Navigation.NavigationStack.First());
-                        await Navigation.PopToRootAsync();
-                    }
+                var login = new LoginModel
+                {
+                    Username = emailEntry.Text,
+                    Password = passwordEntry.Text,
+
+                };
+
+                await Login(login);
+                if (Auth != null)
+                {
+                    App.Auth = Auth;
+                    App.IsUserLoggedIn = true;
+                    Navigation.InsertPageBefore(new MainPage(Auth), this);
+                    await Navigation.PopAsync();
                 }
                 else
                 {
-                    messageLabel.Text = "Sign up failed";
+                    messageLabel.Text = "Login failed";
+                    passwordEntry.Text = string.Empty;
+                    ConfirmPasswordEntry.Text = string.Empty;
                 }
             }
-
-            bool AreDetailsValid(User user)
+            else
             {
-                return (!string.IsNullOrWhiteSpace(user.Password) && !string.IsNullOrWhiteSpace(user.ConfirmPassword) && user.Password == user.ConfirmPassword && !string.IsNullOrWhiteSpace(user.Email) && user.Email.Contains("@"));
+                messageLabel.Text = "Sign up failed";
             }
         }
-    }
+
+            bool AreDetailsValid(User user)
+        {
+            if (ValidatePassword(user.Password))
+            {
+                return (user.Password == user.ConfirmPassword && !string.IsNullOrWhiteSpace(user.Email) && user.Email.Contains("@"));
+            }
+            return false;
+            }
+        private static bool ValidatePassword(string password)
+        {
+            return string.IsNullOrWhiteSpace(password)
+              || password.Length < 6
+              || password.Any(char.IsDigit)
+              || password.Any(char.IsUpper) && password.Any(char.IsLower);
+        }
+
+
+        async Task Login(LoginModel login)
+            {
+
+                var content = JsonConvert.SerializeObject(login);
+                var dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(content);
+
+                using (HttpClient client = new HttpClient())
+                {
+                    var req = new HttpRequestMessage(HttpMethod.Post, "https://timebooking.azurewebsites.net/token") { Content = new FormUrlEncodedContent(dictionary) };
+                    var res = await client.SendAsync(req);
+
+                    var reqcontent = res.Content;
+                    string jsonContent = reqcontent.ReadAsStringAsync().Result;
+                    try
+                    {
+                        Token token = JsonConvert.DeserializeObject<Token>(jsonContent);
+                        Auth = token.access_token;
+                    }
+                    catch (Exception)
+                    {
+                        DisplayAlert("Error!", "Error!!", "Ok");
+                    }
+                }
+        }
+    } 
+}
+
 
 

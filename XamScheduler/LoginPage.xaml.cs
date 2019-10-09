@@ -3,13 +3,7 @@ using XamScheduler.Model;
 using Xamarin.Forms;
 using Newtonsoft.Json;
 using System.Net.Http;
-using System.Text;
-using System.Linq;
-using System.Net;
-using System.IO;
 using System.Collections.Generic;
-using Org.Json;
-using Org.Apache.Http.Util;
 using System.Threading.Tasks;
 
 namespace XamScheduler
@@ -18,8 +12,16 @@ namespace XamScheduler
     public partial class LoginPage : ContentPage
     {
         public string Auth { get; set; }
+        public bool Devmode { get; set; }
         public LoginPage()
         {
+            Devmode = true;  //Set this to False to use regular Login
+
+            if (Devmode)
+            {
+                DevLogin();
+
+            }
             InitializeComponent();
         }
 
@@ -32,6 +34,7 @@ namespace XamScheduler
         {
             var login = new LoginModel
             {
+                
                 Username = EmailnameEntry.Text,
                 Password = passwordEntry.Text,
 
@@ -41,6 +44,7 @@ namespace XamScheduler
             if (Auth != null)
             {
                 App.Auth = Auth;
+                App.User = EmailnameEntry.Text;
                 App.IsUserLoggedIn = true;
                 Navigation.InsertPageBefore(new MainPage(Auth), this);
                 await Navigation.PopAsync();
@@ -77,6 +81,32 @@ namespace XamScheduler
                    
                 }
            
+            }
+
+        }
+        async void DevLogin()
+        {
+            var login = new LoginModel
+            {
+
+                Username = "Dallebull@hotmail.com",
+                Password = "Abcd1234!",
+
+            };
+
+            await Login(login);
+            if (Auth != null)
+            {
+                App.Auth = Auth;
+                App.User = EmailnameEntry.Text;
+                App.IsUserLoggedIn = true;
+                Navigation.InsertPageBefore(new MainPage(Auth), this);
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                messageLabel.Text = "Dev Login failed";
+                passwordEntry.Text = string.Empty;
             }
 
         }

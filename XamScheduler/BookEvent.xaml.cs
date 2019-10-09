@@ -37,12 +37,14 @@ namespace XamScheduler
         async void OnButtonClicked(object sender, EventArgs args)
         {
             var startDate = this.Date.ToString("yyyy/MM/dd");
-            var StartTime = startDate + " " + startTimePicker.Time;      
-                       
+            var StartTime = startDate + " " + startTimePicker.Time;
+            if (Bookable(DateTime.Parse(StartTime)))
+            {
+      
             NewAppointment appointment = new NewAppointment();
             appointment.startDateTime = DateTime.Parse(StartTime);
             appointment.endDateTime = DateTime.Parse(StartTime).AddMinutes(30);
-            appointment.name = "Björne Testar";
+      
 
             var content = JsonConvert.SerializeObject(appointment);
          
@@ -55,6 +57,23 @@ namespace XamScheduler
 
                 Navigation.PushAsync( new XamScheduler.MainPage(Auth)); 
             }
+            }
+            else
+            {
+                DisplayAlert("Sorry!", "Time Must be between 08:00-17:00!!", "Ok");
+            }
+        }
+        bool Bookable(DateTime datetime)
+        {
+            TimeSpan start = new TimeSpan(08, 0, 0);
+            TimeSpan end = new TimeSpan(17, 0, 0);
+            TimeSpan now = datetime.TimeOfDay;
+          
+
+            if (start < end)
+                return start <= now && now <= end;
+            // start is after end, so do the inverse comparison
+            return !(end < now && now < start);
         }
     }
 }
