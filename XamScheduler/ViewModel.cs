@@ -49,8 +49,12 @@ namespace XamScheduler
                 CalendarInlineEvent event1 = new CalendarInlineEvent();
                 event1.StartTime = item.startDateTime;
                 event1.EndTime = item.endDateTime;
-                    event1.Subject = App.User;
+                    event1.Subject = item.name;
                 event1.Color = Color.Blue;
+                    if (string.IsNullOrWhiteSpace(event1.Subject))
+                    {
+                        event1.Color = Color.Red;
+                    }
                 CalendarInlineEvents.Add(event1);
 
                 }

@@ -23,10 +23,10 @@ namespace XamScheduler
         {
             var user = new User()
             {
-
+                Email = emailEntry.Text,
+                DisplayName = userEntry.Text,
                 Password = passwordEntry.Text,
-                ConfirmPassword = ConfirmPasswordEntry.Text,
-                Email = emailEntry.Text
+                ConfirmPassword = ConfirmPasswordEntry.Text
             };
 
 
@@ -77,7 +77,7 @@ namespace XamScheduler
         {
             if (ValidatePassword(user.Password))
             {
-                return (user.Password == user.ConfirmPassword && !string.IsNullOrWhiteSpace(user.Email) && user.Email.Contains("@"));
+                return (user.Password == user.ConfirmPassword && !string.IsNullOrWhiteSpace(user.Email) && user.Email.Contains("@") && !string.IsNullOrWhiteSpace(user.DisplayName));
             }
             return false;
             }
