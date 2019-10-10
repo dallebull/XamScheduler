@@ -34,7 +34,10 @@ namespace XamScheduler
 
         public async void OnDateCellHolding(object sender, EventArgs e)
         {
-            OnAlertYesNoClicked(calendar.SelectedDate);
+        
+                OnAlertYesNoClicked(calendar.SelectedDate);
+
+      
         }
 
         public void Handle_InlineToggled(object sender, InlineToggledEventArgs e)

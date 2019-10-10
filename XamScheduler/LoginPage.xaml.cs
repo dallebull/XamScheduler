@@ -90,7 +90,7 @@ namespace XamScheduler
             {
 
                 Username = "Dallebull@hotmail.com",
-                Password = "Abcd1234!",
+                Password = "Abcd1234",
 
             };
 

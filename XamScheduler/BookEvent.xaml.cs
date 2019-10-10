@@ -61,8 +61,6 @@ namespace XamScheduler
                     else
                     {
                         DisplayAlert("Sorry!", "Time Could not be Booked", "Ok");
-
-
                     }
                 }
             }

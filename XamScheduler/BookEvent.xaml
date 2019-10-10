@@ -26,6 +26,7 @@
 
         <TimePicker x:Name="startTimePicker"                         
                     Format="HH:mm"
+                    Time="08:00"
                     PropertyChanged="OnTimePickerPropertyChanged" />
 
         <Label Text="+ 30 Minutes!"
