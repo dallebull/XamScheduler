@@ -53,10 +53,18 @@ namespace XamScheduler
                 client.DefaultRequestHeaders.Authorization
                          = new AuthenticationHeaderValue("Bearer", Auth);
                 StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
-                await client.PostAsync("https://timebooking.azurewebsites.net/api/timebooking", scontent);
+                var apiAnswer = await client.PostAsync("https://timebooking.azurewebsites.net/api/timebooking", scontent);
+                    if (apiAnswer.IsSuccessStatusCode)
+                    {
+                        Navigation.PushAsync(new XamScheduler.MainPage(Auth));
+                    }
+                    else
+                    {
+                        DisplayAlert("Sorry!", "Time Could not be Booked", "Ok");
 
-                Navigation.PushAsync( new XamScheduler.MainPage(Auth)); 
-            }
+
+                    }
+                }
             }
             else
             {
