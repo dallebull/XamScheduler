@@ -15,7 +15,7 @@ namespace XamScheduler
         public bool Devmode { get; set; }
         public LoginPage()
         {
-            Devmode = true;  //Set this to True to Auto Login (Change Email an PW in method)
+            Devmode = false;  //Set this to True to Auto Login (Change Email an PW in method)
             InitializeComponent();  
 
             EmailnameEntry.Completed += (sender, args) => { passwordEntry.Focus(); };
