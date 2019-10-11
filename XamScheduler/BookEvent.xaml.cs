@@ -22,17 +22,23 @@ namespace XamScheduler
         public BookEvent()
         {
             InitializeComponent();
+          
         }
         public BookEvent(DateTime date, string Auth)
         {
+         
             this.Date = DateTime.Parse(date.ToString("yyyy-MM-dd"));
             this.Auth = Auth;
             InitializeComponent();
+            DatePickerLabel.Date =DateTime.Parse(date.ToString("yyyy-MM-dd"));
         }
 
         void OnTimePickerPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-       
+            var t1 = startTimePicker.Time;
+            t1 += TimeSpan.FromMinutes(30);
+            var t2 = t1.ToString(@"hh\:mm");
+            MinLabel.Text = "To: " + t2;
         }
         async void OnButtonClicked(object sender, EventArgs args)
         {
@@ -56,7 +62,10 @@ namespace XamScheduler
                 var apiAnswer = await client.PostAsync("https://timebooking.azurewebsites.net/api/timebooking", scontent);
                     if (apiAnswer.IsSuccessStatusCode)
                     {
-                        Navigation.PushAsync(new XamScheduler.MainPage(Auth));
+                     
+                        Navigation.InsertPageBefore(new MainPage(Auth), this);
+                        await Navigation.PopAsync();
+                     
                     }
                     else
                     {

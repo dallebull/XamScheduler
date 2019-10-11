@@ -15,8 +15,12 @@ namespace XamScheduler
         public bool Devmode { get; set; }
         public LoginPage()
         {
-            Devmode = true;  //Set this to False to use regular Login
-            InitializeComponent();
+            Devmode = true;  //Set this to True to Auto Login (Change Email an PW in method)
+            InitializeComponent();  
+
+            EmailnameEntry.Completed += (sender, args) => { passwordEntry.Focus(); };
+            passwordEntry.Completed += (sender, args) => { OnLoginButtonClicked(null,null); };
+
             if (Devmode)
             {
                 DevLogin();
@@ -91,8 +95,8 @@ namespace XamScheduler
             var login = new LoginModel
             {
 
-                Username = "Dallebull@hotmail.com",
-                Password = "Abcd1234",
+                Username = "user@test.com",
+                Password = "Test1234!",
 
             };
 

@@ -16,7 +16,7 @@ namespace XamScheduler
     public partial class MainPage : ContentPage
     {
         public string Auth { get; set; }
-       
+        public DateTime Date { get; set; }
 
         public MainPage()
         {
@@ -27,6 +27,7 @@ namespace XamScheduler
         }
         public MainPage(string Auth)
         {
+            Navigation.PopAsync();
             this.Auth = Auth;
             InitializeComponent();       
             
@@ -82,7 +83,9 @@ namespace XamScheduler
             bool answer = await DisplayAlert(DateDate, "Would you like to Book this Day", "Yes", "No");
             if (answer == true)
             {
-                Navigation.PushAsync( new BookEvent((DateTime.Parse(calendar.SelectedDate.ToString())), Auth));           
+                this.Date = (DateTime.Parse(calendar.SelectedDate.ToString()));
+                Navigation.PushAsync( new BookEvent((DateTime.Parse(calendar.SelectedDate.ToString())), Auth));
+                Navigation.RemovePage(this);
 
             }
         }

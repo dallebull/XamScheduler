@@ -6,8 +6,16 @@
              mc:Ignorable="d"
              x:Class="XamScheduler.SignUpPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="StartAndExpand">
-            <Label Text="Username" />
+
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" VerticalOptions="Start" >
+                <!-- top controls -->
+                <Label Text="Sign up" FontSize="Large" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+            
+            <StackLayout  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" >
+
+                <Label Text="Username" />
             <Entry x:Name="userEntry"  Keyboard="Chat" />
             <Label Text="Email address" />
             <Entry x:Name="emailEntry"  Keyboard="Email" />
@@ -15,8 +23,14 @@
             <Entry x:Name="passwordEntry" IsPassword="true"  />
             <Label Text="Confirm Password" />
             <Entry x:Name="ConfirmPasswordEntry" IsPassword="true" />
-            <Button Text="Sign Up" Clicked="OnSignUpButtonClicked" />
-            <Label x:Name="messageLabel" />
+                <Label x:Name="messageLabel" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand"  HorizontalOptions="Center">
+
+                <Button Text="Sign Up" VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnSignUpButtonClicked" Style="{DynamicResource TitleStyle}"/>
+
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

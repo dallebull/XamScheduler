@@ -17,21 +17,24 @@
                Margin="0, 20"
                HorizontalTextAlignment="Center" />
 
-        <Label Text="{Binding Date}" />
-
-        <DatePicker Format="D"  MinimumDate="01/01/2018"
+        <DatePicker Format="D" x:Name="DatePickerLabel" MinimumDate="01/01/2018"
             MaximumDate="12/31/2030"
-            Date="{Binding SelectedDate}" />
+            Date="{Binding SelectedDate}"
+                      Margin="0, 40"/>
 
 
         <TimePicker x:Name="startTimePicker"                         
                     Format="HH:mm"
                     Time="08:00"
-                    PropertyChanged="OnTimePickerPropertyChanged" />
-
-        <Label Text="+ 30 Minutes!"
+                    PropertyChanged="OnTimePickerPropertyChanged" 
+                     Style="{DynamicResource TitleStyle}"
+               Margin="0, 40"  />
+        
+      
+        <Label Text="" x:Name="MinLabel"
                 VerticalOptions="CenterAndExpand"
-                HorizontalOptions="Center"/>
+                HorizontalOptions="Center"
+               FontSize="Large"/>
 
 
         <Button Text="Ok"
