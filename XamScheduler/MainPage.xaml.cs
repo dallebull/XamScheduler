@@ -46,12 +46,14 @@ namespace XamScheduler
             {
                 foreach (var item in e.SelectedAppointment as CalendarEventCollection)
                 {
-                    if (item.Subject != null || item.Subject != string.Empty)
+                    if (item.Subject != "")
                     {
-                        bool answer = await DisplayAlert("Delete", "Would you like to Remove your Booking for this Day", "Yes", "No");
+                        bool answer = await DisplayAlert(item.StartTime.ToString(), "Would you like to Remove this Booking", "Yes", "No");
                         if (answer)
                         {
-                            RemoveEvent(e, Auth);
+                            int id = (item as CustomAppointment).EventId;
+                          
+                            RemoveEvent(id, Auth);
                         }                      
                     }
                 }
@@ -76,7 +78,7 @@ namespace XamScheduler
             }
         }
 
-        public async void RemoveEvent(InlineToggledEventArgs e, string Auth)
+        public async void RemoveEvent(int id, string Auth)
         {
             bool answer = await DisplayAlert("Delete", "Are you 110% Sure?", "Yes", "No");
             if (answer)
@@ -84,17 +86,20 @@ namespace XamScheduler
                 try
                 {
 
-                    var content = JsonConvert.SerializeObject(Auth);
-                    var dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(content);
-
+                
                     using (HttpClient client = new HttpClient())
                     {
-                        var url =
-    "https://timebooking.azurewebsites.net/api/timebooking/" + (e.SelectedAppointment as CustomAppointment).Id;
+                        var url = "https://timebooking.azurewebsites.net/api/timebooking/" + id;
 
-                        var req = new HttpRequestMessage(HttpMethod.Delete, url) { Content = new FormUrlEncodedContent(dictionary) };
+                        var DelAuth = new List<KeyValuePair<string, string>>();
+                        DelAuth.Add(new KeyValuePair<string, string>("Authorization", "Bearer " + Auth));
+                        DelAuth.Add(new KeyValuePair<string, string>("Content-Type", "application/x-www-form-urlencoded"));
+                                   
+                        var req = new HttpRequestMessage(HttpMethod.Delete, url) { Content = new FormUrlEncodedContent(DelAuth) };
                         var res = await client.SendAsync(req);
 
+                          //Här blir det dock unauthorized. Men om man kopierar DelAuth[0].Value, postar in i Postman och byter länken till rätt ID så fungerar det i postman.
+                        
                         if (res.IsSuccessStatusCode)
                         {
                             Navigation.InsertPageBefore(new MainPage(Auth), this);
@@ -104,20 +109,14 @@ namespace XamScheduler
                         {
                             DisplayAlert("Error!", "Could not Delete Booking!!", "Ok");
                         }
-
-
                     }
                 }
                 catch (Exception)
                 {
                     DisplayAlert("Error!", "My Name is Error!!", "Hello");
-
                 }
-
                 }
             }
         }
-
-
-    }
+ }
 

@@ -68,6 +68,8 @@ namespace XamScheduler
                var req = new HttpRequestMessage(HttpMethod.Post, "https://timebooking.azurewebsites.net/token") { Content = new FormUrlEncodedContent(dictionary) };
                 var res = await client.SendAsync(req);
               
+                //Här så Fungerar det (kolla under dictionary[])
+
                 var reqcontent = res.Content;
                 string jsonContent = reqcontent.ReadAsStringAsync().Result;
                 try

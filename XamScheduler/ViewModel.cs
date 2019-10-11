@@ -52,7 +52,7 @@ namespace XamScheduler
                 event1.EndTime = item.endDateTime;
                     event1.Subject = item.name;
                 event1.Color = Color.Blue;
-                    event1.Id = item.id;
+                    event1.EventId = item.id;
                     if (string.IsNullOrWhiteSpace(event1.Subject))
                     {
                         event1.Color = Color.Red;

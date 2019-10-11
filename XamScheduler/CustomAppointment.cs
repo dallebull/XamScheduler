@@ -10,10 +10,10 @@ namespace XamScheduler
     {
 
         private int _Id;
-        public int Id
+        public int EventId
         {
             get { return _Id; }
-            set { _Id = value; OnPropertyChanged("Id"); }
+            set { _Id = value; OnPropertyChanged("EventId"); }
         }
 
 
