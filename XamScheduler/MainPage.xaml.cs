@@ -34,8 +34,26 @@ namespace XamScheduler
 
         public async void OnDateCellHolding(object sender, EventArgs e)
         {
-        
-                OnAlertYesNoClicked(calendar.SelectedDate);
+            //f = f as InlineToggledEventArgs;  //Funkar inteee
+
+
+            //if ((f.SelectedAppointment as CalendarEventCollection).Count != 0)
+            //{
+            //    foreach (var item in f.SelectedAppointment as CalendarEventCollection)
+            //    {
+            //        if (item.Subject != "")
+            //        {
+            //            bool answer = await DisplayAlert(item.StartTime.ToString(), "Would you like to Remove this Booking", "Yes", "No");
+            //            if (answer)
+            //            {
+            //                int id = (item as CustomAppointment).EventId;
+
+            //                RemoveEvent(id, Auth);
+            //            }
+            //        }
+            //    }
+            //}
+            OnAlertYesNoClicked(calendar.SelectedDate);
 
       
         }
@@ -52,15 +70,12 @@ namespace XamScheduler
                         if (answer)
                         {
                             int id = (item as CustomAppointment).EventId;
-                          
+
                             RemoveEvent(id, Auth);
-                        }                      
+                        }
                     }
                 }
             }
-
-     
-
         }
 
         async void OnAlertYesNoClicked(object sender)
@@ -91,10 +106,10 @@ namespace XamScheduler
                     {
                         var url = "https://timebooking.azurewebsites.net/api/timebooking/" + id;
 
-                        var DelAuth = new List<KeyValuePair<string, string>>();
-                        DelAuth.Add(new KeyValuePair<string, string>("Authorization", "Bearer " + Auth));
-                        DelAuth.Add(new KeyValuePair<string, string>("Content-Type", "application/x-www-form-urlencoded"));
-                                   
+                        var DelAuth = new Dictionary<string, string>();
+                        DelAuth.Add("Authorization", "Bearer " + Auth);
+                        DelAuth.Add("Content-Type", "application/x-www-form-urlencoded");
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Auth);
                         var req = new HttpRequestMessage(HttpMethod.Delete, url) { Content = new FormUrlEncodedContent(DelAuth) };
                         var res = await client.SendAsync(req);
 
