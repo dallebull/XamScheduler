@@ -35,37 +35,56 @@ namespace XamScheduler
 
         public async void OnDateCellHolding(object sender, Syncfusion.SfCalendar.XForms.DayCellHoldingEventArgs e)
         {
-            var  HasBooking = false;
-            var ThisDate = e.Calendar.SelectedDate.Value.Date;
+        //    var  HasBooking = false;
+        //    var ThisDate = e.Calendar.SelectedDate.Value.Date;
 
-            if ((e.Calendar.DataSource as CalendarEventCollection).Count != 0 )
-            {
+        //    if ((e.Calendar.DataSource as CalendarEventCollection).Count != 0 )
+        //    {
          
-                foreach (var item in e.Calendar.DataSource as CalendarEventCollection)
-                {
+        //        foreach (var item in e.Calendar.DataSource as CalendarEventCollection)
+        //        {
 
-                    if (item.Subject != "" && item.StartTime.Date == ThisDate)
-                    {
-                        HasBooking = true;
+        //            if (item.Subject != "" && item.StartTime.Date == ThisDate)
+        //            {
+        //                HasBooking = true;
 
-                        bool answer = await DisplayAlert(item.StartTime.ToString("yyyy-MM-dd"), "Would you like to Remove this Booking", "Yes", "No");
-                        if (answer)
-                        {
-                            int id = (item as CustomAppointment).EventId;
+        //                bool answer = await DisplayAlert(item.StartTime.ToString("yyyy-MM-dd"), "Would you like to Remove this Booking", "Yes", "No");
+        //                if (answer)
+        //                {
+        //                    int id = (item as CustomAppointment).EventId;
                        
-                            RemoveEvent(id, Auth);
-                        }
-                    }
+        //                    RemoveEvent(id, Auth);
+        //                }
+        //            }
               
-                }
-            }
-        if(!HasBooking)
-            {
+        //        }
+        //    }
+        //if(!HasBooking)
+        //    {
 
                 BookEventQuery(calendar.SelectedDate);
+
+            //}
+            //Don't need this since u made the lower method.
+
+        }
+        private async void Calendar_InlineItemTapped(object sender, InlineItemTappedEventArgs e)
+        {
+            var appointment = e.InlineEvent as CustomAppointment;
+            var id = appointment.EventId;
+            if (appointment.Subject != "")
+            {
+                bool app = await DisplayAlert(appointment.Subject, appointment.StartTime.ToString("yyyy-MM-dd HH:mm"), "Ok", "Remove");
+                if (!app)
+                {
+                    RemoveEvent(id, Auth);
+                }
             }
-
-
+            else
+            {
+                DisplayAlert("Allready Taken", appointment.StartTime.ToString("yyyy-MM-dd HH:mm"), "Ok");
+            }
+      
         }
 
         async void Handle_InlineToggled(object sender, InlineToggledEventArgs e)
@@ -109,9 +128,7 @@ namespace XamScheduler
                         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Auth);
                         var req = new HttpRequestMessage(HttpMethod.Delete, url) { Content = new FormUrlEncodedContent(DelAuth) };
                         var res = await client.SendAsync(req);
-
-                          //Här blir det dock unauthorized. Men om man kopierar DelAuth[0].Value, postar in i Postman och byter länken till rätt ID så fungerar det i postman.
-                        
+               
                         if (res.IsSuccessStatusCode)
                         {
                             Navigation.InsertPageBefore(new MainPage(Auth), this);
