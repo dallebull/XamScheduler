@@ -48,7 +48,7 @@ namespace XamScheduler
                 {
                     if (item.Subject != null || item.Subject != string.Empty)
                     {
-                        bool answer = await DisplayAlert("", "Would you like to Remove your booking for this Day", "Yes", "No");
+                        bool answer = await DisplayAlert("Delete", "Would you like to Remove your Booking for this Day", "Yes", "No");
                         if (answer)
                         {
                             RemoveEvent(e, Auth);
@@ -78,10 +78,46 @@ namespace XamScheduler
 
         public async void RemoveEvent(InlineToggledEventArgs e, string Auth)
         {
-            string errormsg = "if i could, the booking would be removed now";
-            DisplayAlert("Void" , errormsg , "Ok");
+            bool answer = await DisplayAlert("Delete", "Are you 110% Sure?", "Yes", "No");
+            if (answer)
+            {
+                try
+                {
+
+                    var content = JsonConvert.SerializeObject(Auth);
+                    var dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(content);
+
+                    using (HttpClient client = new HttpClient())
+                    {
+                        var url =
+    "https://timebooking.azurewebsites.net/api/timebooking/" + (e.SelectedAppointment as CustomAppointment).Id;
+
+                        var req = new HttpRequestMessage(HttpMethod.Delete, url) { Content = new FormUrlEncodedContent(dictionary) };
+                        var res = await client.SendAsync(req);
+
+                        if (res.IsSuccessStatusCode)
+                        {
+                            Navigation.InsertPageBefore(new MainPage(Auth), this);
+                            await Navigation.PopAsync();
+                        }
+                        else
+                        {
+                            DisplayAlert("Error!", "Could not Delete Booking!!", "Ok");
+                        }
+
+
+                    }
+                }
+                catch (Exception)
+                {
+                    DisplayAlert("Error!", "My Name is Error!!", "Hello");
+
+                }
+
+                }
+            }
         }
 
 
     }
-}
+
