@@ -40,12 +40,24 @@ namespace XamScheduler
       
         }
 
-        public void Handle_InlineToggled(object sender, InlineToggledEventArgs e)
+        async void Handle_InlineToggled(object sender, InlineToggledEventArgs e)
         {
-            if (e.SelectedAppointment == null)
+            if ((e.SelectedAppointment as CalendarEventCollection).Count != 0)
             {
-                return;
+                foreach (var item in e.SelectedAppointment as CalendarEventCollection)
+                {
+                    if (item.Subject != null || item.Subject != string.Empty)
+                    {
+                        bool answer = await DisplayAlert("", "Would you like to Remove your booking for this Day", "Yes", "No");
+                        if (answer)
+                        {
+                            RemoveEvent(e, Auth);
+                        }                      
+                    }
+                }
             }
+
+     
 
         }
 
@@ -66,7 +78,7 @@ namespace XamScheduler
 
         public async void RemoveEvent(InlineToggledEventArgs e, string Auth)
         {
-            string errormsg = "if i could, " + e.selectedAppointment.ToString() + " would be removed now";
+            string errormsg = "if i could, the booking would be removed now";
             DisplayAlert("Void" , errormsg , "Ok");
         }
 
