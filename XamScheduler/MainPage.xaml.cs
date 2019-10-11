@@ -65,7 +65,7 @@ namespace XamScheduler
                 BookEventQuery(calendar.SelectedDate);
 
             //}
-            //Don't need this since u made the lower method.
+            //Don't need this since i made the lower method.
 
         }
         private async void Calendar_InlineItemTapped(object sender, InlineItemTappedEventArgs e)
@@ -111,7 +111,7 @@ namespace XamScheduler
 
         public async void RemoveEvent(int id, string Auth)
         {
-            bool answer = await DisplayAlert("Delete", "Are you 110% Sure?", "Yes", "No");
+            bool answer = await DisplayAlert("Remove Booking", "Are you 110% Sure?", "Yes", "No");
             if (answer)
             {
                 try
@@ -136,7 +136,7 @@ namespace XamScheduler
                         }
                         else
                         {
-                            DisplayAlert("Error!", "Could not Delete Booking!!", "Ok");
+                            DisplayAlert("Error!", "Could not Remove Booking!!", "Ok");
                         }
                     }
                 }
