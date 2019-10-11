@@ -32,53 +32,47 @@ namespace XamScheduler
             
         }
 
-        public async void OnDateCellHolding(object sender, EventArgs e)
+        public async void OnDateCellHolding(object sender, Syncfusion.SfCalendar.XForms.DayCellHoldingEventArgs e)
         {
-            //f = f as InlineToggledEventArgs;  //Funkar inteee
+            var  HasBooking = false;
+            var ThisDate = e.Calendar.SelectedDate.Value.Date;
+
+            if ((e.Calendar.DataSource as CalendarEventCollection).Count != 0 )
+            {
+         
+                foreach (var item in e.Calendar.DataSource as CalendarEventCollection)
+                {
+
+                    if (item.Subject != "" && item.StartTime.Date == ThisDate)
+                    {
+                        HasBooking = true;
+
+                        bool answer = await DisplayAlert(item.StartTime.ToString("yyyy-MM-dd"), "Would you like to Remove this Booking", "Yes", "No");
+                        if (answer)
+                        {
+                            int id = (item as CustomAppointment).EventId;
+                       
+                            RemoveEvent(id, Auth);
+                        }
+                    }
+              
+                }
+            }
+        if(!HasBooking)
+            {
+
+                BookEventQuery(calendar.SelectedDate);
+            }
 
 
-            //if ((f.SelectedAppointment as CalendarEventCollection).Count != 0)
-            //{
-            //    foreach (var item in f.SelectedAppointment as CalendarEventCollection)
-            //    {
-            //        if (item.Subject != "")
-            //        {
-            //            bool answer = await DisplayAlert(item.StartTime.ToString(), "Would you like to Remove this Booking", "Yes", "No");
-            //            if (answer)
-            //            {
-            //                int id = (item as CustomAppointment).EventId;
-
-            //                RemoveEvent(id, Auth);
-            //            }
-            //        }
-            //    }
-            //}
-            OnAlertYesNoClicked(calendar.SelectedDate);
-
-      
         }
 
         async void Handle_InlineToggled(object sender, InlineToggledEventArgs e)
         {
-            if ((e.SelectedAppointment as CalendarEventCollection).Count != 0)
-            {
-                foreach (var item in e.SelectedAppointment as CalendarEventCollection)
-                {
-                    if (item.Subject != "")
-                    {
-                        bool answer = await DisplayAlert(item.StartTime.ToString(), "Would you like to Remove this Booking", "Yes", "No");
-                        if (answer)
-                        {
-                            int id = (item as CustomAppointment).EventId;
-
-                            RemoveEvent(id, Auth);
-                        }
-                    }
-                }
-            }
+           
         }
 
-        async void OnAlertYesNoClicked(object sender)
+        async void BookEventQuery(object sender)
         {
             
 

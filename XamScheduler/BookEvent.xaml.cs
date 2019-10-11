@@ -25,7 +25,7 @@ namespace XamScheduler
         }
         public BookEvent(DateTime date, string Auth)
         {
-            this.Date = date;
+            this.Date = DateTime.Parse(date.ToString("yyyy-MM-dd"));
             this.Auth = Auth;
             InitializeComponent();
         }
