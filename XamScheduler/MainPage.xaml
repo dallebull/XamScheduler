@@ -10,7 +10,7 @@
     <ContentPage.Content>
         <Grid>
 
-            <syncfusion:SfCalendar x:Name="calendar" OnDateCellHolding="OnDateCellHolding"  FirstDayofWeek="1" ViewMode="MonthView"   InlineToggled="Handle_InlineToggled" InlineItemTapped="Calendar_InlineItemTapped"  ShowInlineEvents="true" InlineViewMode="Inline" MaximumEventIndicatorCount="5" DataSource="{Binding CalendarInlineEvents}">
+            <syncfusion:SfCalendar x:Name="calendar" OnDateCellHolding="OnDateCellHolding"  FirstDayofWeek="1" ViewMode="MonthView"   InlineToggled="Handle_InlineToggled" InlineItemTapped="Calendar_InlineItemTapped"  ShowInlineEvents="true" InlineViewMode="Agenda" MaximumEventIndicatorCount="5" DataSource="{Binding CalendarInlineEvents}">
                 <syncfusion:SfCalendar.BindingContext>
                     <local:ViewModel/>
                 </syncfusion:SfCalendar.BindingContext>

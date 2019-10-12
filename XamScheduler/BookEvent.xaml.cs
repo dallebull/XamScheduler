@@ -62,7 +62,7 @@ namespace XamScheduler
                 var apiAnswer = await client.PostAsync("https://timebooking.azurewebsites.net/api/timebooking", scontent);
                     if (apiAnswer.IsSuccessStatusCode)
                     {
-                     
+                        this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
                         Navigation.InsertPageBefore(new MainPage(Auth), this);
                         await Navigation.PopAsync();
                      

@@ -34,38 +34,9 @@ namespace XamScheduler
         }
 
         public async void OnDateCellHolding(object sender, Syncfusion.SfCalendar.XForms.DayCellHoldingEventArgs e)
-        {
-        //    var  HasBooking = false;
-        //    var ThisDate = e.Calendar.SelectedDate.Value.Date;
-
-        //    if ((e.Calendar.DataSource as CalendarEventCollection).Count != 0 )
-        //    {
-         
-        //        foreach (var item in e.Calendar.DataSource as CalendarEventCollection)
-        //        {
-
-        //            if (item.Subject != "" && item.StartTime.Date == ThisDate)
-        //            {
-        //                HasBooking = true;
-
-        //                bool answer = await DisplayAlert(item.StartTime.ToString("yyyy-MM-dd"), "Would you like to Remove this Booking", "Yes", "No");
-        //                if (answer)
-        //                {
-        //                    int id = (item as CustomAppointment).EventId;
-                       
-        //                    RemoveEvent(id, Auth);
-        //                }
-        //            }
-              
-        //        }
-        //    }
-        //if(!HasBooking)
-        //    {
+        {    
 
                 BookEventQuery(calendar.SelectedDate);
-
-            //}
-            //Don't need this since i made the lower method.
 
         }
         private async void Calendar_InlineItemTapped(object sender, InlineItemTappedEventArgs e)
@@ -104,7 +75,7 @@ namespace XamScheduler
             {
                 this.Date = (DateTime.Parse(calendar.SelectedDate.ToString()));
                 Navigation.PushAsync( new BookEvent((DateTime.Parse(calendar.SelectedDate.ToString())), Auth));
-                Navigation.RemovePage(this);
+              //  Navigation.RemovePage(this);
 
             }
         }

@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="c845c8db-203c-4294-a789-4965979a9a30"
+    Name="a317da5e-6d0f-4080-b59e-b9e4cb89c62f"
     Publisher="CN=Dalle"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="c845c8db-203c-4294-a789-4965979a9a30" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="a317da5e-6d0f-4080-b59e-b9e4cb89c62f" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>XamScheduler.UWP</DisplayName>
