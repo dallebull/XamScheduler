@@ -24,7 +24,6 @@ namespace XamScheduler
             if (Devmode)
             {
                 DevLogin();
-
             }
           
         }
