@@ -92,7 +92,7 @@ namespace XamScheduler
             var login = new LoginModel
             {
 
-                Username = "user@test.com",
+                Username = "admin@admin.com",
                 Password = "Test1234!",
 
             };
