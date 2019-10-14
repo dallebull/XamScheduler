@@ -1,3 +1,4 @@
+using Syncfusion.XForms.iOS.Buttons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,8 @@ namespace XamScheduler.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+global::Xamarin.Forms.Forms.Init();
+SfButtonRenderer.Init();
             
 			SfCalendarRenderer.Init();
 			

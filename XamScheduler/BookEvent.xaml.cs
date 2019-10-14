@@ -42,6 +42,7 @@ namespace XamScheduler
         }
         async void OnButtonClicked(object sender, EventArgs args)
         {
+   
             var startDate = this.Date.ToString("yyyy/MM/dd");
             var StartTime = startDate + " " + startTimePicker.Time;
             if (Bookable(DateTime.Parse(StartTime)))

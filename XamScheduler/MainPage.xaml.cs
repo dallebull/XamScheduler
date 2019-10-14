@@ -66,10 +66,7 @@ namespace XamScheduler
             }      
         }
 
-        async void Handle_InlineToggled(object sender, InlineToggledEventArgs e)
-        {
-           
-        }
+     
 
         async void BookEventQuery(object sender)
         {

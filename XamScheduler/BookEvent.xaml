@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:SfChipgroup="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -29,15 +30,16 @@
                     PropertyChanged="OnTimePickerPropertyChanged" 
                      Style="{DynamicResource TitleStyle}"
                Margin="0, 40"  />
-        
-      
+
+
         <Label Text="" x:Name="MinLabel"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="Center"
                FontSize="Large"/>
 
 
-        <Button Text="Ok"
+
+            <Button Text="Ok"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="Center"
                 Clicked="OnButtonClicked" />

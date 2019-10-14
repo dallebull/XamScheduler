@@ -48,14 +48,14 @@ namespace XamScheduler
             foreach (var item in appointments)
             {
                 CustomAppointment event1 = new CustomAppointment();
-                    event1.StartTime = item.startDateTime;
+                event1.StartTime = item.startDateTime;
                 event1.EndTime = item.endDateTime;
                 event1.Subject = item.name;       
                 event1.Color = Color.Blue;
                     event1.EventId = item.id;
                     if (string.IsNullOrWhiteSpace(event1.Subject))
                     {
-                        event1.Color = Color.Red;
+                        event1.Color = Color.DarkGray;
                     }
                 CalendarInlineEvents.Add(event1);
 
