@@ -6,7 +6,8 @@ namespace XamScheduler.Model
 {
     class Token
     {
-        public string access_token { get; set; } 
+        public string access_token { get; set; }
+        public string displayName { get; set; }
 
     }
 }

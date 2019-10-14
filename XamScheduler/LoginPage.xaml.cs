@@ -47,7 +47,6 @@ namespace XamScheduler
             if (Auth != null)
             {
                 App.Auth = Auth;
-                App.User = EmailnameEntry.Text;
                 App.IsUserLoggedIn = true;
                 Navigation.InsertPageBefore(new MainPage(Auth), this);
                 await Navigation.PopAsync();
@@ -76,7 +75,8 @@ namespace XamScheduler
                 try
                 {
                     Token token = JsonConvert.DeserializeObject<Token>(jsonContent);
-                    Auth = token.access_token;   
+                    Auth = token.access_token;
+                    App.User = token.displayName;
                 }
                 catch (Exception)
                 {
