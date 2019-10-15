@@ -12,16 +12,16 @@ namespace XamScheduler
     public partial class LoginPage : ContentPage
     {
         public string Auth { get; set; }
-        public bool Devmode { get; set; }
+   
         public LoginPage()
         {
-            Devmode = true;  //Set this to True to Auto Login (Change Email an PW in method)
+            App.Devmode = true;  //Set this to True to Auto Login (Change Email an PW in method)
             InitializeComponent();  
 
             EmailnameEntry.Completed += (sender, args) => { passwordEntry.Focus(); };
             passwordEntry.Completed += (sender, args) => { OnLoginButtonClicked(null,null); };
 
-            if (Devmode)
+            if (App.Devmode)
             {
                 DevLogin();
             }
