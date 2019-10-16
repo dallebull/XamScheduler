@@ -62,13 +62,13 @@ namespace XamScheduler
                     }
                     else
                     {
-                        DisplayAlert("Sorry!", "Time Could not be Booked", "Ok");
+                       await DisplayAlert("Sorry!", "Time Could not be Booked", "Ok");
                     }
                 }
             }
             else
             {
-                DisplayAlert("Sorry!", "Time Must be between 08:00-17:00!!", "Ok");
+                await DisplayAlert("Sorry!", "Time Must be between 08:00-17:00!!", "Ok");
             }
         }
         bool Bookable(DateTime datetime)

@@ -10,12 +10,10 @@ namespace XamScheduler
 {
 
     public partial class LoginPage : ContentPage
-    {
-        public string Auth { get; set; }
-   
+    {   
         public LoginPage()
         {
-            App.Devmode = true;  //Set this to True to Auto Login (Change Email an PW in method)
+            App.Devmode = false;  //Set this to True to Auto Login (Change Email an PW in method)
             InitializeComponent();  
 
             EmailnameEntry.Completed += (sender, args) => { passwordEntry.Focus(); };
@@ -75,7 +73,7 @@ namespace XamScheduler
                 }
                 catch (Exception)
                 {
-                    DisplayAlert("Error!","Error!!", "Ok");                   
+                    await DisplayAlert("Error!","Error!!", "Ok");                   
                 }           
             }
         }

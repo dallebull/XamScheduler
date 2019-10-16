@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-    using Syncfusion.SfCalendar.XForms;
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Text;
-    using Xamarin.Forms;
+﻿using Syncfusion.SfCalendar.XForms;
+using Xamarin.Forms;
 
 namespace XamScheduler
 {
 
- 
-        class CalendarBehavior : Behavior<ContentPage>
+
+    class CalendarBehavior : Behavior<ContentPage>
         {
           public  SfCalendar calendar;
 

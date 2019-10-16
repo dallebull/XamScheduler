@@ -114,7 +114,7 @@ namespace XamScheduler
                 }
                     catch (Exception)
                     {
-                        DisplayAlert("Error!", "Error!!", "Ok");
+                        await DisplayAlert("Error!", "Error!!", "Ok");
                     }
                 }
         }

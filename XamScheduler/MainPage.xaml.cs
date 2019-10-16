@@ -33,7 +33,7 @@ namespace XamScheduler
 
         public async void OnDateCellHolding(object sender, Syncfusion.SfCalendar.XForms.DayCellHoldingEventArgs e)
         {
-            BookEventQuery(calendar.SelectedDate);
+           BookEventQuery(calendar.SelectedDate);
         }
         private async void Calendar_InlineItemTapped(object sender, InlineItemTappedEventArgs e)
         {
@@ -49,7 +49,7 @@ namespace XamScheduler
             }
             else
             {
-                DisplayAlert("Allready Taken", appointment.StartTime.ToString("yyyy-MM-dd HH:mm"), "Ok");
+                await DisplayAlert("Allready Taken", appointment.StartTime.ToString("yyyy-MM-dd HH:mm"), "Ok");
             }
         }
 
@@ -64,7 +64,7 @@ namespace XamScheduler
             if (answer == true)
             {
                 this.Date = (DateTime.Parse(calendar.SelectedDate.ToString()));
-                Navigation.PushAsync(new BookEvent((DateTime.Parse(calendar.SelectedDate.ToString()))));
+                await Navigation.PushAsync(new BookEvent((DateTime.Parse(calendar.SelectedDate.ToString()))));
             }
         }
 
