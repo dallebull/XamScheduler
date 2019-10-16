@@ -24,8 +24,7 @@ namespace XamScheduler
             if (App.Devmode)
             {
                 DevLogin();
-            }
-          
+            }          
         }
 
         async void OnSignUpButtonClicked(object sender, EventArgs e)
@@ -36,19 +35,16 @@ namespace XamScheduler
         async void OnLoginButtonClicked(object sender, EventArgs e)
         {
             var login = new LoginModel
-            {
-                
+            {                
                 Username = EmailnameEntry.Text,
                 Password = passwordEntry.Text,
-
             };
 
            await Login(login);
-            if (Auth != null)
+            if (App.Auth != null)
             {
-                App.Auth = Auth;
                 App.IsUserLoggedIn = true;
-                Navigation.InsertPageBefore(new MainPage(Auth), this);
+                    Navigation.InsertPageBefore(new MainPage(), this);
                 await Navigation.PopAsync();
             }
             else
@@ -61,7 +57,6 @@ namespace XamScheduler
 
         async Task Login(LoginModel login)
         {
-
             var content = JsonConvert.SerializeObject(login);
             var dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(content);
 
@@ -75,35 +70,28 @@ namespace XamScheduler
                 try
                 {
                     Token token = JsonConvert.DeserializeObject<Token>(jsonContent);
-                    Auth = token.access_token;
+                    App.Auth = token.access_token;
                     App.User = token.displayName;
                 }
                 catch (Exception)
                 {
-                    DisplayAlert("Error!","Error!!", "Ok");
-                   
-                }
-           
+                    DisplayAlert("Error!","Error!!", "Ok");                   
+                }           
             }
-
         }
         async void DevLogin()
         {
             var login = new LoginModel
             {
-
                 Username = "admin@admin.com",
                 Password = "Test1234!",
-
             };
 
             await Login(login);
-            if (Auth != null)
-            {
-                App.Auth = Auth;
-                App.User = "Admin";
+            if (App.Auth != null)
+            {               
                 App.IsUserLoggedIn = true;
-                Navigation.InsertPageBefore(new MainPage(Auth), this);
+                Navigation.InsertPageBefore(new MainPage(), this);
                 await Navigation.PopAsync();
             }
             else

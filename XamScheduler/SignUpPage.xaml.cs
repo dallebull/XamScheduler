@@ -13,10 +13,13 @@ namespace XamScheduler
 
     public partial class SignUpPage : ContentPage
     {
-        public string Auth { get; set; }
-        public SignUpPage()
+            public SignUpPage()
         {
             InitializeComponent();
+            userEntry.Completed += (sender, args) => { emailEntry.Focus(); };
+            emailEntry.Completed += (sender, args) => { passwordEntry.Focus(); };
+            passwordEntry.Completed += (sender, args) => { confirmPasswordEntry.Focus(); };
+            confirmPasswordEntry.Completed += (sender, args) => { OnSignUpButtonClicked(null, null); };
         }
 
         async void OnSignUpButtonClicked(object sender, EventArgs e)
@@ -26,7 +29,7 @@ namespace XamScheduler
                 Email = emailEntry.Text,
                 DisplayName = userEntry.Text,
                 Password = passwordEntry.Text,
-                ConfirmPassword = ConfirmPasswordEntry.Text
+                ConfirmPassword = confirmPasswordEntry.Text
             };
 
 
@@ -53,18 +56,18 @@ namespace XamScheduler
                 };
 
                 await Login(login);
-                if (Auth != null)
+                if (App.Auth != null)
                 {
-                    App.Auth = Auth;
+                   
                     App.IsUserLoggedIn = true;
-                    Navigation.InsertPageBefore(new MainPage(Auth), this);
+                    Navigation.InsertPageBefore(new MainPage(), this);
                     await Navigation.PopAsync();
                 }
                 else
                 {
                     messageLabel.Text = "Login failed";
                     passwordEntry.Text = string.Empty;
-                    ConfirmPasswordEntry.Text = string.Empty;
+                    confirmPasswordEntry.Text = string.Empty;
                 }
             }
             else
@@ -74,7 +77,7 @@ namespace XamScheduler
         }
 
             bool AreDetailsValid(User user)
-        {
+            {
             if (ValidatePassword(user.Password))
             {
                 return (user.Password == user.ConfirmPassword && !string.IsNullOrWhiteSpace(user.Email) && user.Email.Contains("@") && !string.IsNullOrWhiteSpace(user.DisplayName));
@@ -106,8 +109,9 @@ namespace XamScheduler
                     try
                     {
                         Token token = JsonConvert.DeserializeObject<Token>(jsonContent);
-                        Auth = token.access_token;
-                    }
+                        App.Auth = token.access_token;
+                        App.User = token.displayName;
+                }
                     catch (Exception)
                     {
                         DisplayAlert("Error!", "Error!!", "Ok");

@@ -18,17 +18,11 @@ namespace XamScheduler
     public partial class BookEvent : ContentPage
     {
         public DateTime Date { get; set; }
-        public string Auth { get; set; }
-        public BookEvent()
-        {
-            InitializeComponent();
-          
-        }
-        public BookEvent(DateTime date, string Auth)
+
+        public BookEvent(DateTime date)
         {
          
-            this.Date = DateTime.Parse(date.ToString("yyyy-MM-dd"));
-            this.Auth = Auth;
+            this.Date = DateTime.Parse(date.ToString("yyyy-MM-dd"));    
             InitializeComponent();
             DatePickerLabel.Date =DateTime.Parse(date.ToString("yyyy-MM-dd"));
         }
@@ -57,16 +51,14 @@ namespace XamScheduler
          
             using (HttpClient client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization
-                         = new AuthenticationHeaderValue("Bearer", Auth);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
                 StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
                 var apiAnswer = await client.PostAsync("https://timebooking.azurewebsites.net/api/timebooking", scontent);
                     if (apiAnswer.IsSuccessStatusCode)
                     {
                         this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
-                        Navigation.InsertPageBefore(new MainPage(Auth), this);
-                        await Navigation.PopAsync();
-                     
+                        Navigation.InsertPageBefore(new MainPage(), this);
+                        await Navigation.PopAsync();                     
                     }
                     else
                     {

@@ -16,52 +16,42 @@ namespace XamScheduler
 {
     public class ViewModel
     {
-        public string Auth { get; set; }
+      
         public CalendarEventCollection CalendarInlineEvents { get; set; } = new CalendarEventCollection();
 
         public ViewModel()
         {
-            this.Auth = App.Auth;
-            FillApsAsync(Auth);
+            
+            FillApsAsync(App.Auth);
         }
-        public ViewModel(string Auth)
-        {
 
-            this.Auth = Auth;
-            FillApsAsync(Auth);
-   
-        }
         async void FillApsAsync(string Auth)
         {
             List<Appointment> appointments = new List<Appointment>();
             using (HttpClient client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization
-                  = new AuthenticationHeaderValue("Bearer", Auth);
-          
-                var apiResponse = await client.GetStringAsync("https://timebooking.azurewebsites.net/api/timebooking");
-          
-
-            appointments = JsonConvert.DeserializeObject<List<Appointment>>(apiResponse);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Auth);          
+                var apiResponse = await client.GetStringAsync("https://timebooking.azurewebsites.net/api/timebooking");       
+                appointments = JsonConvert.DeserializeObject<List<Appointment>>(apiResponse);
  
-
-            foreach (var item in appointments)
-            {
-                CustomAppointment event1 = new CustomAppointment();
-                event1.StartTime = item.startDateTime;
-                event1.EndTime = item.endDateTime;
-                event1.Subject = item.name;       
-                event1.Color = Color.Blue;
+                 foreach (var item in appointments)
+                 {
+                    CustomAppointment event1 = new CustomAppointment();
+                    event1.StartTime = item.startDateTime;
+                    event1.EndTime = item.endDateTime;
+                    event1.Subject = item.name;       
+                    event1.Color = Color.Blue;
                     event1.EventId = item.id;
+                  
                     if (string.IsNullOrWhiteSpace(event1.Subject))
                     {
                         event1.Color = Color.DarkGray;
                     }
+
                 CalendarInlineEvents.Add(event1);
 
-                }
+                 }
             }
-
         }
 
     }

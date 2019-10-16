@@ -22,7 +22,7 @@
             <Label Text="Password" />
             <Entry x:Name="passwordEntry" IsPassword="true"  />
             <Label Text="Confirm Password" />
-            <Entry x:Name="ConfirmPasswordEntry" IsPassword="true" />
+            <Entry x:Name="confirmPasswordEntry" IsPassword="true" />
                 <Label x:Name="messageLabel" />
             </StackLayout>
 

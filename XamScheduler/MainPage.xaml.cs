@@ -15,37 +15,21 @@ namespace XamScheduler
 {
     public partial class MainPage : ContentPage
     {
-        public string Auth { get; set; }
         public DateTime Date { get; set; }
-
-        public string User { get; set; }
-
         public MainPage()
-        {
-            App.Auth = Auth;
-
-            InitializeComponent();
-
-        }
-        public MainPage(string Auth)
-        {
-
-            this.Auth = Auth;
+        {         
             InitializeComponent();
 
             ToolbarItem item = new ToolbarItem
             {
-
                 Text = App.User,
-            
-               
             };
-
-
             this.ToolbarItems.Add(item);
             item.Clicked += OnLogout;
 
         }
+
+   
 
         public async void OnDateCellHolding(object sender, Syncfusion.SfCalendar.XForms.DayCellHoldingEventArgs e)
         {
@@ -60,7 +44,7 @@ namespace XamScheduler
                 bool app = await DisplayAlert(appointment.Subject, appointment.StartTime.ToString("yyyy-MM-dd HH:mm"), "Ok", "Remove");
                 if (!app)
                 {
-                    RemoveEvent(id, Auth);
+                    RemoveEvent(id);
                 }
             }
             else
@@ -80,11 +64,11 @@ namespace XamScheduler
             if (answer == true)
             {
                 this.Date = (DateTime.Parse(calendar.SelectedDate.ToString()));
-                Navigation.PushAsync(new BookEvent((DateTime.Parse(calendar.SelectedDate.ToString())), Auth));
+                Navigation.PushAsync(new BookEvent((DateTime.Parse(calendar.SelectedDate.ToString()))));
             }
         }
 
-        public async void RemoveEvent(int id, string Auth)
+        public async void RemoveEvent(int id)
         {
             bool answer = await DisplayAlert("Remove Booking", "Are you 110% Sure?", "Yes", "No");
             if (answer)
@@ -98,21 +82,21 @@ namespace XamScheduler
                         var url = "https://timebooking.azurewebsites.net/api/timebooking/" + id;
 
                         var DelAuth = new Dictionary<string, string>();
-                        DelAuth.Add("Authorization", "Bearer " + Auth);
+                        DelAuth.Add("Authorization", "Bearer " + App.Auth);
                         DelAuth.Add("Content-Type", "application/x-www-form-urlencoded");
-                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Auth);
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
                         var req = new HttpRequestMessage(HttpMethod.Delete, url) { Content = new FormUrlEncodedContent(DelAuth) };
                         var res = await client.SendAsync(req);
 
                         if (res.IsSuccessStatusCode)
                         {
-                            Navigation.InsertPageBefore(new MainPage(Auth), this);
+                            Navigation.InsertPageBefore(new MainPage(), this);
                             await Navigation.PopAsync();
                         }
                         else
                         {
                             await DisplayAlert("Error!", "Could not Remove Booking!!", "Ok");
-                            Navigation.InsertPageBefore(new MainPage(Auth), this);
+                            Navigation.InsertPageBefore(new MainPage(), this);
                             await Navigation.PopAsync();
                         }
                     }
@@ -120,7 +104,7 @@ namespace XamScheduler
                 catch (Exception)
                 {
                     await DisplayAlert("Error!", "My Name is Error!!", "Hello");
-                    Navigation.InsertPageBefore(new MainPage(Auth), this);
+                    Navigation.InsertPageBefore(new MainPage(), this);
                     await Navigation.PopAsync();
                 }
             }
