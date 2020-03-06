@@ -106,7 +106,7 @@ namespace FriskaClient
 
                 using (HttpClient client = new HttpClient())
                 {
-                    var req = new HttpRequestMessage(HttpMethod.Post, "https://timebooking.azurewebsites.net/token") { Content = new FormUrlEncodedContent(dictionary) };
+                    var req = new HttpRequestMessage(HttpMethod.Post, "Https://localhost:44349/token") { Content = new FormUrlEncodedContent(dictionary) };
                     var res = await client.SendAsync(req);
 
                     var reqcontent = res.Content;
