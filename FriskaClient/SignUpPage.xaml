@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FriskaClient.SignUpPage">
+    <ContentPage.Content>
+
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" VerticalOptions="Start" >
+                <!-- top controls -->
+                <Label Text="Sign up" FontSize="Large" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+            
+            <StackLayout  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" >
+
+                <Label Text="Namn" />
+            <Entry x:Name="userEntry"  Keyboard="Chat" />
+            <Label Text="Email address" />
+            <Entry x:Name="emailEntry"  Keyboard="Email" />
+
+                <Label Text="Kön" />
+                <Entry x:Name="genderEntry"  Keyboard="Chat" />
+                <Label Text="Födelseår" />
+                <Entry x:Name="ageEntry"  Keyboard="Chat" />
+                <Label Text="Telefonummer" />
+                <Entry x:Name="numberEntry"  Keyboard="Numeric" />
+
+                <Label Text="Password" />
+            <Entry x:Name="passwordEntry" IsPassword="true"  />
+            <Label Text="Confirm Password" />
+            <Entry x:Name="confirmPasswordEntry" IsPassword="true" />
+                <Label x:Name="messageLabel" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand"  HorizontalOptions="Center">
+
+                <Button Text="Sign Up" VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnSignUpButtonClicked" Style="{DynamicResource TitleStyle}"/>
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

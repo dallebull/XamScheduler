@@ -6,8 +6,8 @@
     <ProjectGuid>{0A3E03C7-D944-4883-99CF-96EB8EC0CD48}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>XamScheduler.Android</RootNamespace>
-    <AssemblyName>XamScheduler.Android</AssemblyName>
+    <RootNamespace>FriskaClient.Android</RootNamespace>
+    <AssemblyName>FriskaClient.Android</AssemblyName>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
@@ -65,7 +65,7 @@
     <AndroidUseAapt2>false</AndroidUseAapt2>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XamScheduler\XamScheduler.csproj">
+    <ProjectReference Include="..\FriskaClient\FriskaClient.csproj">
       <Project>{2549C2E8-38C9-4C78-BBF2-EC15416A2E9A}</Project>
       <Name>XamScheduler</Name>
     </ProjectReference>
@@ -99,7 +99,7 @@
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
       <Version>17.3.0.14</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.3.0.14" />
   </ItemGroup>
   <ItemGroup>
