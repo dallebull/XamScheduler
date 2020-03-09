@@ -9,8 +9,7 @@
     <ContentPage.Content>
         <Grid>
 
-            <ListView x:Name="ansList"
-            ItemsSource="{Binding MyAnswers}">
+            <ListView x:Name="ansList" ItemsSource="{Binding MyAnswers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

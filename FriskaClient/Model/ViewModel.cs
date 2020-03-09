@@ -16,9 +16,9 @@ namespace FriskaClient
 {
     public class ViewModel
     {
-        public ObservableCollection<KontrollSvar> myAnswers { get; set; } = new ObservableCollection<KontrollSvar>();
+        public ObservableCollection<KontrollSvar> myAnswers = new ObservableCollection<KontrollSvar>();
 
- 
+         public ListView ansList = new ListView();
         public ObservableCollection<KontrollSvar> MyAnswers { get { return myAnswers; } }
         public ViewModel()
         {
@@ -27,11 +27,7 @@ namespace FriskaClient
         }
 
         async void FillApsAsync(string Auth)
-        {
-
-            var ansList = new ListView();
-            ansList.ItemsSource = myAnswers;
-
+        {         
             List<KontrollSvar> Answers = new List<KontrollSvar>();
             using (HttpClient client = new HttpClient())
             {

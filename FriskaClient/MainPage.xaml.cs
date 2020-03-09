@@ -23,10 +23,12 @@ namespace FriskaClient
         public MainPage()
         {         
             InitializeComponent();
-            FillApsAsync(App.Auth);
+            //FillApsAsync(App.Auth);
+            var vm = new ViewModel();
+            ansList.ItemsSource = vm.MyAnswers;
 
 
-            ToolbarItem item = new ToolbarItem
+             ToolbarItem item = new ToolbarItem
             {
                 Text = App.User,
             };
