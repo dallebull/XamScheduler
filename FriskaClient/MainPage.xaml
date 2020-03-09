@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:FriskaClient"
+             x:Class="FriskaClient.MainPage">
+
+    <ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+
+            <ListView x:Name="ansList"
+            ItemsSource="{Binding MyAnswers}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout BackgroundColor="#eee"
+                        Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal">
+
+                                    <Label Text="{Binding Kontroll}"
+                                TextColor="#f35e20" />
+                                    <Label Text="{Binding KontrollTag}"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#503026" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
+

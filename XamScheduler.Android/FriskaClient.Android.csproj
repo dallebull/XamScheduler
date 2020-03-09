@@ -6,8 +6,8 @@
     <ProjectGuid>{0A3E03C7-D944-4883-99CF-96EB8EC0CD48}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>XamScheduler.Android</RootNamespace>
-    <AssemblyName>XamScheduler.Android</AssemblyName>
+    <RootNamespace>FriskaClient.Android</RootNamespace>
+    <AssemblyName>FriskaClient.Android</AssemblyName>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
@@ -17,57 +17,31 @@
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <AndroidKeyStore>false</AndroidKeyStore>
-    <AndroidSigningKeyStore>C:\Users\Dalle\AppData\Local\Xamarin\Mono for Android\Keystore\Dallebull\Dallebull.keystore</AndroidSigningKeyStore>
-    <AndroidSigningStorePass>abcd1234</AndroidSigningStorePass>
-    <AndroidSigningKeyAlias>Dalle</AndroidSigningKeyAlias>
-    <AndroidSigningKeyPass>Dalle</AndroidSigningKeyPass>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG</DefineConstants>
+    <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
-    <BundleAssemblies>false</BundleAssemblies>
-    <MandroidI18n />
-    <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
-    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
-    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
-    <AndroidEnableMultiDex>false</AndroidEnableMultiDex>
-    <AndroidUseAapt2>true</AndroidUseAapt2>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugSymbols>false</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>2</WarningLevel>
+    <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
-    <BundleAssemblies>false</BundleAssemblies>
-    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
-    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <AndroidUseAapt2>false</AndroidUseAapt2>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XamScheduler\XamScheduler.csproj">
-      <Project>{2549C2E8-38C9-4C78-BBF2-EC15416A2E9A}</Project>
-      <Name>XamScheduler</Name>
+    <ProjectReference Include="..\FriskaClient\FriskaClient.csproj">
+      <Project>{DCE51FF4-9F72-4B39-9DC9-4A39F1037949}</Project>
+      <Name>FriskaClient</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -96,9 +70,6 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Syncfusion.Xamarin.Buttons">
-      <Version>17.3.0.14</Version>
-    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.3.0.14" />
   </ItemGroup>
