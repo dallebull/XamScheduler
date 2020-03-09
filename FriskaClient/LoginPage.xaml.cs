@@ -12,10 +12,10 @@ namespace FriskaClient
     public partial class LoginPage : ContentPage
     {
 
-        static string url = "Https://localhost:44349/Token";
+        static string url = "http://31.208.194.94/Token";
         public LoginPage()
         {
-            App.Devmode = false;  //Set this to True to Auto Login (Change Email an PW in method)
+            App.Devmode = true;  //Set this to True to Auto Login (Change Email an PW in method)
             InitializeComponent();  
 
             EmailnameEntry.Completed += (sender, args) => { passwordEntry.Focus(); };
@@ -39,8 +39,10 @@ namespace FriskaClient
                 Username = EmailnameEntry.Text,
                 Password = passwordEntry.Text,
             };
+        
+                await Login(login);
 
-           await Login(login);
+
             if (App.Auth != null)
             {
                 App.IsUserLoggedIn = true;
@@ -71,7 +73,15 @@ namespace FriskaClient
                 {
                     Token token = JsonConvert.DeserializeObject<Token>(jsonContent);
                     App.Auth = token.access_token;
-                    App.User = token.displayName;
+
+                    var tmpName = token.userName.Split('@');
+                    var Name = tmpName[0];
+
+                    if (Name.Length > 1)
+                    {
+                        Name = char.ToUpper(Name[0]) + Name.Substring(1);
+                    }
+                    App.User = Name;
                 }
                 catch (Exception)
                 {

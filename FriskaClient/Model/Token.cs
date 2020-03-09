@@ -7,7 +7,7 @@ namespace FriskaClient.Model
     class Token
     {
         public string access_token { get; set; }
-        public string displayName { get; set; }
+        public string userName { get; set; }
 
     }
 }

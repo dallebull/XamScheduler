@@ -53,7 +53,7 @@ namespace FriskaClient
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
                 StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
-                var apiAnswer = await client.PostAsync("https://timebooking.azurewebsites.net/api/timebooking", scontent);
+                var apiAnswer = await client.PostAsync("http://timebooking.azurewebsites.net/api/timebooking", scontent);
                     if (apiAnswer.IsSuccessStatusCode)
                     {
                         this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
