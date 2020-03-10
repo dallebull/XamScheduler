@@ -16,9 +16,7 @@ namespace FriskaClient
 {
     public partial class MainPage : ContentPage
     {
-        ObservableCollection<KontrollSvar> myAnswers  = new ObservableCollection<KontrollSvar>();
 
-        public ObservableCollection<KontrollSvar> MyAnswers { get { return myAnswers; } }
 
         public MainPage()
         {         
@@ -32,44 +30,18 @@ namespace FriskaClient
             {
                 Text = App.User,
             };
+
             this.ToolbarItems.Add(item);
             item.Clicked += OnLogout;
 
         }
 
-
-        async void FillApsAsync(string Auth)
+        async void OnAddButtonClicked(object sender, EventArgs args)
         {
-
-            var ansList = new ListView();
-            ansList.ItemsSource = myAnswers;
-
-            List<KontrollSvar> Answers = new List<KontrollSvar>();
-            using (HttpClient client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Auth);
-                var apiResponse = await client.GetStringAsync("http://31.208.194.94/api/kontrollsvarsapi/");
-                
-                 Answers = JsonConvert.DeserializeObject<List<KontrollSvar>>(apiResponse);
-
-                foreach (var item in Answers)
-                {
-                    KontrollSvar ans = new KontrollSvar();
-                    ans.ID = item.ID;
-                    ans.UserID = item.UserID;
-                    ans.Kontroll = item.Kontroll;
-                    ans.KontrollTag = item.KontrollTag;
-                    ans.RegDate = item.RegDate;
-                    ans.Rattsvar = item.Rattsvar;
-                    ans.YearID = item.YearID;
-
-
-
-                    myAnswers.Add(ans);
-
-                }
-            }
+            await Navigation.PushAsync(new AddKontroll());
         }
+
+
         //public async void OnDateCellHolding(object sender, Syncfusion.SfCalendar.XForms.DayCellHoldingEventArgs e)
         //{
         //   BookEventQuery(calendar.SelectedDate);
@@ -118,7 +90,7 @@ namespace FriskaClient
 
         //            using (HttpClient client = new HttpClient())
         //            {
-        //                var url = "http://31.208.194.94/api/Kontrollsvarsapi/" + id;
+        //                var url = "http://31.208.194.94:44349/api/Kontrollsvarsapi/" + id;
 
         //                var DelAuth = new Dictionary<string, string>();
         //                DelAuth.Add("Authorization", "Bearer " + App.Auth);

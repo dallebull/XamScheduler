@@ -16,23 +16,33 @@ namespace FriskaClient
 {
     public class ViewModel
     {
-        public ObservableCollection<KontrollSvar> myAnswers = new ObservableCollection<KontrollSvar>();
+        static string url = "https://31.208.194.94:44349/api/kontrollsvarsapi/";
+      
+        private ObservableCollection<KontrollSvar> myAnswers = new ObservableCollection<KontrollSvar>();
 
          public ListView ansList = new ListView();
         public ObservableCollection<KontrollSvar> MyAnswers { get { return myAnswers; } }
         public ViewModel()
         {
 
-            FillApsAsync(App.Auth);
+            FillAnsAsync(App.Auth);
         }
 
-        async void FillApsAsync(string Auth)
+        async void FillAnsAsync(string Auth)
         {         
             List<KontrollSvar> Answers = new List<KontrollSvar>();
-            using (HttpClient client = new HttpClient())
-            {
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            // Pass the handler to httpclient(from you are calling api)
+            HttpClient client = new HttpClient(clientHandler);
+    
+           
+                client.Timeout = TimeSpan.FromMinutes(10);
+          
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Auth);
-                var apiResponse = await client.GetStringAsync("http://31.208.194.94/api/kontrollsvarsapi/");
+                var apiResponse = await client.GetStringAsync(url); 
                 Answers = JsonConvert.DeserializeObject<List<KontrollSvar>>(apiResponse);
 
                 foreach (var item in Answers)
@@ -51,7 +61,7 @@ namespace FriskaClient
                     myAnswers.Add(ans);
 
                 }
-            }
+            
         }
 
     }

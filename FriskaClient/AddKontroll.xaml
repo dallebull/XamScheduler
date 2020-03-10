@@ -1,0 +1,43 @@
+﻿
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:behaviors="clr-namespace:FriskaClient.Behaviors;assembly=FriskaClient"
+             mc:Ignorable="d"
+             x:Class="FriskaClient.AddKontroll">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0, 20, 0, 0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+
+    <StackLayout Margin="10" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
+        <Label Text="Lägg Till Kontroll"
+               Style="{DynamicResource TitleStyle}"
+               Margin="0, 20"
+               HorizontalTextAlignment="Center" />
+
+        <Label Text="Kontroll" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+        <Entry x:Name="kontrollEntry"  Keyboard="Numeric" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" >
+            <Entry.Behaviors>
+                <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
+            </Entry.Behaviors>
+        </Entry>
+
+
+        <Label Text="Kod" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+
+        <Entry x:Name="tagEntry"  Keyboard="Chat" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold">
+            <Entry.Behaviors>
+                <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
+            </Entry.Behaviors>
+        </Entry>
+
+        <Button Text="Ok"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="OnButtonClicked" />
+
+    </StackLayout>
+</ContentPage>

@@ -4,11 +4,10 @@
              xmlns:local="clr-namespace:FriskaClient"
              x:Class="FriskaClient.MainPage">
 
-    <ContentPage.ToolbarItems>
-    </ContentPage.ToolbarItems>
-    <ContentPage.Content>
-        <Grid>
+    <ContentPage.ToolbarItems/>
 
+    <ContentPage.Content>
+        <Grid>   
             <ListView x:Name="ansList" ItemsSource="{Binding MyAnswers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -16,12 +15,18 @@
                             <StackLayout BackgroundColor="#eee"
                         Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal">
+                                    
 
                                     <Label Text="{Binding Kontroll}"
-                                TextColor="#f35e20" />
+                                           VerticalOptions="Center"
+                                             HorizontalOptions="CenterAndExpand"
+                                     FontAttributes="Bold"
+                                TextColor="Black" />
                                     <Label Text="{Binding KontrollTag}"
-                                HorizontalOptions="EndAndExpand"
-                                TextColor="#503026" />
+                                           VerticalOptions="Center"
+                                HorizontalOptions="CenterAndExpand"
+                                           FontAttributes="Bold"                                           
+                                TextColor="Black" />
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>
@@ -29,6 +34,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button Text="Lägg Till Kontroll" VerticalOptions="End" HorizontalOptions="Center" Clicked="OnAddButtonClicked"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

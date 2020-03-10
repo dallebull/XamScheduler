@@ -48,7 +48,7 @@ namespace FriskaClient
                 {
 
                     StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
-                    await client.PostAsync("http://31.208.194.94/api/accountapi/register", scontent);
+                    await client.PostAsync("http://31.208.194.94:44349/api/accountapi/register", scontent);
                                   
                 }
                 //Assume it works and Log in
@@ -106,7 +106,7 @@ namespace FriskaClient
 
                 using (HttpClient client = new HttpClient())
                 {
-                    var req = new HttpRequestMessage(HttpMethod.Post, "http://31.208.194.94/token") { Content = new FormUrlEncodedContent(dictionary) };
+                    var req = new HttpRequestMessage(HttpMethod.Post, "http://31.208.194.94:44349/token") { Content = new FormUrlEncodedContent(dictionary) };
                     var res = await client.SendAsync(req);
 
                     var reqcontent = res.Content;
