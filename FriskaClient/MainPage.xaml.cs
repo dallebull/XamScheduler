@@ -27,7 +27,7 @@ namespace FriskaClient
     public partial class MainPage : ContentPage
     {
 
-        static string url = "https://31.208.194.94/api/kontrollsvarsapi/";
+        static string url = App.url + "api/kontrollsvarsapi/";
         public MainPage()
         {         
             InitializeComponent();
