@@ -2,18 +2,28 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:FriskaClient"
-             x:Class="FriskaClient.MainPage">
-
+             x:Class="FriskaClient.MainPage"
+             x:Key="FriskaClient.MsgToImagePathConverter">
     <ContentPage.ToolbarItems/>
 
     <ContentPage.Content>
-        <Grid>   
-            <ListView x:Name="ansList" ItemsSource="{Binding MyAnswers}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="90%" />
+                <RowDefinition Height="10%" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25%" />
+                <ColumnDefinition Width="25%" /> 
+                <ColumnDefinition Width="25%" />
+                <ColumnDefinition Width="25%" />
+            </Grid.ColumnDefinitions>
+
+            <ListView x:Name="ansList" ItemsSource="{Binding MyAnswers}" Grid.ColumnSpan="4">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout BackgroundColor="#eee"
-                        Orientation="Vertical">
+                            <StackLayout BackgroundColor="#eee" Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal">
                                     
 
@@ -21,12 +31,26 @@
                                            VerticalOptions="Center"
                                              HorizontalOptions="CenterAndExpand"
                                      FontAttributes="Bold"
-                                TextColor="Black" />
+                                TextColor="Black"
+                                            Grid.Row="0" Grid.Column="0"/>
+                                    
                                     <Label Text="{Binding KontrollTag}"
                                            VerticalOptions="Center"
                                 HorizontalOptions="CenterAndExpand"
                                            FontAttributes="Bold"                                           
-                                TextColor="Black" />
+                                TextColor="Black" 
+                                            Grid.Row="0" Grid.Column="1"/>
+                                    
+                                    
+                                    <Label Text="{Binding Rattsvar}"
+                                           VerticalOptions="Center"
+                                HorizontalOptions="CenterAndExpand"
+                                           FontAttributes="Bold"                                           
+                                TextColor="Black" Grid.Row="0" Grid.Column="2" />
+                           
+
+                                    <Button Text="Ta Bort" CommandParameter="{Binding ID}" Clicked="OnDelButtonClicked" Grid.Row="0" Grid.Column="3"/>
+
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>
@@ -34,7 +58,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="Lägg Till Kontroll" VerticalOptions="End" HorizontalOptions="Center" Clicked="OnAddButtonClicked"/>
+
+            <Button Text="Lägg Till Kontroll" VerticalOptions="End" HorizontalOptions="Center" Clicked="OnAddButtonClicked" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="2" />
+            <Button Text="Scanna Kontroll" VerticalOptions="End" HorizontalOptions="Center" Clicked="OnScanButtonClicked" Grid.Row="1" Grid.Column="2"  Grid.ColumnSpan="2" />
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

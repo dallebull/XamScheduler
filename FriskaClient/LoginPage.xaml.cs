@@ -12,10 +12,10 @@ namespace FriskaClient
     public partial class LoginPage : ContentPage
     {
 
-        static string url = "http://31.208.194.94:44349/Token";
+        static string url = "https://31.208.194.94/Token";
         public LoginPage()
         {
-            App.Devmode = true;  //Set this to True to Auto Login (Change Email an PW in method)
+            App.Devmode = false;  //Set this to True to Auto Login (Change Email an PW in method)
             InitializeComponent();  
 
             EmailnameEntry.Completed += (sender, args) => { passwordEntry.Focus(); };
@@ -61,10 +61,11 @@ namespace FriskaClient
         {
             var content = JsonConvert.SerializeObject(login);
             var dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(content);
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            HttpClient client = new HttpClient(clientHandler);
 
-            using (HttpClient client = new HttpClient())
-            {
-               var req = new HttpRequestMessage(HttpMethod.Post, url) { Content = new FormUrlEncodedContent(dictionary) };
+            var req = new HttpRequestMessage(HttpMethod.Post, url) { Content = new FormUrlEncodedContent(dictionary) };
                 var res = await client.SendAsync(req);              
               
                 var reqcontent = res.Content;
@@ -87,7 +88,7 @@ namespace FriskaClient
                 {
                     await DisplayAlert("Error!","Error!!", "Ok");                   
                 }           
-            }
+            
         }
         async void DevLogin()
         {

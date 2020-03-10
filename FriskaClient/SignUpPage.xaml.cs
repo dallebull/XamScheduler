@@ -13,6 +13,7 @@ namespace FriskaClient
 
     public partial class SignUpPage : ContentPage
     {
+        static string url = "https://31.208.194.94/api/Account/Register";
             public SignUpPage()
         {
             InitializeComponent();        
@@ -43,41 +44,33 @@ namespace FriskaClient
             if (signUpSucceeded)
             {
                 var content = JsonConvert.SerializeObject(user);
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (usersender, cert, chain, sslPolicyErrors) => { return true; };
+                HttpClient client = new HttpClient(clientHandler);
 
-                using (HttpClient client = new HttpClient())
+                StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(url, scontent);
+                if (response.IsSuccessStatusCode)
                 {
+                    var login = new LoginModel
+                    {
+                        Username = user.Email,
+                        Password = user.Password,
+                    };
 
-                    StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
-                    await client.PostAsync("http://31.208.194.94:44349/api/accountapi/register", scontent);
-                                  
-                }
-                //Assume it works and Log in
+                    await Login(login);
 
-                var login = new LoginModel
-                {
-                    Username = emailEntry.Text,
-                    Password = passwordEntry.Text,
-
-                };
-
-                await Login(login);
-                if (App.Auth != null)
-                {
-                   
-                    App.IsUserLoggedIn = true;
-                    Navigation.InsertPageBefore(new MainPage(), this);
-                    await Navigation.PopAsync();
+                    //Navigation.InsertPageBefore(new LoginPage(), this);
+                    //await Navigation.PopAsync();
                 }
                 else
                 {
-                    messageLabel.Text = "Login failed";
-                    passwordEntry.Text = string.Empty;
-                    confirmPasswordEntry.Text = string.Empty;
+                    await DisplayAlert("Oh No!", response.StatusCode.ToString(), "Ok");
                 }
             }
             else
             {
-                messageLabel.Text = "Sign up failed";
+                await DisplayAlert("Oh No!", "Check your Details", "Ok");
             }
         }
 
@@ -85,7 +78,14 @@ namespace FriskaClient
             {
             if (ValidatePassword(user.Password))
             {
-                return (user.Password == user.ConfirmPassword && !string.IsNullOrWhiteSpace(user.Email) && user.Email.Contains("@") && !string.IsNullOrWhiteSpace(user.Namn) && !string.IsNullOrWhiteSpace(user.PhoneNumber) && !string.IsNullOrWhiteSpace(user.Gender) && (user.Age >=1900 && user.Age <= 2020));
+                return (user.Password == user.ConfirmPassword &&
+                    !string.IsNullOrWhiteSpace(user.Email) &&
+                    user.Email.Contains("@") &&
+                    !string.IsNullOrWhiteSpace(user.Namn) &&
+                    !string.IsNullOrWhiteSpace(user.PhoneNumber) &&
+                    user.PhoneNumber.Count() >= 10 &&
+                    !string.IsNullOrWhiteSpace(user.Gender) &&
+                    (user.Age >=1900 && user.Age <= 2020));
             }
             return false;
             }
@@ -106,7 +106,7 @@ namespace FriskaClient
 
                 using (HttpClient client = new HttpClient())
                 {
-                    var req = new HttpRequestMessage(HttpMethod.Post, "http://31.208.194.94:44349/token") { Content = new FormUrlEncodedContent(dictionary) };
+                    var req = new HttpRequestMessage(HttpMethod.Post, "https://31.208.194.94/token") { Content = new FormUrlEncodedContent(dictionary) };
                     var res = await client.SendAsync(req);
 
                     var reqcontent = res.Content;

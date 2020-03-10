@@ -11,13 +11,23 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using FriskaClient.Model;
 using System.Collections.ObjectModel;
+using FriskaClient.Model;
+using FriskaClient.Services;
+using Newtonsoft.Json;
+using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Web;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace FriskaClient
 {
     public partial class MainPage : ContentPage
     {
 
-
+        static string url = "https://31.208.194.94/api/kontrollsvarsapi/";
         public MainPage()
         {         
             InitializeComponent();
@@ -39,88 +49,180 @@ namespace FriskaClient
         async void OnAddButtonClicked(object sender, EventArgs args)
         {
             await Navigation.PushAsync(new AddKontroll());
+        }    
+        async void OnScanButtonClicked(object sender, EventArgs args)
+        {
+
+            string Kontroll = null;
+            string KontrollTag = null;
+            try
+            {
+                var scanner = DependencyService.Get<IQrScanningService>();
+             
+                var result = await scanner.ScanAsync();
+                if (result != null)
+                {
+                    Uri myUri = new Uri(result);
+                    Kontroll = HttpUtility.ParseQueryString(myUri.Query).Get("Kontroll");
+                    KontrollTag = HttpUtility.ParseQueryString(myUri.Query).Get("KontrollTag");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            if (Kontroll != null && KontrollTag != null)
+            {
+
+
+                KontrollSvar ks = new KontrollSvar();
+
+                ks.KontrollTag = KontrollTag;
+                ks.Kontroll = Int32.Parse(Kontroll);
+
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sslsender, cert, chain, sslPolicyErrors) => { return true; };
+
+                // Pass the handler to httpclient(from you are calling api)
+                HttpClient client = new HttpClient(clientHandler);
+
+                //Put Answer on Site
+                var content = JsonConvert.SerializeObject(ks);
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
+                StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
+                var apiAnswer = await client.PostAsync(url, scontent);
+                if (apiAnswer.IsSuccessStatusCode)
+                {
+                  
+                    Navigation.InsertPageBefore(new MainPage(), this);
+                    await Navigation.PopAsync();
+                }
+                else
+                {
+                    await DisplayAlert("Oh No!", apiAnswer.StatusCode.ToString(), "Ok");
+                }
+            }
+        }
+
+        async void OnDelButtonClicked(object sender, EventArgs e)
+        {
+            var action = await DisplayAlert("Ta Bort?", "Vill du ta bort Kontrollen?", "Ja", "Nej");
+            if (action)
+            {
+                var item = (Xamarin.Forms.Button)sender;
+                var Id = item.CommandParameter;
+
+                HttpClientHandler clientHandler = new HttpClientHandler();
+              clientHandler.ServerCertificateCustomValidationCallback = (thissender, cert, chain, sslPolicyErrors) => { return true; };
+
+            // Pass the handler to httpclient(from you are calling api)
+            HttpClient client = new HttpClient(clientHandler);
+
+
+            client.Timeout = TimeSpan.FromMinutes(10);
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
+          
+                var apiAnswer = await client.DeleteAsync(url + Id);
+                if (apiAnswer.IsSuccessStatusCode)
+                {
+             
+                    Navigation.InsertPageBefore(new MainPage(), this);
+                    await Navigation.PopAsync();
+                }
+                else
+                {
+                    await DisplayAlert("Oh No!", apiAnswer.StatusCode.ToString(), "Ok");
+                }     
+        }
+
         }
 
 
-        //public async void OnDateCellHolding(object sender, Syncfusion.SfCalendar.XForms.DayCellHoldingEventArgs e)
-        //{
-        //   BookEventQuery(calendar.SelectedDate);
-        //}
-        //private async void Calendar_InlineItemTapped(object sender, InlineItemTappedEventArgs e)
-        //{
-        //    var appointment = e.InlineEvent as CustomAppointment;
-        //    var id = appointment.EventId;
-        //    if (appointment.Subject != "")
-        //    {
-        //        bool app = await DisplayAlert(appointment.Subject, appointment.StartTime.ToString("yyyy-MM-dd HH:mm"), "Ok", "Remove");
-        //        if (!app)
-        //        {
-        //            RemoveEvent(id);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        await DisplayAlert("Allready Taken", appointment.StartTime.ToString("yyyy-MM-dd HH:mm"), "Ok");
-        //    }
-        //}
+    
+
+    //public async void OnDateCellHolding(object sender, Syncfusion.SfCalendar.XForms.DayCellHoldingEventArgs e)
+    //{
+    //   BookEventQuery(calendar.SelectedDate);
+    //}
+    //private async void Calendar_InlineItemTapped(object sender, InlineItemTappedEventArgs e)
+    //{
+    //    var appointment = e.InlineEvent as CustomAppointment;
+    //    var id = appointment.EventId;
+    //    if (appointment.Subject != "")
+    //    {
+    //        bool app = await DisplayAlert(appointment.Subject, appointment.StartTime.ToString("yyyy-MM-dd HH:mm"), "Ok", "Remove");
+    //        if (!app)
+    //        {
+    //            RemoveEvent(id);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        await DisplayAlert("Allready Taken", appointment.StartTime.ToString("yyyy-MM-dd HH:mm"), "Ok");
+    //    }
+    //}
 
 
 
-        //async void BookEventQuery(object sender)
-        //{
-        //    var tmpDate = calendar.SelectedDate.ToString();
-        //    var tmpDate2 = DateTime.Parse(tmpDate);
-        //    var DateDate = tmpDate2.Date.ToString("yyyy-MM-dd");
-        //    bool answer = await DisplayAlert(DateDate, "Would you like to Book this Day", "Yes", "No");
-        //    if (answer == true)
-        //    {
-        //        this.Date = (DateTime.Parse(calendar.SelectedDate.ToString()));
-        //        await Navigation.PushAsync(new BookEvent((DateTime.Parse(calendar.SelectedDate.ToString()))));
-        //    }
-        //}
+    //async void BookEventQuery(object sender)
+    //{
+    //    var tmpDate = calendar.SelectedDate.ToString();
+    //    var tmpDate2 = DateTime.Parse(tmpDate);
+    //    var DateDate = tmpDate2.Date.ToString("yyyy-MM-dd");
+    //    bool answer = await DisplayAlert(DateDate, "Would you like to Book this Day", "Yes", "No");
+    //    if (answer == true)
+    //    {
+    //        this.Date = (DateTime.Parse(calendar.SelectedDate.ToString()));
+    //        await Navigation.PushAsync(new BookEvent((DateTime.Parse(calendar.SelectedDate.ToString()))));
+    //    }
+    //}
 
-        //public async void RemoveEvent(int id)
-        //{
-        //    bool answer = await DisplayAlert("Remove Booking", "Are you 110% Sure?", "Yes", "No");
-        //    if (answer)
-        //    {
-        //        try
-        //        {
+    //public async void RemoveEvent(int id)
+    //{
+    //    bool answer = await DisplayAlert("Remove Booking", "Are you 110% Sure?", "Yes", "No");
+    //    if (answer)
+    //    {
+    //        try
+    //        {
 
 
-        //            using (HttpClient client = new HttpClient())
-        //            {
-        //                var url = "http://31.208.194.94:44349/api/Kontrollsvarsapi/" + id;
+    //            using (HttpClient client = new HttpClient())
+    //            {
+    //                var url = "https://31.208.194.94/api/Kontrollsvarsapi/" + id;
 
-        //                var DelAuth = new Dictionary<string, string>();
-        //                DelAuth.Add("Authorization", "Bearer " + App.Auth);
-        //                DelAuth.Add("Content-Type", "application/x-www-form-urlencoded");
-        //                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
-        //                var req = new HttpRequestMessage(HttpMethod.Delete, url) { Content = new FormUrlEncodedContent(DelAuth) };
-        //                var res = await client.SendAsync(req);
+    //                var DelAuth = new Dictionary<string, string>();
+    //                DelAuth.Add("Authorization", "Bearer " + App.Auth);
+    //                DelAuth.Add("Content-Type", "application/x-www-form-urlencoded");
+    //                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
+    //                var req = new HttpRequestMessage(HttpMethod.Delete, url) { Content = new FormUrlEncodedContent(DelAuth) };
+    //                var res = await client.SendAsync(req);
 
-        //                if (res.IsSuccessStatusCode)
-        //                {
-        //                    Navigation.InsertPageBefore(new MainPage(), this);
-        //                    await Navigation.PopAsync();
-        //                }
-        //                else
-        //                {
-        //                    await DisplayAlert("Error!", "Could not Remove Booking!!", "Ok");
-        //                    Navigation.InsertPageBefore(new MainPage(), this);
-        //                    await Navigation.PopAsync();
-        //                }
-        //            }
-        //        }
-        //        catch (Exception)
-        //        {
-        //            await DisplayAlert("Error!", "My Name is Error!!", "Hello");
-        //            Navigation.InsertPageBefore(new MainPage(), this);
-        //            await Navigation.PopAsync();
-        //        }
-        //    }
-        //}
-        static void OnLogout(object sender, EventArgs e)
+    //                if (res.IsSuccessStatusCode)
+    //                {
+    //                    Navigation.InsertPageBefore(new MainPage(), this);
+    //                    await Navigation.PopAsync();
+    //                }
+    //                else
+    //                {
+    //                    await DisplayAlert("Error!", "Could not Remove Booking!!", "Ok");
+    //                    Navigation.InsertPageBefore(new MainPage(), this);
+    //                    await Navigation.PopAsync();
+    //                }
+    //            }
+    //        }
+    //        catch (Exception)
+    //        {
+    //            await DisplayAlert("Error!", "My Name is Error!!", "Hello");
+    //            Navigation.InsertPageBefore(new MainPage(), this);
+    //            await Navigation.PopAsync();
+    //        }
+    //    }
+    //}
+    static void OnLogout(object sender, EventArgs e)
         {
             
             App.IsUserLoggedIn = false;
