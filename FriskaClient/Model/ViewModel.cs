@@ -16,7 +16,7 @@ namespace FriskaClient
 {
     public class ViewModel
     {
-        static string url = "https://31.208.194.94:44349/api/kontrollsvarsapi/";
+        static string url = App.url + "api/kontrollsvarsapi/";
       
         private ObservableCollection<KontrollSvar> myAnswers = new ObservableCollection<KontrollSvar>();
 

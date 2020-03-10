@@ -90,7 +90,7 @@ namespace FriskaClient
 
         //            using (HttpClient client = new HttpClient())
         //            {
-        //                var url = "http://31.208.194.94:44349/api/Kontrollsvarsapi/" + id;
+        //                var url = "http://localhost:44349/api/Kontrollsvarsapi/" + id;
 
         //                var DelAuth = new Dictionary<string, string>();
         //                DelAuth.Add("Authorization", "Bearer " + App.Auth);

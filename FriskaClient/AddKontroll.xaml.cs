@@ -20,7 +20,7 @@ namespace FriskaClient
     public partial class AddKontroll : ContentPage
     {
 
-        static string url = "http://31.208.194.94:44349/api/KontrollSvarsApi";
+        static string url = App.url + "api/KontrollSvarsApi";
         public AddKontroll()
         {         
        
