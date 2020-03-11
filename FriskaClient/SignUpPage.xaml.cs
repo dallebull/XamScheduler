@@ -13,7 +13,7 @@ namespace FriskaClient
 
     public partial class SignUpPage : ContentPage
     {
-        static string url = App.url + "api/Account/Register/";
+        static string url = App.url + "api/Account/Register";
             public SignUpPage()
         {
             InitializeComponent();        

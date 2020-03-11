@@ -3,7 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:FriskaClient"
              x:Class="FriskaClient.MainPage"
-             x:Key="FriskaClient.MsgToImagePathConverter">
+             x:Key="FriskaClient.MsgToImagePathConverter" BackgroundColor="#ED1C24">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:MsgToImagePathConverter x:Key="MsgToImagePathConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.ToolbarItems/>
 
     <ContentPage.Content>
@@ -19,11 +26,11 @@
                 <ColumnDefinition Width="25%" />
             </Grid.ColumnDefinitions>
 
-            <ListView x:Name="ansList" ItemsSource="{Binding MyAnswers}" Grid.ColumnSpan="4">
+            <ListView x:Name="ansList" ItemsSource="{Binding MyAnswers}" Grid.ColumnSpan="4" HasUnevenRows="True" IsPullToRefreshEnabled="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout BackgroundColor="#eee" Orientation="Vertical">
+                            <StackLayout BackgroundColor="#FFFFFF" Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal">
                                     
 
@@ -40,16 +47,20 @@
                                            FontAttributes="Bold"                                           
                                 TextColor="Black" 
                                             Grid.Row="0" Grid.Column="1"/>
+
+                                    <Image Source="{Binding Rattsvar, Converter={StaticResource MsgToImagePathConverter}}"
+                                       VerticalOptions="Center"
+                                HorizontalOptions="CenterAndExpand"
+                                       Grid.Row="0" Grid.Column="2" />
                                     
-                                    
-                                    <Label Text="{Binding Rattsvar}"
+                                        <!--<Label Text="{Binding Rattsvar}"
                                            VerticalOptions="Center"
                                 HorizontalOptions="CenterAndExpand"
                                            FontAttributes="Bold"                                           
-                                TextColor="Black" Grid.Row="0" Grid.Column="2" />
-                           
+                                TextColor="Black" Grid.Row="0" Grid.Column="2" />-->
 
-                                    <Button Text="Ta Bort" CommandParameter="{Binding ID}" Clicked="OnDelButtonClicked" Grid.Row="0" Grid.Column="3"/>
+
+                                    <ImageButton Source="ms-appx:///Assets/delete.png"  CommandParameter="{Binding ID}" Clicked="OnDelButtonClicked" Grid.Row="0" Grid.Column="3"/>
 
                                 </StackLayout>
                             </StackLayout>

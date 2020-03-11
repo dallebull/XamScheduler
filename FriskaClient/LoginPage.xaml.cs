@@ -12,10 +12,10 @@ namespace FriskaClient
     public partial class LoginPage : ContentPage
     {
 
-        static string url = App.url +"Token";
+        static string url = App.url + "Token";
         public LoginPage()
         {
-            App.Devmode = false;  //Set this to True to Auto Login (Change Email an PW in method)
+            App.Devmode = false; 
             InitializeComponent();  
 
             EmailnameEntry.Completed += (sender, args) => { passwordEntry.Focus(); };

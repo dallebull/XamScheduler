@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using ZXing.Mobile;
+using Android.Graphics;
 
 namespace FriskaClient.Android
 {
@@ -18,12 +19,15 @@ namespace FriskaClient.Android
             MobileBarcodeScanner.Initialize(Application);
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
+        
             base.OnCreate(bundle);
+
+
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
         }
+      
     }
 }
 
