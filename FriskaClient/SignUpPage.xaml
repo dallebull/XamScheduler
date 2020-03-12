@@ -16,31 +16,31 @@
             <StackLayout  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" >
 
                 <Label Text="Namn" HorizontalOptions="Center"  />
-                <Entry x:Name="userEntry"  Keyboard="Chat" HorizontalTextAlignment="Center" />
+                <Entry x:Name="userEntry" Placeholder="Nils Nilsson"  Keyboard="Chat" HorizontalTextAlignment="Center" />
                 
                 <Label Text="Email address" HorizontalOptions="Center"/>
-                <Entry x:Name="emailEntry"  Keyboard="Email" HorizontalTextAlignment="Center" />
+                <Entry x:Name="emailEntry" Placeholder="Nils@Nilsson.com"  Keyboard="Email" HorizontalTextAlignment="Center" />
 
                 <Label Text="Kön" HorizontalOptions="Center" />
-                <Entry x:Name="genderEntry"  Keyboard="Chat" HorizontalTextAlignment="Center"/>
+                <Entry x:Name="genderEntry" Placeholder="Man/Kvinna"  Keyboard="Chat" HorizontalTextAlignment="Center"/>
                 
                 <Label Text="Födelseår" HorizontalOptions="Center" />
                 <Entry x:Name="ageEntry"  Keyboard="Chat" Placeholder="1985" HorizontalTextAlignment="Center"/>
                 
                 <Label Text="Telefonummer" HorizontalOptions="Center"  />
-                <Entry x:Name="numberEntry"  Keyboard="Numeric" Placeholder="070-1234567" HorizontalTextAlignment="Center"/>
+                <Entry x:Name="numberEntry"  Keyboard="Numeric" Placeholder="0701234567" HorizontalTextAlignment="Center"/>
 
-                <Label Text="Password" HorizontalOptions="Center" />
-                <Entry x:Name="passwordEntry" IsPassword="true" HorizontalTextAlignment="Center" />
+                <Label Text="Lösenord" HorizontalOptions="Center" />
+                <Entry x:Name="passwordEntry" Placeholder="Abcd1234!" IsPassword="true" HorizontalTextAlignment="Center" />
                 
-                <Label Text="Confirm Password" HorizontalOptions="Center" />
-                <Entry x:Name="confirmPasswordEntry" IsPassword="true" HorizontalTextAlignment="Center" />                
+                <Label Text="Verifiera Lösenord" HorizontalOptions="Center" />
+                <Entry x:Name="confirmPasswordEntry" Placeholder="Abcd1234!" IsPassword="true" HorizontalTextAlignment="Center" />                
      
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand"  HorizontalOptions="Center">
 
-                <Button Text="Sign Up" VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnSignUpButtonClicked" Style="{DynamicResource TitleStyle}"/>
+                <Button Text="Sign Up" VerticalOptions="Center" BackgroundColor="#ed1c24" TextColor="white" HorizontalOptions="Center" Clicked="OnSignUpButtonClicked" Style="{DynamicResource TitleStyle}"/>
 
             </StackLayout>
         </StackLayout>

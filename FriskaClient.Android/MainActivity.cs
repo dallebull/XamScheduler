@@ -26,6 +26,8 @@ namespace FriskaClient.Android
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
+            Window.SetStatusBarColor(Color.Argb(255, 28, 34, 1));
+            Window.SetNavigationBarColor(Color.Argb(255,28,36,1));
         }
       
     }

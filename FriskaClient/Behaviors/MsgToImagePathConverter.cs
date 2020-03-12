@@ -12,11 +12,11 @@ namespace FriskaClient
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var imagePath = "ms-appx:///Assets/1.png";
+            var imagePath = "wrong.png";
             var Rattsvar = (bool)value;
             if (Rattsvar)
             {
-                imagePath = "ms-appx:///Assets/2.png";
+                imagePath = "corr.png";
             }
 
             return imagePath;

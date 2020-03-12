@@ -26,6 +26,7 @@ namespace FriskaClient
 {
     public partial class MainPage : ContentPage
     {
+        public ObservableCollection<KontrollSvar> _myAnswers { get; set; } 
 
         static string url = App.url + "api/kontrollsvarsapi/";
         public MainPage()
@@ -34,7 +35,7 @@ namespace FriskaClient
             //FillApsAsync(App.Auth);
             var vm = new ViewModel();
             ansList.ItemsSource = vm.MyAnswers;
-
+            _myAnswers = vm.MyAnswers;
 
              ToolbarItem item = new ToolbarItem
             {
@@ -109,11 +110,16 @@ namespace FriskaClient
 
         async void OnDelButtonClicked(object sender, EventArgs e)
         {
-            var action = await DisplayAlert("Ta Bort?", "Vill du ta bort Kontrollen?", "Ja", "Nej");
+            var item = (Xamarin.Forms.ImageButton)sender;
+            var Id = item.CommandParameter;
+            var IdString = Id.ToString();
+            var tmpkontroll = from a in _myAnswers where a.ID.ToString() == IdString select a;
+            var kontroll = tmpkontroll.First() as KontrollSvar;
+
+            var action = await DisplayAlert("Ta Bort?", "Vill du ta bort Kontrollen?\n" +kontroll.Kontroll + "  " + kontroll.KontrollTag, "Ja", "Nej");
             if (action)
             {
-                var item = (Xamarin.Forms.Button)sender;
-                var Id = item.CommandParameter;
+               
 
                 HttpClientHandler clientHandler = new HttpClientHandler();
               clientHandler.ServerCertificateCustomValidationCallback = (thissender, cert, chain, sslPolicyErrors) => { return true; };
@@ -229,7 +235,12 @@ namespace FriskaClient
             App.Auth = string.Empty;
             App.User = string.Empty;
             App.Devmode = false;
-            App.Current.MainPage = new NavigationPage(new LoginPage());
+            App.Current.MainPage = new NavigationPage(new LoginPage())
+            {
+
+                BarBackgroundColor = Color.FromHex("#ed1c24"),
+                BarTextColor = Color.White
+            };
         }
     }
 }

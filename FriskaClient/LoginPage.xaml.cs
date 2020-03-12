@@ -15,9 +15,9 @@ namespace FriskaClient
         static string url = App.url + "Token";
         public LoginPage()
         {
-            App.Devmode = false; 
+      
             InitializeComponent();  
-
+            
             EmailnameEntry.Completed += (sender, args) => { passwordEntry.Focus(); };
             passwordEntry.Completed += (sender, args) => { OnLoginButtonClicked(null,null); };
 

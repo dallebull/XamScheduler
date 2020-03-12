@@ -12,24 +12,32 @@ namespace FriskaClient
         public static bool IsUserLoggedIn { get; set; }
         public static string Auth { get; set; }
         public static string User { get; set; }
-        public static bool Devmode { get; set; } = true;
+        public static bool Devmode = true;
 
         public static string url = "https://31.208.194.94/";
         public App()
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTUzMzg2QDMxMzcyZTMzMmUzMFloS2I3ZzhtTUpObzRhbzhraTR3RWQ1WlBESFhLc3pLMzVjTndpajN6MU09;MTUzMzg3QDMxMzcyZTMzMmUzMExzdXdhYzRFdG9vemJrWmdwQ0FlTWVKbHlNYjIrbmZycEFsS3M4NCtSYUk9;MTUzMzg4QDMxMzcyZTMzMmUzMEg1Vno4c25PM0RGQWs5bHVrK1llMzRNN1hWTHhVSGJJeHB1K2ZId1UzYlE9;MTUzMzg5QDMxMzcyZTMzMmUzMGRBTk92NUM2NktrQ2NyTUVpVlJQZWlCWGlKYVh5Wm4xdnlLSmQvZ1FIOXc9;MTUzMzkwQDMxMzcyZTMzMmUzMGFzRFNPSkg5RzV1aWJVdytNbldkaTJYQ0pkWG1xUzVaK2JsbWU3TlBwcnM9;MTUzMzkxQDMxMzcyZTMzMmUzME8yQ0lFSDNXL0lmdjhmZFpPVzA1ZlozdkFZNjBtdmxHa0gwSEhsdlRkOEE9;MTUzMzkyQDMxMzcyZTMzMmUzME9ySHRYeFE4L0lmQ1dvVlJqMUMxSHJ6SnY3RHNab0xRUDBlUjJ3MGJFbWc9;MTUzMzkzQDMxMzcyZTMzMmUzMGE0WWlYcGRWNWF2c1JmV1huS01DRys2UXc0KzhmWTY5K0tHRnV6OXlrajQ9;MTUzMzk0QDMxMzcyZTMzMmUzMEc4Q1Q0YTVRNDNFaHdZOTdQMFdHREQvVnd5Tlp0Y2EwYTA5clFFa0djM0U9;MTUzMzk1QDMxMzcyZTMzMmUzMGFzRFNPSkg5RzV1aWJVdytNbldkaTJYQ0pkWG1xUzVaK2JsbWU3TlBwcnM9;NT8mJyc2IWhiZH1gfWN9YmdoYmF8YGJ8ampqanNiYmlmamlmanMDHmg3Mj8/NjEmPz8TOzwnPjI6P30wPD4=");
 
-      
+    
             if (!IsUserLoggedIn)
             {
-            
-                MainPage = new NavigationPage(new LoginPage());
+                MainPage = new NavigationPage(new LoginPage())
+                {
+
+                    BarBackgroundColor = Color.FromHex("#ed1c24"),
+                    BarTextColor = Color.White
+                };
+      
             }
             else
             {
-                //NavigationPage page = App.Current.MainPage as NavigationPage;
-                //page.BarBackgroundColor = Color.FromHex("ed1c24");    
-                MainPage = new NavigationPage(new FriskaClient.MainPage());
+                MainPage = new NavigationPage(new FriskaClient.MainPage())
+                {
+                    BarBackgroundColor = Color.FromHex("#ed1c24"),
+                    BarTextColor = Color.White
+                };
+           
             }
 
         }
