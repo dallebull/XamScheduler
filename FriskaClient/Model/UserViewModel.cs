@@ -69,34 +69,39 @@ namespace FriskaClient.Model
                 }
             }
         }
-        private int _age;
+        private int _Age;
         public int Age
         {
             get
             {
-                return _age;
+                return _Age;
             }
             set
             {
-                if (_age != value)
+                if (_Age != value)
                 {
-                    _age = value;
+
+                    var Now = DateTime.Now.Year;
+                    _Age = Now - value;
                     OnPropertyChanged();
                 }
             }
         }
-        private string _phoneNumber;
+        private string _PhoneNumber;
         public string PhoneNumber
         {
             get
             {
-                return _phoneNumber;
+                return _PhoneNumber;
             }
             set
             {
-                if (_phoneNumber != value)
+                if (_PhoneNumber != value)
                 {
-                    _phoneNumber = value;
+                    var builder = new StringBuilder(value);
+                    builder.Insert(3, '-');
+
+                    _PhoneNumber = builder.ToString();
                     OnPropertyChanged();
                 }
             }

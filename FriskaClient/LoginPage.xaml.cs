@@ -17,15 +17,32 @@ namespace FriskaClient
         public LoginPage()
         {
       
-            InitializeComponent();  
-            
+            InitializeComponent();
+            try
+            {
+                EmailnameEntry.Text = FriskaClient.Services.Settings.LastUsedEmail;
+                passwordEntry.Text = FriskaClient.Services.Settings.LastUsedPassword;
+
+                if (EmailnameEntry.Text.Length != 0 && passwordEntry.Text.Length != 0)
+                {
+                    var login = new LoginModel
+                    {
+                        Username = EmailnameEntry.Text,
+                        Password = passwordEntry.Text,
+                    };
+
+                     Login(login);
+                }
+            }
+            catch (Exception)
+            {
+                EmailnameEntry.Text = null;
+            }
+
             EmailnameEntry.Completed += (sender, args) => { passwordEntry.Focus(); };
             passwordEntry.Completed += (sender, args) => { OnLoginButtonClicked(null,null); };
-
-            if (App.Devmode)
-            {
-                DevLogin();
-            }          
+            
+          
         }
 
         async void OnSignUpButtonClicked(object sender, EventArgs e)
@@ -44,22 +61,13 @@ namespace FriskaClient
                 await Login(login);
 
 
-            if (App.Auth != null)
-            {
-                App.IsUserLoggedIn = true;
-                    Navigation.InsertPageBefore(new MainPage(), this);
-                await Navigation.PopAsync();
-            }
-            else
-            {
-                messageLabel.Text = "Login failed";
-                passwordEntry.Text = string.Empty;
-            }
         }
           
 
         async Task Login(LoginModel login)
         {
+
+
             var content = JsonConvert.SerializeObject(login);
             var dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(content);
             HttpClientHandler clientHandler = new HttpClientHandler();
@@ -88,6 +96,20 @@ namespace FriskaClient
                         Name = char.ToUpper(Name[0]) + Name.Substring(1);
                     }
                     App.User = Name;
+
+
+                    if (App.Auth != null)
+                    {
+                        App.IsUserLoggedIn = true;
+                        Navigation.InsertPageBefore(new MainPage(), this);
+                        await Navigation.PopAsync();
+                    }
+                    else
+                    {
+                        messageLabel.Text = "Login failed";
+                        passwordEntry.Text = string.Empty;
+                    }
+                    
                 }
                 catch (Exception)
                 {
@@ -121,28 +143,7 @@ namespace FriskaClient
             }
 
         }
-        async void DevLogin()
-        {
-            var login = new LoginModel
-            {
-                Username = "Dallebull@hotmail.com",
-                Password = "Abcd1234!",
-            };
-
-            await Login(login);
-            if (App.Auth != null)
-            {               
-                App.IsUserLoggedIn = true;
-                Navigation.InsertPageBefore(new MainPage(), this);
-                await Navigation.PopAsync();
-            }
-            else
-            {
-                messageLabel.Text = "Dev Login failed";
-                passwordEntry.Text = string.Empty;
-            }
-
-        }
+     
               
     }
 }

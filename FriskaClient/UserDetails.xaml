@@ -45,14 +45,14 @@
                         <Label Text="{Binding CorrectAnswers}"  FontAttributes="Bold" TextColor="Black" Grid.Row="6" Grid.Column="1"/>
                     
                         <Label Text="Medlem Sedan"  FontAttributes="Bold" TextColor="Black" Grid.Row="7" Grid.Column="0" />
-                        <Label Text="{Binding JoinDate}"  FontAttributes="Bold" TextColor="Black" Grid.Row="7" Grid.Column="1"/>
-
-                    
+                        <Label Text="{Binding JoinDate,StringFormat='{0:yyyy-MM-dd}'}"  FontAttributes="Bold" TextColor="Black" Grid.Row="7" Grid.Column="1"/>
 
 
-                           
- 
-                  
+
+
+
+
+
             </Grid>
         
         </StackLayout>

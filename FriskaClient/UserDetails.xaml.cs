@@ -31,7 +31,7 @@ namespace FriskaClient
 
         static void OnLogout(object sender, EventArgs e)
         {
-
+            FriskaClient.Services.Settings.LastUsedPassword = null;
             App.IsUserLoggedIn = false;
             App.Auth = string.Empty;
             App.User = string.Empty;

@@ -27,10 +27,11 @@
             </StackLayout>
 
                 <StackLayout Margin="80" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Grid.Row="0" Grid.Column="1">
-                    <Label Text="Email" VerticalTextAlignment="Center" FontSize="Large" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="Black"/>
-                    <Entry x:Name="EmailnameEntry" Keyboard="Email"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Fill" FontAttributes="Bold"  />
-                    <Label Text="Lösenord" VerticalTextAlignment="Center" FontSize="Large" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="Black"/>
-                    <Entry x:Name="passwordEntry"  IsPassword="true"   VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Fill" FontAttributes="Bold" />
+                    <!--<Label Text="Email" VerticalTextAlignment="Center" FontSize="Large" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="Black"/>-->
+                    <Entry x:Name="EmailnameEntry" Keyboard="Email"  VerticalTextAlignment="Center" Placeholder="Epost" HorizontalTextAlignment="Center" HorizontalOptions="Fill" FontAttributes="Bold"  Margin="0,0,0,20" />
+                    
+                    <!--<Label Text="Lösenord" VerticalTextAlignment="Center" FontSize="Large" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="Black"/>-->
+                    <Entry x:Name="passwordEntry"  IsPassword="true"   VerticalTextAlignment="Center"  Placeholder="Lösenord" HorizontalTextAlignment="Center" HorizontalOptions="Fill" FontAttributes="Bold" />
                     <Label x:Name="messageLabel" VerticalOptions="End" HorizontalOptions="CenterAndExpand" />
                 </StackLayout>
 
