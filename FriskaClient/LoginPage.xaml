@@ -15,15 +15,15 @@
                 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20%" />
-                <ColumnDefinition Width="60%" />
-                <ColumnDefinition Width="20%" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
             <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.ColumnSpan="3">
                 
             <StackLayout Orientation="Horizontal" VerticalOptions="Start" >              
-                    <Label Text="Welcome to FriskaClient" FontSize="Large" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="1"/>
+                    <Label Text="Välkommen till FriskaClient" FontSize="Large" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="1"/>
             </StackLayout>
 
                 <StackLayout Margin="80" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Grid.Row="0" Grid.Column="1">

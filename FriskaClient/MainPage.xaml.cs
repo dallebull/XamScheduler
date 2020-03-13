@@ -43,7 +43,7 @@ namespace FriskaClient
             };
 
             this.ToolbarItems.Add(item);
-            item.Clicked += OnLogout;
+            item.Clicked += OnUserDetails;
 
         }
 
@@ -94,8 +94,8 @@ namespace FriskaClient
 
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
                 StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
-                var apiAnswer = await client.PostAsync(url, scontent);
-                if (apiAnswer.IsSuccessStatusCode)
+                var response = await client.PostAsync(url, scontent);
+                if (response.IsSuccessStatusCode)
                 {
                   
                     Navigation.InsertPageBefore(new MainPage(), this);
@@ -103,7 +103,28 @@ namespace FriskaClient
                 }
                 else
                 {
-                    await DisplayAlert("Oh No!", apiAnswer.StatusCode.ToString(), "Ok");
+                    try
+                    {
+                        var ex = ApiException.CreateApiException(response);
+                        if (ex.Errors.Count() == 1)
+                        {
+                            await DisplayAlert("Oh No!", ex.Errors.FirstOrDefault().ToString(), "Ok");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < ex.Errors.Count(); i++)
+                            {
+                                await DisplayAlert("Oh No!", ex.Errors.ElementAt(i).ToString(), "Ok");
+                            }
+
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+
+                        await DisplayAlert("Oh No!", "Något allvarligt gick fel!", "Ok");
+                    }
                 }
             }
         }
@@ -132,8 +153,8 @@ namespace FriskaClient
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
           
-                var apiAnswer = await client.DeleteAsync(url + Id);
-                if (apiAnswer.IsSuccessStatusCode)
+                var response = await client.DeleteAsync(url + Id);
+                if (response.IsSuccessStatusCode)
                 {
              
                     Navigation.InsertPageBefore(new MainPage(), this);
@@ -141,106 +162,38 @@ namespace FriskaClient
                 }
                 else
                 {
-                    await DisplayAlert("Oh No!", apiAnswer.StatusCode.ToString(), "Ok");
+                    try
+                    {
+                        var ex = ApiException.CreateApiException(response);
+                        if (ex.Errors.Count() == 1)
+                        {
+                            await DisplayAlert("Oh No!", ex.Errors.FirstOrDefault().ToString(), "Ok");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < ex.Errors.Count(); i++)
+                            {
+                                await DisplayAlert("Oh No!", ex.Errors.ElementAt(i).ToString(), "Ok");
+                            }
+
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+
+                        await DisplayAlert("Oh No!", "Något allvarligt gick fel!", "Ok");
+                    }
                 }     
         }
 
         }
 
-
-    
-
-    //public async void OnDateCellHolding(object sender, Syncfusion.SfCalendar.XForms.DayCellHoldingEventArgs e)
-    //{
-    //   BookEventQuery(calendar.SelectedDate);
-    //}
-    //private async void Calendar_InlineItemTapped(object sender, InlineItemTappedEventArgs e)
-    //{
-    //    var appointment = e.InlineEvent as CustomAppointment;
-    //    var id = appointment.EventId;
-    //    if (appointment.Subject != "")
-    //    {
-    //        bool app = await DisplayAlert(appointment.Subject, appointment.StartTime.ToString("yyyy-MM-dd HH:mm"), "Ok", "Remove");
-    //        if (!app)
-    //        {
-    //            RemoveEvent(id);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        await DisplayAlert("Allready Taken", appointment.StartTime.ToString("yyyy-MM-dd HH:mm"), "Ok");
-    //    }
-    //}
-
-
-
-    //async void BookEventQuery(object sender)
-    //{
-    //    var tmpDate = calendar.SelectedDate.ToString();
-    //    var tmpDate2 = DateTime.Parse(tmpDate);
-    //    var DateDate = tmpDate2.Date.ToString("yyyy-MM-dd");
-    //    bool answer = await DisplayAlert(DateDate, "Would you like to Book this Day", "Yes", "No");
-    //    if (answer == true)
-    //    {
-    //        this.Date = (DateTime.Parse(calendar.SelectedDate.ToString()));
-    //        await Navigation.PushAsync(new BookEvent((DateTime.Parse(calendar.SelectedDate.ToString()))));
-    //    }
-    //}
-
-    //public async void RemoveEvent(int id)
-    //{
-    //    bool answer = await DisplayAlert("Remove Booking", "Are you 110% Sure?", "Yes", "No");
-    //    if (answer)
-    //    {
-    //        try
-    //        {
-
-
-    //            using (HttpClient client = new HttpClient())
-    //            {
-    //                var url = "https://31.208.194.94/api/Kontrollsvarsapi/" + id;
-
-    //                var DelAuth = new Dictionary<string, string>();
-    //                DelAuth.Add("Authorization", "Bearer " + App.Auth);
-    //                DelAuth.Add("Content-Type", "application/x-www-form-urlencoded");
-    //                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
-    //                var req = new HttpRequestMessage(HttpMethod.Delete, url) { Content = new FormUrlEncodedContent(DelAuth) };
-    //                var res = await client.SendAsync(req);
-
-    //                if (res.IsSuccessStatusCode)
-    //                {
-    //                    Navigation.InsertPageBefore(new MainPage(), this);
-    //                    await Navigation.PopAsync();
-    //                }
-    //                else
-    //                {
-    //                    await DisplayAlert("Error!", "Could not Remove Booking!!", "Ok");
-    //                    Navigation.InsertPageBefore(new MainPage(), this);
-    //                    await Navigation.PopAsync();
-    //                }
-    //            }
-    //        }
-    //        catch (Exception)
-    //        {
-    //            await DisplayAlert("Error!", "My Name is Error!!", "Hello");
-    //            Navigation.InsertPageBefore(new MainPage(), this);
-    //            await Navigation.PopAsync();
-    //        }
-    //    }
-    //}
-    static void OnLogout(object sender, EventArgs e)
+    async void OnUserDetails(object sender, EventArgs e)
         {
-            
-            App.IsUserLoggedIn = false;
-            App.Auth = string.Empty;
-            App.User = string.Empty;
-            App.Devmode = false;
-            App.Current.MainPage = new NavigationPage(new LoginPage())
-            {
 
-                BarBackgroundColor = Color.FromHex("#ed1c24"),
-                BarTextColor = Color.White
-            };
+            await Navigation.PushAsync(new UserDetails());
+
         }
     }
 }

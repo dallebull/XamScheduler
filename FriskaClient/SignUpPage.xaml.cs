@@ -52,26 +52,40 @@ namespace FriskaClient
                 var response = await client.PostAsync(url, scontent);
                 if (response.IsSuccessStatusCode)
                 {
-                    var login = new LoginModel
-                    {
-                        Username = user.Email,
-                        Password = user.Password,
-                    };
-
-                    await Login(login);
-
-                    //Navigation.InsertPageBefore(new LoginPage(), this);
-                    //await Navigation.PopAsync();
+                    await DisplayAlert("Konto Skapat!", "Vänligen verifiera din Epostadress via länken i Mailet vi skickade", "Ok");
+                    
+                    Navigation.InsertPageBefore(new LoginPage(), this);
+                    await Navigation.PopAsync();
                 }
                 else
                 {
-                    var ex = CreateApiException(response);
-                    await DisplayAlert("Oh No!", ex.ToString(), "Ok");
+                    try
+                    {
+                        var ex = ApiException.CreateApiException(response);
+                        if (ex.Errors.Count() == 1)
+                        {
+                            await DisplayAlert("Oh No!", ex.Errors.FirstOrDefault().ToString(), "Ok");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < ex.Errors.Count(); i++)
+                            {
+                                await DisplayAlert("Oh No!", ex.Errors.ElementAt(i).ToString(), "Ok");
+                            }
+
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+
+                        await DisplayAlert("Oh No!", "Något allvarligt gick fel!", "Ok");
+                    }
                 }
             }
             else
             {
-                await DisplayAlert("Oh No!", "Check your Details", "Ok");
+                await DisplayAlert("Oh No!", "Något fält är fel ifyllt", "Ok");
             }
         }
 
@@ -112,26 +126,58 @@ namespace FriskaClient
             var req = new HttpRequestMessage(HttpMethod.Post, App.url + "token") { Content = new FormUrlEncodedContent(dictionary) };
             var res = await client.SendAsync(req);
 
-            var reqcontent = res.Content;
-            string jsonContent = reqcontent.ReadAsStringAsync().Result;
-            try
+            if (res.IsSuccessStatusCode)
             {
-                Token token = JsonConvert.DeserializeObject<Token>(jsonContent);
-                App.Auth = token.access_token;
 
-                var tmpName = token.userName.Split('@');
-                var Name = tmpName[0];
 
-                if (Name.Length > 1)
+                var reqcontent = res.Content;
+                string jsonContent = reqcontent.ReadAsStringAsync().Result;
+                try
                 {
-                    Name = char.ToUpper(Name[0]) + Name.Substring(1);
+                    Token token = JsonConvert.DeserializeObject<Token>(jsonContent);
+                    App.Auth = token.access_token;
+
+                    var tmpName = token.userName.Split('@');
+                    var Name = tmpName[0];
+
+                    if (Name.Length > 1)
+                    {
+                        Name = char.ToUpper(Name[0]) + Name.Substring(1);
+                    }
+                    App.User = Name;
                 }
-                App.User = Name;
+                catch (Exception)
+                {
+                    await DisplayAlert("Error!", "Error!!", "Ok");
+                }
             }
-            catch (Exception)
+            else
             {
-                await DisplayAlert("Error!", "Error!!", "Ok");
+                try
+                {
+                    var ex = ApiException.CreateApiException(res);
+                    if (ex.Errors.Count() == 1)
+                    {
+                        await DisplayAlert("Oh No!", ex.Errors.FirstOrDefault().ToString(), "Ok");
+                    }
+                    else
+                    {
+                        for (int i = 0; i < ex.Errors.Count(); i++)
+                        {
+                            await DisplayAlert("Oh No!", ex.Errors.ElementAt(i).ToString(), "Ok");
+                        }
+
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                    await DisplayAlert("Oh No!", "Något allvarligt gick fel!", "Ok");
+                }
             }
+
+    
 
             if (App.Auth != null)
             {

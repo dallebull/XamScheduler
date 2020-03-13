@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace FriskaClient
 {
@@ -65,9 +66,13 @@ namespace FriskaClient
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient client = new HttpClient(clientHandler);
 
-            var req = new HttpRequestMessage(HttpMethod.Post, url) { Content = new FormUrlEncodedContent(dictionary) };
-                var res = await client.SendAsync(req);              
-              
+                var req = new HttpRequestMessage(HttpMethod.Post, url) { Content = new FormUrlEncodedContent(dictionary) };
+                var res = await client.SendAsync(req);
+
+            if (res.IsSuccessStatusCode)
+            {
+
+          
                 var reqcontent = res.Content;
                 string jsonContent = reqcontent.ReadAsStringAsync().Result;
                 try
@@ -86,9 +91,35 @@ namespace FriskaClient
                 }
                 catch (Exception)
                 {
-                    await DisplayAlert("Error!","Error!!", "Ok");                   
-                }           
-            
+                    await DisplayAlert("Error!","Error!!", "Ok");
+                }
+            }
+            else
+            {
+                try
+                {
+                    var ex = ApiException.CreateApiException(res);
+                    if (ex.Errors.Count() == 1)
+                    {
+                        await DisplayAlert("Oh No!", ex.Errors.FirstOrDefault().ToString(), "Ok");
+                    }
+                    else
+                    {
+                        for (int i = 0; i < ex.Errors.Count(); i++)
+                        {
+                            await DisplayAlert("Oh No!", ex.Errors.ElementAt(i).ToString(), "Ok");
+                        }
+
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                    await DisplayAlert("Oh No!", "Något allvarligt gick fel!", "Ok");
+                }
+            }
+
         }
         async void DevLogin()
         {
@@ -112,6 +143,7 @@ namespace FriskaClient
             }
 
         }
+              
     }
 }
 

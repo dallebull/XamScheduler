@@ -55,8 +55,29 @@ namespace FriskaClient
                     }
                     else
                     {
-                await DisplayAlert("Oh No!", apiAnswer.StatusCode.ToString(), "Ok") ;
+                try
+                {
+                    var ex = ApiException.CreateApiException(apiAnswer);
+                    if (ex.Errors.Count() == 1)
+                    {
+                        await DisplayAlert("Oh No!", ex.Errors.FirstOrDefault().ToString(), "Ok");
                     }
+                    else
+                    {
+                        for (int i = 0; i < ex.Errors.Count(); i++)
+                        {
+                            await DisplayAlert("Oh No!", ex.Errors.ElementAt(i).ToString(), "Ok");
+                        }
+                 
+                    }
+               
+                }
+                catch (Exception)
+                {
+
+                    await DisplayAlert("Oh No!", "Något allvarligt gick fel!", "Ok");
+                }
+            }
         }
     }
   

@@ -16,17 +16,17 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="90%" />
-                <RowDefinition Height="10%" />
+                <RowDefinition Height="9*" />
+                <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="25%" />
-                <ColumnDefinition Width="25%" /> 
-                <ColumnDefinition Width="25%" />
-                <ColumnDefinition Width="25%" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" /> 
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <ListView x:Name="ansList" ItemsSource="{Binding MyAnswers}" Grid.ColumnSpan="4" HasUnevenRows="True" IsPullToRefreshEnabled="True">
+            <ListView x:Name="ansList" ItemsSource="{Binding MyAnswers}" Grid.ColumnSpan="4" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell Height="50" >
@@ -69,9 +69,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-            <Button Text="Lägg Till Kontroll" BackgroundColor="#ed1c24" TextColor="white" VerticalOptions="End" HorizontalOptions="Center" Clicked="OnAddButtonClicked" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="2" />
-            <Button Text="Scanna Kontroll" BackgroundColor="#ed1c24" TextColor="white"  VerticalOptions="End" HorizontalOptions="Center" Clicked="OnScanButtonClicked" Grid.Row="1" Grid.Column="2"  Grid.ColumnSpan="2" />
+            <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0" Color="#ed1c24" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="4"/>
+            <Button Text="Lägg Till Kontroll" BackgroundColor="#ed1c24" TextColor="white" VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnAddButtonClicked" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="2" />
+            <Button Text="Scanna Kontroll" BackgroundColor="#ed1c24" TextColor="white"  VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnScanButtonClicked" Grid.Row="1" Grid.Column="2"  Grid.ColumnSpan="2" />
             
         </Grid>
     </ContentPage.Content>
