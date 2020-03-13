@@ -145,14 +145,14 @@ namespace FriskaClient.Model
 
             try
             {
-                HttpClientHandler clientHandler = new HttpClientHandler();
-                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
 
                 // Pass the handler to httpclient(from you are calling api)
                 HttpClient client = new HttpClient(clientHandler);
-
-
-                client.Timeout = TimeSpan.FromMinutes(10);
+          
 
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Auth);
                 var apiResponse = await client.GetStringAsync(url);

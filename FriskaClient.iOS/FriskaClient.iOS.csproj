@@ -120,10 +120,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
-      <Version>17.3.0.14</Version>
+      <Version>17.4.0.55</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
-    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.3.0.14" />
     <PackageReference Include="ZXing.Net.Mobile">
       <Version>2.4.1</Version>
     </PackageReference>

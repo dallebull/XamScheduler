@@ -27,16 +27,16 @@
             </StackLayout>
 
                 <StackLayout Margin="80" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Grid.Row="0" Grid.Column="1">
-                    <Label Text="Email" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="Email" VerticalTextAlignment="Center" FontSize="Large" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="Black"/>
                     <Entry x:Name="EmailnameEntry" Keyboard="Email"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Fill" FontAttributes="Bold"  />
-                    <Label Text="Lösenord" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="Lösenord" VerticalTextAlignment="Center" FontSize="Large" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="Black"/>
                     <Entry x:Name="passwordEntry"  IsPassword="true"   VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Fill" FontAttributes="Bold" />
                     <Label x:Name="messageLabel" VerticalOptions="End" HorizontalOptions="CenterAndExpand" />
                 </StackLayout>
 
             <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="Center">
 
-                    <Button Text="Logga In" BackgroundColor="#ed1c24" TextColor="white" VerticalOptions="Center" Clicked="OnLoginButtonClicked" HorizontalOptions="CenterAndExpand"   Style="{DynamicResource TitleStyle}"/>
+                    <Button Text="Logga In" FontSize="Large" BackgroundColor="#ed1c24" TextColor="white" VerticalOptions="Center" Clicked="OnLoginButtonClicked" HorizontalOptions="CenterAndExpand"   Style="{DynamicResource TitleStyle}"/>
             </StackLayout>
 
         </StackLayout>

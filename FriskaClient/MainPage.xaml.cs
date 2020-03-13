@@ -1,41 +1,29 @@
 using Newtonsoft.Json;
-using NUnit.Framework;
-using Syncfusion.SfCalendar.XForms;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using FriskaClient.Model;
 using System.Collections.ObjectModel;
-using FriskaClient.Model;
 using FriskaClient.Services;
-using Newtonsoft.Json;
-using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Web;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace FriskaClient
 {
     public partial class MainPage : ContentPage
     {
-        public ObservableCollection<KontrollSvar> _myAnswers { get; set; } 
+        private ObservableCollection<KontrollSvar> MyAnswers { get; set; } 
 
-        static string url = App.url + "api/kontrollsvarsapi/";
+        static readonly string  _url = App.url + "api/kontrollsvarsapi/";
         public MainPage()
         {         
             InitializeComponent();
             //FillApsAsync(App.Auth);
             var vm = new ViewModel();
             ansList.ItemsSource = vm.MyAnswers;
-            _myAnswers = vm.MyAnswers;
+            MyAnswers = vm.MyAnswers;
 
              ToolbarItem item = new ToolbarItem
             {
@@ -68,7 +56,7 @@ namespace FriskaClient
                     KontrollTag = HttpUtility.ParseQueryString(myUri.Query).Get("KontrollTag");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -78,13 +66,16 @@ namespace FriskaClient
             {
 
 
-                KontrollSvar ks = new KontrollSvar();
+                KontrollSvar ks = new KontrollSvar
+                {
+                    KontrollTag = KontrollTag,
+                    Kontroll = Int32.Parse(Kontroll)
+                };
 
-                ks.KontrollTag = KontrollTag;
-                ks.Kontroll = Int32.Parse(Kontroll);
-
-                HttpClientHandler clientHandler = new HttpClientHandler();
-                clientHandler.ServerCertificateCustomValidationCallback = (sslsender, cert, chain, sslPolicyErrors) => { return true; };
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sslsender, cert, chain, sslPolicyErrors) => { return true; }
+                };
 
                 // Pass the handler to httpclient(from you are calling api)
                 HttpClient client = new HttpClient(clientHandler);
@@ -94,7 +85,7 @@ namespace FriskaClient
 
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
                 StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
-                var response = await client.PostAsync(url, scontent);
+                var response = await client.PostAsync(_url, scontent);
                 if (response.IsSuccessStatusCode)
                 {
                   
@@ -134,26 +125,28 @@ namespace FriskaClient
             var item = (Xamarin.Forms.ImageButton)sender;
             var Id = item.CommandParameter;
             var IdString = Id.ToString();
-            var tmpkontroll = from a in _myAnswers where a.ID.ToString() == IdString select a;
+            var tmpkontroll = from a in MyAnswers where a.ID.ToString() == IdString select a;
             var kontroll = tmpkontroll.First() as KontrollSvar;
 
             var action = await DisplayAlert("Ta Bort?", "Vill du ta bort Kontrollen?\n" +kontroll.Kontroll + "  " + kontroll.KontrollTag, "Ja", "Nej");
             if (action)
             {
-               
-
-                HttpClientHandler clientHandler = new HttpClientHandler();
-              clientHandler.ServerCertificateCustomValidationCallback = (thissender, cert, chain, sslPolicyErrors) => { return true; };
-
-            // Pass the handler to httpclient(from you are calling api)
-            HttpClient client = new HttpClient(clientHandler);
 
 
-            client.Timeout = TimeSpan.FromMinutes(10);
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (thissender, cert, chain, sslPolicyErrors) => { return true; }
+                };
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
+                // Pass the handler to httpclient(from you are calling api)
+                HttpClient client = new HttpClient(clientHandler)
+                {
+                    Timeout = TimeSpan.FromMinutes(10)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
           
-                var response = await client.DeleteAsync(url + Id);
+                var response = await client.DeleteAsync(_url + Id);
                 if (response.IsSuccessStatusCode)
                 {
              

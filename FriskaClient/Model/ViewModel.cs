@@ -1,6 +1,6 @@
 ﻿
 using Newtonsoft.Json;
-using Syncfusion.SfCalendar.XForms;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,12 +16,14 @@ namespace FriskaClient
 {
     public class ViewModel
     {
-        static string url = App.url + "api/kontrollsvarsapi/";
+        static readonly string _url = App.url + "api/kontrollsvarsapi/";
       
-        private ObservableCollection<KontrollSvar> myAnswers = new ObservableCollection<KontrollSvar>();
+#pragma warning disable IDE0044 // Add readonly modifier
+        private ObservableCollection<KontrollSvar> _myAnswers = new ObservableCollection<KontrollSvar>();
+#pragma warning restore IDE0044 // Add readonly modifier
 
          public ListView ansList = new ListView();
-        public ObservableCollection<KontrollSvar> MyAnswers { get { return myAnswers; } }
+        public ObservableCollection<KontrollSvar> MyAnswers { get { return _myAnswers; } }
         public ViewModel()
         {
 
@@ -32,33 +34,33 @@ namespace FriskaClient
         {         
             List<KontrollSvar> Answers = new List<KontrollSvar>();
 
-            HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            HttpClientHandler clientHandler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+            };
 
             // Pass the handler to httpclient(from you are calling api)
             HttpClient client = new HttpClient(clientHandler);
-    
-           
-                client.Timeout = TimeSpan.FromMinutes(10);
-          
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Auth);
-                var apiResponse = await client.GetStringAsync(url); 
+
+
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Auth);
+                var apiResponse = await client.GetStringAsync(_url); 
                 Answers = JsonConvert.DeserializeObject<List<KontrollSvar>>(apiResponse);
 
                 foreach (var item in Answers)
                 {
-                    KontrollSvar ans = new KontrollSvar();
-                    ans.ID = item.ID;
-                    ans.UserID = item.UserID;
-                    ans.Kontroll = item.Kontroll;
-                    ans.KontrollTag = item.KontrollTag;
-                    ans.RegDate = item.RegDate;
-                    ans.Rattsvar = item.Rattsvar;
-                    ans.YearID = item.YearID;
-
-
-
-                    myAnswers.Add(ans);
+                    KontrollSvar ans = new KontrollSvar
+                    {
+                        ID = item.ID,
+                        UserID = item.UserID,
+                        Kontroll = item.Kontroll,
+                        KontrollTag = item.KontrollTag,
+                        RegDate = item.RegDate,
+                        Rattsvar = item.Rattsvar,
+                        YearID = item.YearID
+                    };
+                _myAnswers.Add(ans);
 
                 }
             
