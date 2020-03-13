@@ -22,28 +22,37 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*" />
                     <ColumnDefinition Width="5*" />
-                </Grid.ColumnDefinitions>               
+                </Grid.ColumnDefinitions>
+
+                 
                 
-                        <Label Text="{Binding Namn}" FontSize="Large" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="Black" Grid.ColumnSpan="2" Grid.Row="0"/>
+
+                    <Label Text="{Binding Namn}" FontSize="Large" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="Black" Grid.ColumnSpan="2" Grid.Row="0"/>
                         
                         <Label Text="Email"  FontAttributes="Bold" TextColor="Black" Grid.Row="2" Grid.Column="0" />
                         <Label Text="{Binding Email}" FontAttributes="Bold" TextColor="Black" Grid.Row="2" Grid.Column="1"/>
                         
-                        <Label Text="Ålder"  FontAttributes="Bold" TextColor="Black" Grid.Row="3" Grid.Column="0" />
+                        <Label Text="Födelseår"  FontAttributes="Bold" TextColor="Black" Grid.Row="3" Grid.Column="0" />
                         <Label Text="{Binding Age}" FontAttributes="Bold" TextColor="Black" Grid.Row="3" Grid.Column="1"/>
 
                         <Label Text="Kön"  FontAttributes="Bold" TextColor="Black" Grid.Row="4" Grid.Column="0" />
                         <Label Text="{Binding Gender}"  FontAttributes="Bold" TextColor="Black" Grid.Row="4" Grid.Column="1"/>
                     
                         <Label Text="Tfn. Nummer" FontAttributes="Bold" TextColor="Black" Grid.Row="5" Grid.Column="0" />
-                        <Label Text="{Binding PhoneNumber, StringFormat='{0:***-*******}'}" FontAttributes="Bold" TextColor="Black" Grid.Row="5" Grid.Column="1"/>
+                        <Label Text="{Binding PhoneNumber}" FontAttributes="Bold" TextColor="Black" Grid.Row="5" Grid.Column="1"/>
 
                         <Label Text="Antal Rätt" FontAttributes="Bold" TextColor="Black" Grid.Row="6" Grid.Column="0" />
                         <Label Text="{Binding CorrectAnswers}"  FontAttributes="Bold" TextColor="Black" Grid.Row="6" Grid.Column="1"/>
                     
                         <Label Text="Medlem Sedan"  FontAttributes="Bold" TextColor="Black" Grid.Row="7" Grid.Column="0" />
-                        <Label Text="{Binding JoinDate,StringFormat='{0:yyyy-MM-dd}'}"  FontAttributes="Bold" TextColor="Black" Grid.Row="7" Grid.Column="1"/>
-             
+                        <Label Text="{Binding JoinDate}"  FontAttributes="Bold" TextColor="Black" Grid.Row="7" Grid.Column="1"/>
+
+                    
+
+
+                           
+ 
+                  
             </Grid>
         
         </StackLayout>

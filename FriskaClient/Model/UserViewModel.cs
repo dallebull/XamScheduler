@@ -80,9 +80,7 @@ namespace FriskaClient.Model
             {
                 if (_Age != value)
                 {
-                   
-                    var Now = DateTime.Now.Year;
-                    _Age = Now - value;
+                    _Age = value;
                     OnPropertyChanged();
                 }
             }
@@ -98,10 +96,7 @@ namespace FriskaClient.Model
             {
                 if (_PhoneNumber != value)
                 {
-                    var builder = new StringBuilder(value);
-                    builder.Insert(3, '-');     
-                 
-                    _PhoneNumber = builder.ToString();
+                    _PhoneNumber = value;
                     OnPropertyChanged();
                 }
             }
