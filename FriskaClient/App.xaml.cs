@@ -12,7 +12,7 @@ namespace FriskaClient
         public static bool IsUserLoggedIn { get; set; }
         public static string Auth { get; set; }
         public static string User { get; set; }
-        public static bool Devmode = true;
+        public static bool Devmode = false;
 
         public static string url = "https://31.208.194.94/";
         public App()
