@@ -18,7 +18,7 @@ namespace FriskaClient.Android.Services
             var scanner = new MobileBarcodeScanner()
             {
                 TopText = "Skanna QR Kod",
-                BottomText = "Vänligen Vänta",
+                BottomText = "",
             };
 
             var scanResult = await scanner.Scan(optionsCustom); if (scanResult != null) { return scanResult.Text; } else { return null; }
