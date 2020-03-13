@@ -21,114 +21,114 @@ namespace FriskaClient.Model
         }
 
         static public string url = App.url + "api/Account/GetUser";
-        private string _Email;
+        private string _email;
         public string Email
         {
             get
             {
-                return _Email;
+                return _email;
             }
             set
             {
-                if (_Email != value)
+                if (_email != value)
                 {
-                    _Email = value;
+                    _email = value;
                     OnPropertyChanged();
                 }
             }
         }
-        private string _Gender;
+        private string _gender;
         public string Gender
         {
             get
             {
-                return _Gender;
+                return _gender;
             }
             set
             {
-                if (_Gender != value)
+                if (_gender != value)
                 {
-                    _Gender = value;
+                    _gender = value;
                     OnPropertyChanged();
                 }
             }
         }
-        private string _CorrectAnswers;
+        private string _correctAnswers;
         public string CorrectAnswers
         {
             get
             {
-                return _CorrectAnswers;
+                return _correctAnswers;
             }
             set
             {
-                if (_CorrectAnswers != value)
+                if (_correctAnswers != value)
                 {
-                    _CorrectAnswers = value;
+                    _correctAnswers = value;
                     OnPropertyChanged();
                 }
             }
         }
-        private int _Age;
+        private int _age;
         public int Age
         {
             get
             {
-                return _Age;
+                return _age;
             }
             set
             {
-                if (_Age != value)
+                if (_age != value)
                 {
-                    _Age = value;
+                    _age = value;
                     OnPropertyChanged();
                 }
             }
         }
-        private string _PhoneNumber;
+        private string _phoneNumber;
         public string PhoneNumber
         {
             get
             {
-                return _PhoneNumber;
+                return _phoneNumber;
             }
             set
             {
-                if (_PhoneNumber != value)
+                if (_phoneNumber != value)
                 {
-                    _PhoneNumber = value;
+                    _phoneNumber = value;
                     OnPropertyChanged();
                 }
             }
         }
-        private string _Namn;
+        private string _namn;
         public string Namn
         {
             get
             {
-                return _Namn;
+                return _namn;
             }
             set
             {
-                if (_Namn != value)
+                if (_namn != value)
                 {
-                    _Namn = value;
+                    _namn = value;
                     OnPropertyChanged();
                 }
             }
         }
-        private DateTime _JoinDate;
+        private DateTime _joinDate;
         public DateTime JoinDate
         {
             get
             {
-                return _JoinDate;
+                return _joinDate;
             }
             set
             {
-                if (_JoinDate != value)
+                if (_joinDate != value)
                 {
-                    _JoinDate = value;
+                    _joinDate = value;
                     OnPropertyChanged();
                 }
             }
