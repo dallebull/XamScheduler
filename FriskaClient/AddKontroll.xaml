@@ -19,16 +19,16 @@
                HorizontalTextAlignment="Center" />
 
         <Label Text="Kontroll" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
-        <Entry x:Name="kontrollEntry"  Keyboard="Numeric" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" >
+        <Entry x:Name="kontrollEntry" BackgroundColor="White" Keyboard="Numeric" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" >
             <Entry.Behaviors>
                 <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
-            </Entry.Behaviors>
+            </Entry.Behaviors>      
         </Entry>
 
 
         <Label Text="Kod" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
 
-        <Entry x:Name="tagEntry"  Keyboard="Chat" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold">
+        <Entry x:Name="tagEntry"  Keyboard="Chat" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" >
             <Entry.Behaviors>
                 <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
             </Entry.Behaviors>

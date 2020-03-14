@@ -17,14 +17,16 @@ namespace FriskaClient
         public static string url = "https://31.208.194.94/";
         public App()
         {
-            
 
-    
+          
+
+
+
             if (!IsUserLoggedIn)
             {
                 MainPage = new NavigationPage(new LoginPage())
                 {
-
+				
                     BarBackgroundColor = Color.FromHex("#ed1c24"),
                     BarTextColor = Color.White
                 };
@@ -34,6 +36,7 @@ namespace FriskaClient
             {
                 MainPage = new NavigationPage(new FriskaClient.MainPage())
                 {
+				
                     BarBackgroundColor = Color.FromHex("#ed1c24"),
                     BarTextColor = Color.White
                 };

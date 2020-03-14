@@ -32,7 +32,7 @@ namespace FriskaClient
         {
             KontrollSvar ks = new KontrollSvar();
 
-            ks.KontrollTag = tagEntry.Text;
+            ks.KontrollTag = tagEntry.Text.ToUpper();
             ks.Kontroll = Int32.Parse(kontrollEntry.Text);
 
             HttpClientHandler clientHandler = new HttpClientHandler();
