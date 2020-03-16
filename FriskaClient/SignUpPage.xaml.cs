@@ -113,7 +113,7 @@ namespace FriskaClient
         }
 
 
-        async Task Login(LoginModel login)
+        async Task Login(Login login)
         {
 
             var content = JsonConvert.SerializeObject(login);

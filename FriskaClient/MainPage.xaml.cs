@@ -21,7 +21,7 @@ namespace FriskaClient
         {         
             InitializeComponent();
             //FillApsAsync(App.Auth);
-            var vm = new ViewModel();
+            var vm = new SvarViewModel();
             ansList.ItemsSource = vm.MyAnswers;
             MyAnswers = vm.MyAnswers;
 

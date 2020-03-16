@@ -14,17 +14,15 @@ using System.Collections.ObjectModel;
 
 namespace FriskaClient
 {
-    public class ViewModel
+    public class SvarViewModel
     {
-        static readonly string _url = App.url + "api/kontrollsvarsapi/";
-      
-#pragma warning disable IDE0044 // Add readonly modifier
-        private ObservableCollection<KontrollSvar> _myAnswers = new ObservableCollection<KontrollSvar>();
-#pragma warning restore IDE0044 // Add readonly modifier
+        static readonly string _url = App.url + "api/kontrollsvarsapi/";      
 
-         public ListView ansList = new ListView();
+        private ObservableCollection<KontrollSvar> _myAnswers = new ObservableCollection<KontrollSvar>();
+
+    
         public ObservableCollection<KontrollSvar> MyAnswers { get { return _myAnswers; } }
-        public ViewModel()
+        public SvarViewModel()
         {
 
             FillAnsAsync(App.Auth);

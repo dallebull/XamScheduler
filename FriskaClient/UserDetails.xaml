@@ -18,15 +18,16 @@
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsClippedToBounds="True">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                  
 
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -57,11 +58,13 @@
                 <Label Text="Medlem Sedan"  FontAttributes="Bold" TextColor="Black" Grid.Row="7" Grid.Column="0"  Margin="10,0,0,0"/>
                 <Label Text="{Binding JoinDate,StringFormat='{0:yyyy-MM-dd}'}"  FontAttributes="Bold" TextColor="Black" Grid.Row="7" Grid.Column="1"/>
 
-                <Label Text="Admin"  FontAttributes="Bold" TextColor="Black" Grid.Row="8" Grid.Column="0"  Margin="10,0,0,0"/>
-                <Label Text="{Binding IsAdmin, Converter={StaticResource BooleanToStringConverter}}"  FontAttributes="Bold" TextColor="Black" Grid.Row="8" Grid.Column="1"/>
-                <Button Text="Admin" IsVisible="{Binding IsAdmin}" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#2828ff" TextColor="White" VerticalOptions="End" HorizontalOptions="Center"   Style="{DynamicResource TitleStyle}"  Clicked="OnAdminClicked"/>
+                <!--<Label Text="Admin"  FontAttributes="Bold" TextColor="Black" Grid.Row="8" Grid.Column="0"  Margin="10,0,0,0"/>
+                <Label Text="{Binding IsAdmin, Converter={StaticResource BooleanToStringConverter}}"  FontAttributes="Bold" TextColor="Black" Grid.Row="8" Grid.Column="1"/>-->
 
+                <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="Center" Grid.ColumnSpan="2" Grid.RowSpan="25">
+                <Button Text="Admin" IsVisible="{Binding IsAdmin}"   HeightRequest="30" FontSize="Small" Padding="5" BackgroundColor="#2828ff" TextColor="#FFFFFF" VerticalOptions="EndAndExpand" HorizontalOptions="Center"  Style="{DynamicResource TitleStyle}"   Clicked="OnAdminClicked"/>
 
+                </StackLayout>
 
 
             </Grid>

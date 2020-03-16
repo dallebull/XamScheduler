@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FriskaClient.Model
 {
-    class LoginModel
+    class Login
     {
         public string grant_type = "password";
         private string _username { get; set; }

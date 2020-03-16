@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+                xmlns:local="clr-namespace:FriskaClient"
+             x:Class="FriskaClient.AdminPage"
+             x:Key="FriskaClient.YearIDToYearnameConverter">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:YearIDToYearnameConverter x:Key="YearIDToYearnameConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackLayout>
+                <ListView x:Name="facList" ItemsSource="{Binding AllAnswers}" Grid.ColumnSpan="4" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="50" >
+                                <StackLayout BackgroundColor="#50FFFFFF" Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+
+                                        <Label Text="{Binding Kontroll}"
+                                           VerticalOptions="Center"
+                                             HorizontalOptions="CenterAndExpand"
+                                     FontAttributes="Bold"
+                                TextColor="Black"
+                                            Grid.Row="0" Grid.Column="0"/>
+
+                                        <Label Text="{Binding KontrollTag}"
+                                           VerticalOptions="Center" 
+                                HorizontalOptions="CenterAndExpand"
+                                           FontAttributes="Bold"                                           
+                                TextColor="Black" 
+                                            Grid.Row="0" Grid.Column="1"/>
+
+                                        <Label Text="{Binding YearID, Converter={StaticResource YearIDToYearnameConverter}}"
+                                           VerticalOptions="Center" 
+                                HorizontalOptions="CenterAndExpand"
+                                           FontAttributes="Bold"                                           
+                                TextColor="Black" 
+                                            Grid.Row="0" Grid.Column="2"/>
+
+
+                                        <ImageButton Source="delete.png" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" CommandParameter="{Binding ID}" Clicked="OnDelButtonClicked" Grid.Row="0" Grid.Column="3"/>
+
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

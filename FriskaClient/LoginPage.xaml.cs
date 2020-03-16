@@ -25,7 +25,7 @@ namespace FriskaClient
 
                 if (EmailnameEntry.Text.Length != 0 && passwordEntry.Text.Length != 0)
                 {
-                    var login = new LoginModel
+                    var login = new Login
                     {
                         Username = EmailnameEntry.Text,
                         Password = passwordEntry.Text,
@@ -52,7 +52,7 @@ namespace FriskaClient
 
         async void OnLoginButtonClicked(object sender, EventArgs e)
         {
-            var login = new LoginModel
+            var login = new Login
             {                
                 Username = EmailnameEntry.Text,
                 Password = passwordEntry.Text,
@@ -64,7 +64,7 @@ namespace FriskaClient
         }
           
 
-        async Task Login(LoginModel login)
+        async Task Login(Login login)
         {
 
 
