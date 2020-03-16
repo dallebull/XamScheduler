@@ -38,7 +38,7 @@ namespace FriskaClient.Model
                 }
             }
         }        
-        private bool _isAdmin;
+        private static bool _isAdmin;
         public bool IsAdmin
         {
             get
@@ -210,10 +210,10 @@ namespace FriskaClient.Model
                     Namn = item.Namn;
 
                 }
-                aurl = aurl + "?Id=" + Id;
+                var myurl = aurl + "?Id=" + Id;
                 StringContent scontent = new StringContent("?Id=" +Id, Encoding.UTF8, "application/json");
-                var apiAnswer = await client.PostAsync(aurl, scontent);
-                if (apiAnswer.IsSuccessStatusCode)
+                var roleAnswer = await client.PostAsync(myurl, scontent);
+                if (roleAnswer.IsSuccessStatusCode)
                 {
                     IsAdmin = true;
                 }

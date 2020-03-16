@@ -21,6 +21,10 @@ namespace FriskaClient
             var sv = new FacitViewModel();
             facList.ItemsSource = sv.AllFacits;
             AllAnswers = sv.AllFacits;
+
+            facList.ItemSelected += DeselectItem;
+
+         
             //ToolbarItem item = new ToolbarItem
             //{
             //    Text = App.User,
@@ -30,18 +34,28 @@ namespace FriskaClient
             //item.Clicked += OnUserDetails;
 
         }
+
+        public void DeselectItem(object sender, EventArgs e)
+        {
+            ((ListView)sender).SelectedItem = null;
+        }
         public async void OnAddClicked(object sender, EventArgs args)
         {
-            //await DisplayAlert("Todo", "Nu skulle du kommit till Admin Sidan", "Ok");
-            await Navigation.PushAsync(new AddFacit());
+            await DisplayAlert("Todo", "Nu skulle du kommit till Lägg Till Sidan", "Ok");
+            //await Navigation.PushAsync(new AddFacit());
         }
 
         public async void OnYearClicked(object sender, EventArgs args)
         {
             //await DisplayAlert("Todo", "Nu skulle du kommit till Admin Sidan", "Ok");
             await Navigation.PushAsync(new YearPage());
+        }  
+        public async void OnEditClicked(object sender, EventArgs args)
+        {
+            await DisplayAlert("Todo", "Nu skulle du kommit Edit Sidan", "Ok");
+
         }
-        async void OnDelButtonClicked(object sender, EventArgs e)
+        async void OnDelClicked(object sender, EventArgs e)
         {
             var item = (Xamarin.Forms.ImageButton)sender;
             var Id = item.CommandParameter;

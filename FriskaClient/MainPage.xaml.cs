@@ -25,7 +25,11 @@ namespace FriskaClient
             ansList.ItemsSource = vm.MyAnswers;
             MyAnswers = vm.MyAnswers;
 
-             ToolbarItem item = new ToolbarItem
+
+            ansList.ItemSelected += DeselectItem;
+
+
+            ToolbarItem item = new ToolbarItem
             {
                 Text = App.User,
             };
@@ -35,6 +39,10 @@ namespace FriskaClient
          
         }
 
+        public void DeselectItem(object sender, EventArgs e)
+        {
+            ((ListView)sender).SelectedItem = null;
+        }
         async void OnAddButtonClicked(object sender, EventArgs args)
         {
             await Navigation.PushAsync(new AddKontroll());
@@ -120,7 +128,7 @@ namespace FriskaClient
             }
         }
 
-        async void OnDelButtonClicked(object sender, EventArgs e)
+        async void OnDelClicked(object sender, EventArgs e)
         {
             var item = (Xamarin.Forms.ImageButton)sender;
             var Id = item.CommandParameter;

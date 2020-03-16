@@ -22,9 +22,9 @@ namespace FriskaClient.Model
     {
 
 
-        public static ObservableCollection<Year> _allYears = new ObservableCollection<Year>();
+        private  ObservableCollection<Year> _allYears = new ObservableCollection<Year>();
       
-        public ObservableCollection<Year> AllYears { get { return _allYears; } }
+        public  ObservableCollection<Year> AllYears { get { return _allYears; } }
        
         static public string yurl = App.url + "api/YearsApi/";
       
@@ -36,6 +36,7 @@ namespace FriskaClient.Model
         }
         async void FillYearsAsync(string Auth)
         {
+           
             List<Year> Answers = new List<Year>();
 
             HttpClientHandler clientHandler = new HttpClientHandler
@@ -60,7 +61,9 @@ namespace FriskaClient.Model
                     YearName = item.YearName,
                     YearID = item.YearID,
                 };
-                _allYears.Add(year);
+          
+                    _allYears.Add(year);
+               
 
             }
 

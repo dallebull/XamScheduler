@@ -21,10 +21,15 @@ namespace FriskaClient
 
         public  object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-         
-         
+            if (_allYears.Count == 0)
+            {
+                var vm = new YearViewModel();
+                _allYears = vm.AllYears;
 
-            var yearname = from y in YearViewModel._allYears where y.ID == (int)value select y.YearName;
+            }
+
+
+            var yearname = from y in _allYears where y.ID == (int)value select y.YearName;
             List<string> yearlist = yearname.ToList();
 
             return yearlist.FirstOrDefault();

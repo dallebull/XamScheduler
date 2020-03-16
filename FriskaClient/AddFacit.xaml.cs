@@ -25,15 +25,25 @@ namespace FriskaClient
         {         
        
             InitializeComponent();
-     
+            kontrollEntry.Completed += (sender, args) => { tagEntry.Focus(); };
+            tagEntry.Completed += (sender, args) => { OnButtonClicked(null, null); };
+
         }
 
         async void OnButtonClicked(object sender, EventArgs args)
         {
             Facit ks = new Facit();
 
-            ks.KontrollTag = tagEntry.Text.ToUpper();
-            ks.Kontroll = Int32.Parse(kontrollEntry.Text);
+            try
+            {
+                ks.KontrollTag = tagEntry.Text.ToUpper();
+                ks.Kontroll = Int32.Parse(kontrollEntry.Text);
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Fel!", "Fyll i alla Fält!", "Ok");
+            }
+         
 
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sslsender, cert, chain, sslPolicyErrors) => { return true; };

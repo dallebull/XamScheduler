@@ -28,36 +28,38 @@
 
             <Image Grid.RowSpan="2" Grid.ColumnSpan="4" Aspect="AspectFill" Source="wallpaper.png"/>
             
-            <ListView x:Name="ansList" ItemsSource="{Binding MyAnswers}" Grid.ColumnSpan="4" HasUnevenRows="True">
+            <ListView x:Name="ansList" ItemsSource="{Binding MyAnswers}" Grid.ColumnSpan="4" HasUnevenRows="True" Margin="10">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell Height="50" >
-                            <StackLayout BackgroundColor="#50FFFFFF" Orientation="Vertical">
+                        <ViewCell Height="50"  >
+                            <StackLayout BackgroundColor="#50FFFFFF" Orientation="Vertical"  Padding="10">
                                 <StackLayout Orientation="Horizontal"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                                     
 
                                     <Label Text="{Binding Kontroll}"
                                            VerticalOptions="Center"
-                                             HorizontalOptions="CenterAndExpand"
-                                     FontAttributes="Bold"
-                                TextColor="Black"
-                                            Grid.Row="0" Grid.Column="0"/>
+                                           HorizontalOptions="CenterAndExpand"
+                                           FontAttributes="Bold"
+                                           TextColor="Black"
+                                           Grid.Row="0" Grid.Column="0"/>
                                     
                                     <Label Text="{Binding KontrollTag}"
                                            VerticalOptions="Center" 
-                                HorizontalOptions="CenterAndExpand"
+                                           HorizontalOptions="CenterAndExpand"
                                            FontAttributes="Bold"                                           
-                                TextColor="Black" 
-                                            Grid.Row="0" Grid.Column="1"/>
+                                           TextColor="Black" 
+                                           Grid.Row="0" Grid.Column="1"/>
 
                                     <Image Source="{Binding Rattsvar, Converter={StaticResource MsgToImagePathConverter}}"
                                        VerticalOptions="Center"
-                                HorizontalOptions="CenterAndExpand"
-                                       Grid.Row="0" Grid.Column="2" />                                  
-                    
+                                       HorizontalOptions="CenterAndExpand"
+                                       WidthRequest="36" HeightRequest="30"
+                                       Grid.Row="0" Grid.Column="2" />
 
 
-                                    <ImageButton Source="delete.png" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" CommandParameter="{Binding ID}" Clicked="OnDelButtonClicked" Grid.Row="0" Grid.Column="3"/>
+                                    <ImageButton Source="delete.png" VerticalOptions="Center" BackgroundColor="#00FFFFFF" WidthRequest="36" HeightRequest="30"  Aspect="AspectFit" HorizontalOptions="Center" CommandParameter="{Binding ID}" Clicked="OnDelClicked" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="3"/>
+
+                                    <!--<ImageButton Source="delete.png" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" CommandParameter="{Binding ID}" Clicked="OnDelButtonClicked" Grid.Row="0" Grid.Column="3"/>-->
 
                                 </StackLayout>
                             </StackLayout>

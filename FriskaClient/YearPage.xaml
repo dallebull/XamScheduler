@@ -27,7 +27,7 @@
             <ListView x:Name="yearList" ItemsSource="{Binding MyYears}" Grid.ColumnSpan="4" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell Height="50" >
+                        <ViewCell Height="50" IsEnabled="false">
                             <StackLayout BackgroundColor="#50FFFFFF" Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                                     
