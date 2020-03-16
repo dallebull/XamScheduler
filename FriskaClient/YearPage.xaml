@@ -27,7 +27,7 @@
             <ListView x:Name="yearList" ItemsSource="{Binding MyYears}" Grid.ColumnSpan="4" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell Height="50" IsEnabled="false">
+                        <ViewCell Height="50" >
                             <StackLayout BackgroundColor="#50FFFFFF" Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                                     
@@ -38,9 +38,9 @@
                                      FontAttributes="Bold"
                                 TextColor="Black"
                                             Grid.Row="0" Grid.Column="0"/>
-                              
 
-                                    <ImageButton Source="delete.png" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" CommandParameter="{Binding ID}" Clicked="OnDelButtonClicked" Grid.Row="0" Grid.Column="3"/>
+                                    <ImageButton Source="edit.png" VerticalOptions="Center" WidthRequest="36" BackgroundColor="#00FFFFFF" HeightRequest="36" Aspect="AspectFit" HorizontalOptions="Center" CommandParameter="{Binding ID}" Clicked="OnEditClicked" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3"/>
+                                    <ImageButton Source="delete.png" VerticalOptions="Center" BackgroundColor="#00FFFFFF" WidthRequest="36" HeightRequest="30"  Aspect="AspectFit" HorizontalOptions="Center" CommandParameter="{Binding ID}" Clicked="OnDelClicked" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="3"/>
 
                                 </StackLayout>
                             </StackLayout>

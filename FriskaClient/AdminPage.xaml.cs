@@ -16,9 +16,31 @@ namespace FriskaClient
 
         public AdminPage()
         {
+          
             InitializeComponent();
             var yr = new YearViewModel();
             var sv = new FacitViewModel();
+            facList.ItemsSource = sv.AllFacits;
+            AllAnswers = sv.AllFacits;
+
+            facList.ItemSelected += DeselectItem;
+
+         
+            //ToolbarItem item = new ToolbarItem
+            //{
+            //    Text = App.User,
+            //};
+
+            //this.ToolbarItems.Add(item);
+            //item.Clicked += OnUserDetails;
+
+        }
+           public AdminPage(int Id)
+        {
+     
+            InitializeComponent();
+            var yr = new YearViewModel();
+            var sv = new FacitViewModel(Id);
             facList.ItemsSource = sv.AllFacits;
             AllAnswers = sv.AllFacits;
 

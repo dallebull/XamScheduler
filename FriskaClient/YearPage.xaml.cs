@@ -25,23 +25,19 @@ namespace FriskaClient
             var vm = new YearViewModel();
             yearList.ItemsSource = vm.AllYears;
             MyYears = vm.AllYears;
+            yearList.ItemSelected += DeselectItem;
 
-             ToolbarItem item = new ToolbarItem
-            {
-                Text = App.User,
-            };
-
-            this.ToolbarItems.Add(item);
-            item.Clicked += OnUserDetails;
-         
         }
-
+        public void DeselectItem(object sender, EventArgs e)
+        {
+            ((ListView)sender).SelectedItem = null;
+        }
         async void OnAddButtonClicked(object sender, EventArgs args)
         {
            // await Navigation.PushAsync(new AddYear());
         }    
    
-        async void OnDelButtonClicked(object sender, EventArgs e)
+        async void OnDelClicked(object sender, EventArgs e)
         {
             var item = (Xamarin.Forms.ImageButton)sender;
             var Id = item.CommandParameter;
@@ -103,10 +99,11 @@ namespace FriskaClient
 
         }
 
-    async void OnUserDetails(object sender, EventArgs e)
+    async void OnEditClicked(object sender, EventArgs e)
         {
-
-            await Navigation.PushAsync(new UserDetails());
+            var item = (Xamarin.Forms.ImageButton)sender;
+            var Id = (int)item.CommandParameter;
+            await Navigation.PushAsync(new AdminPage(Id));
 
         }
     }

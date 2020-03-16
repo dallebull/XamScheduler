@@ -31,6 +31,11 @@ namespace FriskaClient.Model
         {
 
             FillFacAsync(App.Auth);
+        }    
+        public FacitViewModel(int Id)
+        {
+
+            FillFacAsync(App.Auth, Id);
         }
         async void FillFacAsync(string Auth)
         {
@@ -62,6 +67,43 @@ namespace FriskaClient.Model
                 };
                 _allFacits.Add(fac);
 
+            }
+
+        }
+           async void FillFacAsync(string Auth, int Id)
+        {
+            List<Facit> Answers = new List<Facit>();
+
+            HttpClientHandler clientHandler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+            };
+
+            // Pass the handler to httpclient(from you are calling api)
+            HttpClient client = new HttpClient(clientHandler);
+
+
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Auth);
+            var apiResponse = await client.GetStringAsync(furl);
+            Answers = JsonConvert.DeserializeObject<List<Facit>>(apiResponse);
+
+            foreach (var item in Answers)
+            {
+                if (item.YearID == Id)
+                {
+
+            
+                Facit fac = new Facit
+                {
+                    ID = item.ID,
+                    Kontroll = item.Kontroll,
+                    KontrollTag = item.KontrollTag,
+                    QRURL = item.QRURL,
+                    YearID = item.YearID,
+                };
+                _allFacits.Add(fac);
+                }
             }
 
         }
