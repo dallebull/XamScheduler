@@ -1,0 +1,48 @@
+﻿
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:behaviors="clr-namespace:FriskaClient.Behaviors;assembly=FriskaClient"
+             mc:Ignorable="d"
+             x:Class="FriskaClient.AddFacit">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0, 20, 0, 0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    
+    <Grid>
+    <Image Aspect="AspectFill" Source="wallpaper.png"/>
+    <StackLayout Margin="10" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
+        <Label Text="Lägg Till Kontroll"
+               Style="{DynamicResource TitleStyle}"
+               Margin="0, 20"
+               HorizontalTextAlignment="Center" 
+               TextColor="White" 
+                FontAttributes="Bold"/>
+
+        <!--<Label Text="Kontroll" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
+            <Entry x:Name="kontrollEntry" BackgroundColor="#50FFFFFF" Keyboard="Numeric" VerticalTextAlignment="Center" Placeholder="Kontroll" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+            <Entry.Behaviors>
+                <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
+            </Entry.Behaviors>      
+        </Entry>
+
+
+        <!--<Label Text="Kod" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
+            <Entry x:Name="tagEntry" BackgroundColor="#50FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="Kod" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+     
+            <Entry.Behaviors>
+                <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
+            </Entry.Behaviors>
+        </Entry>
+        
+        
+            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="Center">
+                <Button Text="Lägg Till" FontSize="Large" BackgroundColor="#2828ff" TextColor="White" VerticalOptions="End" HorizontalOptions="Center"   Style="{DynamicResource TitleStyle}" Clicked="OnButtonClicked" />         
+
+    </StackLayout>
+    </StackLayout>
+    </Grid>
+</ContentPage>

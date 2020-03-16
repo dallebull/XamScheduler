@@ -18,9 +18,9 @@ namespace FriskaClient
 
         static readonly string  _url = App.url + "api/kontrollsvarsapi/";
         public MainPage()
-        {         
+        {
             InitializeComponent();
-            //FillApsAsync(App.Auth);
+
             var vm = new SvarViewModel();
             ansList.ItemsSource = vm.MyAnswers;
             MyAnswers = vm.MyAnswers;
@@ -32,7 +32,7 @@ namespace FriskaClient
 
             this.ToolbarItems.Add(item);
             item.Clicked += OnUserDetails;
-
+         
         }
 
         async void OnAddButtonClicked(object sender, EventArgs args)

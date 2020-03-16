@@ -19,7 +19,6 @@ namespace FriskaClient
         static readonly string _url = App.url + "api/kontrollsvarsapi/";      
 
         private ObservableCollection<KontrollSvar> _myAnswers = new ObservableCollection<KontrollSvar>();
-
     
         public ObservableCollection<KontrollSvar> MyAnswers { get { return _myAnswers; } }
         public SvarViewModel()

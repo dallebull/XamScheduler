@@ -1,55 +1,55 @@
-﻿using FriskaClient.Model;
-using FriskaClient.Models;
+using Newtonsoft.Json;
 using System;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using Xamarin.Forms;
+using FriskaClient.Model;
+using System.Collections.ObjectModel;
+using FriskaClient.Services;
+using System.Web;
+using FriskaClient.Models;
 
 namespace FriskaClient
 {
-    public partial class AdminPage : ContentPage
+    public partial class YearPage : ContentPage
     {
-        static public string furl = App.url + "api/AdminApi/";
-        private ObservableCollection<Facit> AllAnswers { get; set; }
+        private ObservableCollection<Year> MyYears { get; set; } 
 
-        public AdminPage()
+        static readonly string  _url = App.url + "api/YearApi/";
+        public YearPage()
         {
             InitializeComponent();
-            var yr = new YearViewModel();
-            var sv = new FacitViewModel();
-            facList.ItemsSource = sv.AllFacits;
-            AllAnswers = sv.AllFacits;
-            //ToolbarItem item = new ToolbarItem
-            //{
-            //    Text = App.User,
-            //};
 
-            //this.ToolbarItems.Add(item);
-            //item.Clicked += OnUserDetails;
+            var vm = new YearViewModel();
+            yearList.ItemsSource = vm.AllYears;
+            MyYears = vm.AllYears;
 
+             ToolbarItem item = new ToolbarItem
+            {
+                Text = App.User,
+            };
+
+            this.ToolbarItems.Add(item);
+            item.Clicked += OnUserDetails;
+         
         }
-        public async void OnAddClicked(object sender, EventArgs args)
+
+        async void OnAddButtonClicked(object sender, EventArgs args)
         {
-            //await DisplayAlert("Todo", "Nu skulle du kommit till Admin Sidan", "Ok");
-            await Navigation.PushAsync(new AddFacit());
-        }
-
-        public async void OnYearClicked(object sender, EventArgs args)
-        {
-            //await DisplayAlert("Todo", "Nu skulle du kommit till Admin Sidan", "Ok");
-            await Navigation.PushAsync(new YearPage());
-        }
+           // await Navigation.PushAsync(new AddYear());
+        }    
+   
         async void OnDelButtonClicked(object sender, EventArgs e)
         {
             var item = (Xamarin.Forms.ImageButton)sender;
             var Id = item.CommandParameter;
             var IdString = Id.ToString();
-            var tmpkontroll = from a in AllAnswers where a.ID.ToString() == IdString select a;
-            var kontroll = tmpkontroll.First() as Facit;
+            var tmpkontroll = from a in MyYears where a.ID.ToString() == IdString select a;
+            var kontroll = tmpkontroll.First() as Year;
 
-            var action = await DisplayAlert("Ta Bort?", "Vill du ta bort Facit?\n" + kontroll.Kontroll + "  " + kontroll.KontrollTag, "Ja", "Nej");
+            var action = await DisplayAlert("Ta Bort?", "Vill du ta bort Året?\n" +kontroll.YearName, "Ja", "Nej");
             if (action)
             {
 
@@ -60,15 +60,18 @@ namespace FriskaClient
                 };
 
                 // Pass the handler to httpclient(from you are calling api)
-                HttpClient client = new HttpClient(clientHandler);        
+                HttpClient client = new HttpClient(clientHandler)
+                {
+                    Timeout = TimeSpan.FromMinutes(10)
+                };
 
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
-
-                var response = await client.DeleteAsync(furl + Id);
+          
+                var response = await client.DeleteAsync(_url + Id);
                 if (response.IsSuccessStatusCode)
                 {
-
-                    Navigation.InsertPageBefore(new AdminPage(), this);
+             
+                    Navigation.InsertPageBefore(new MainPage(), this);
                     await Navigation.PopAsync();
                 }
                 else
@@ -95,9 +98,17 @@ namespace FriskaClient
 
                         await DisplayAlert("Oh No!", "Något allvarligt gick fel!", "Ok");
                     }
-                }
-            }
+                }     
+        }
+
+        }
+
+    async void OnUserDetails(object sender, EventArgs e)
+        {
+
+            await Navigation.PushAsync(new UserDetails());
 
         }
     }
 }
+

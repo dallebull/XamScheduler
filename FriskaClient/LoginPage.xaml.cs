@@ -14,7 +14,7 @@ namespace FriskaClient
     {
 
         static string url = App.url + "Token";
-        public LoginPage()
+        public  LoginPage()
         {
       
             InitializeComponent();
@@ -111,9 +111,9 @@ namespace FriskaClient
                     }
                     
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    await DisplayAlert("Error!","Error!!", "Ok");
+                    await DisplayAlert("Error!",ex.ToString(), "Ok");
                 }
             }
             else

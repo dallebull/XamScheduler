@@ -1,10 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-                xmlns:local="clr-namespace:FriskaClient"
+             xmlns:local="clr-namespace:FriskaClient"
              x:Class="FriskaClient.AdminPage"
              x:Key="FriskaClient.YearIDToYearnameConverter">
 
@@ -14,6 +11,8 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
+    <ContentPage.ToolbarItems/>
+
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -27,8 +26,9 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <StackLayout>
-                <ListView x:Name="facList" ItemsSource="{Binding AllAnswers}" Grid.ColumnSpan="4" HasUnevenRows="True">
+            <Image Grid.RowSpan="2" Grid.ColumnSpan="4" Aspect="AspectFill" Source="wallpaper.png"/>
+            
+            <ListView x:Name="facList" ItemsSource="{Binding AllAnswers}" Grid.ColumnSpan="4" HasUnevenRows="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell Height="50" >
@@ -67,7 +67,9 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </StackLayout>
+            <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0" Color="#2828ff" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="4"/>
+            <Button Text="Lägg Till Kontroll" BackgroundColor="#2828ff" TextColor="white" VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnAddClicked" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="2" />
+            <Button Text="Redigera År" BackgroundColor="#2828ff" TextColor="white"  VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnYearClicked" Grid.Row="1" Grid.Column="2"  Grid.ColumnSpan="2" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -18,71 +18,16 @@ using FriskaClient.Models;
 
 namespace FriskaClient.Model
 {
-    class YearViewModel : INotifyPropertyChanged
+    class YearViewModel 
     {
 
 
-        private ObservableCollection<Year> _allYears = new ObservableCollection<Year>();
-
+        public static ObservableCollection<Year> _allYears = new ObservableCollection<Year>();
       
         public ObservableCollection<Year> AllYears { get { return _allYears; } }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
        
-        static public string yurl = App.url + "api/Years/";
-        private int _id;
-        public int ID
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                if (_id != value)
-                {
-                    _id = value;
-                    OnPropertyChanged();
-                }
-            }
-        }    
-        private int _yearID;
-        public int YearID
-        {
-            get
-            {
-                return _yearID;
-            }
-            set
-            {
-                if (_yearID != value)
-                {
-                    _yearID = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        private string _yearname;
-        public string YearName
-        {
-            get
-            {
-                return _yearname;
-            }
-            set
-            {
-                if (_yearname != value)
-                {
-                    _yearname = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        static public string yurl = App.url + "api/YearsApi/";
+      
    
         public YearViewModel()
         {
@@ -109,12 +54,11 @@ namespace FriskaClient.Model
 
             foreach (var item in Answers)
             {
-                Year year = new Year();
+                Year year = new Year
                 {
-                    ID = item.ID;
-         
-                    YearName = item.YearName;
-                    YearID = item.YearID;
+                    ID = item.ID,         
+                    YearName = item.YearName,
+                    YearID = item.YearID,
                 };
                 _allYears.Add(year);
 

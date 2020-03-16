@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace FriskaClient
@@ -13,20 +14,20 @@ namespace FriskaClient
     public class YearIDToYearnameConverter : IValueConverter
     {
 
-        private ObservableCollection<Year> _allYears = new ObservableCollection<Year>();
+        private static ObservableCollection<Year> _allYears = new ObservableCollection<Year>();
 
 
         public ObservableCollection<Year> AllYears { get { return _allYears; } }
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public  object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var sv = new YearViewModel();
-             _allYears= sv.AllYears;
+         
+         
 
-            var yearname =from y in _allYears where y.YearID == (int)value select y.YearName;
+            var yearname = from y in YearViewModel._allYears where y.ID == (int)value select y.YearName;
+            List<string> yearlist = yearname.ToList();
 
-
-            return yearname;
+            return yearlist.FirstOrDefault();
         }
 
    

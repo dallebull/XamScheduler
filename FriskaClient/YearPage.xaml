@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:FriskaClient"
+             x:Class="FriskaClient.YearPage"
+             x:Key="FriskaClient.MsgToImagePathConverter">
+
+
+    
+    <ContentPage.ToolbarItems/>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" /> 
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.RowSpan="2" Grid.ColumnSpan="4" Aspect="AspectFill" Source="wallpaper.png"/>
+            
+            <ListView x:Name="yearList" ItemsSource="{Binding MyYears}" Grid.ColumnSpan="4" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="50" >
+                            <StackLayout BackgroundColor="#50FFFFFF" Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    
+
+                                    <Label Text="{Binding YearName}"
+                                           VerticalOptions="Center"
+                                             HorizontalOptions="CenterAndExpand"
+                                     FontAttributes="Bold"
+                                TextColor="Black"
+                                            Grid.Row="0" Grid.Column="0"/>
+                              
+
+                                    <ImageButton Source="delete.png" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" CommandParameter="{Binding ID}" Clicked="OnDelButtonClicked" Grid.Row="0" Grid.Column="3"/>
+
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0" Color="#2828ff" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="4"/>
+            <Button Text="Lägg Till År" BackgroundColor="#2828ff" TextColor="white" VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnAddButtonClicked" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="4" />
+          
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
+

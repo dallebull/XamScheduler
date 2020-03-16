@@ -45,8 +45,8 @@ namespace FriskaClient
         }
         public async void OnAdminClicked(object sender, EventArgs args)
         {
-            await DisplayAlert("Todo", "Nu skulle du kommit till Admin Sidan", "Ok");
-           // await Navigation.PushAsync(new AdminPage());
+            //await DisplayAlert("Todo", "Nu skulle du kommit till Admin Sidan", "Ok");
+            await Navigation.PushAsync(new AdminPage());
         }
     }
 }

@@ -28,11 +28,17 @@
 </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="AddFacit.xaml.cs">
+      <DependentUpon>AddFacit.xaml</DependentUpon>
+    </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
     <Compile Update="AddKontroll.xaml.cs">
       <DependentUpon>AddKontroll.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="YearPage.xaml.cs">
+      <DependentUpon>YearPage.xaml</DependentUpon>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="MainPage.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
