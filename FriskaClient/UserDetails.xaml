@@ -1,60 +1,72 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="FriskaClient.UserDetails">
+             xmlns:local="clr-namespace:FriskaClient"
+             x:Class="FriskaClient.UserDetails"
+             x:Key="FriskaClient.BoolToValueConverter">
+ 
 
-    <ContentPage.Content  >
-        <StackLayout Margin="10" >
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:BoolToStringConverter x:Key="BooleanToStringConverter" FalseValue="Nej" TrueValue="Ja" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content  >          
+
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsClippedToBounds="True">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="Auto" />
 
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*" />
-                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
                 </Grid.ColumnDefinitions>
 
-                 
-                
+        
+                    <Image Aspect="AspectFill" Grid.RowSpan="25" Grid.ColumnSpan="2" Source="wallpaper.png"/>
 
-                    <Label Text="{Binding Namn}" FontSize="Large" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="Black" Grid.ColumnSpan="2" Grid.Row="0"/>
-                        
-                        <Label Text="Email"  FontAttributes="Bold" TextColor="Black" Grid.Row="2" Grid.Column="0" />
-                        <Label Text="{Binding Email}" FontAttributes="Bold" TextColor="Black" Grid.Row="2" Grid.Column="1"/>
-                        
-                        <Label Text="Ålder"  FontAttributes="Bold" TextColor="Black" Grid.Row="3" Grid.Column="0" />
+                <Label Text="{Binding Namn}" FontSize="Large" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="Black" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2"/>
+
+                <Label Text="Email"  FontAttributes="Bold" TextColor="Black" Grid.Row="2" Grid.Column="0" Margin="10,0,0,0"/>
+                <Label Text="{Binding Email}" FontAttributes="Bold" TextColor="Black" Grid.Row="2" Grid.Column="1"/>
+
+                <Label Text="Ålder"  FontAttributes="Bold" TextColor="Black" Grid.Row="3" Grid.Column="0"  Margin="10,0,0,0"/>
                         <Label Text="{Binding Age}" FontAttributes="Bold" TextColor="Black" Grid.Row="3" Grid.Column="1"/>
 
-                        <Label Text="Kön"  FontAttributes="Bold" TextColor="Black" Grid.Row="4" Grid.Column="0" />
-                        <Label Text="{Binding Gender}"  FontAttributes="Bold" TextColor="Black" Grid.Row="4" Grid.Column="1"/>
-                    
-                        <Label Text="TelefonNummer" FontAttributes="Bold" TextColor="Black" Grid.Row="5" Grid.Column="0" />
-                        <Label Text="{Binding PhoneNumber}" FontAttributes="Bold" TextColor="Black" Grid.Row="5" Grid.Column="1"/>
+                <Label Text="Kön"  FontAttributes="Bold" TextColor="Black" Grid.Row="4" Grid.Column="0"  Margin="10,0,0,0"/>
+                <Label Text="{Binding Gender}"  FontAttributes="Bold" TextColor="Black" Grid.Row="4" Grid.Column="1"/>
 
-                        <Label Text="Antal Rätt" FontAttributes="Bold" TextColor="Black" Grid.Row="6" Grid.Column="0" />
-                        <Label Text="{Binding CorrectAnswers}"  FontAttributes="Bold" TextColor="Black" Grid.Row="6" Grid.Column="1"/>
-                    
-                        <Label Text="Medlem Sedan"  FontAttributes="Bold" TextColor="Black" Grid.Row="7" Grid.Column="0" />
-                        <Label Text="{Binding JoinDate,StringFormat='{0:yyyy-MM-dd}'}"  FontAttributes="Bold" TextColor="Black" Grid.Row="7" Grid.Column="1"/>
+                <Label Text="TelefonNummer" FontAttributes="Bold" TextColor="Black" Grid.Row="5" Grid.Column="0"  Margin="10,0,0,0"/>
+                <Label Text="{Binding PhoneNumber}" FontAttributes="Bold" TextColor="Black" Grid.Row="5" Grid.Column="1"/>
 
+                <Label Text="Antal Rätt" FontAttributes="Bold" TextColor="Black" Grid.Row="6" Grid.Column="0"  Margin="10,0,0,0"/>
+                <Label Text="{Binding CorrectAnswers}"  FontAttributes="Bold" TextColor="Black" Grid.Row="6" Grid.Column="1"/>
 
+                <Label Text="Medlem Sedan"  FontAttributes="Bold" TextColor="Black" Grid.Row="7" Grid.Column="0"  Margin="10,0,0,0"/>
+                <Label Text="{Binding JoinDate,StringFormat='{0:yyyy-MM-dd}'}"  FontAttributes="Bold" TextColor="Black" Grid.Row="7" Grid.Column="1"/>
 
+                <Label Text="Admin"  FontAttributes="Bold" TextColor="Black" Grid.Row="8" Grid.Column="0"  Margin="10,0,0,0"/>
+                <Label Text="{Binding IsAdmin, Converter={StaticResource BooleanToStringConverter}}"  FontAttributes="Bold" TextColor="Black" Grid.Row="8" Grid.Column="1"/>
+                <Button Text="Admin" IsVisible="{Binding IsAdmin}" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#2828ff" TextColor="White" VerticalOptions="End" HorizontalOptions="Center"   Style="{DynamicResource TitleStyle}"  Clicked="OnAdminClicked"/>
 
 
 
 
             </Grid>
         
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

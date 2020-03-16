@@ -7,42 +7,30 @@
              x:Class="FriskaClient.SignUpPage">
     <ContentPage.Content>
 
-        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-            <StackLayout Orientation="Horizontal" VerticalOptions="Start" >
-                <!-- top controls -->
-                <Label Text="Registrera" FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
-            </StackLayout>
-            
+        <Grid>
+            <Image Aspect="AspectFill" Source="wallpaper.png"/>
+            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+         
             <StackLayout  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"  Margin="60, 0 , 60, 0" >
+                <!-- top controls -->
+                <Label Text="Registrera Konto" FontSize="Large" FontAttributes="Bold" TextColor="White" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />    
 
-                <Label Text="Namn" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" Margin="-5"  />
-                <Entry x:Name="userEntry" Placeholder="Nils Nilsson"   HorizontalTextAlignment="Center" Margin="0,-10,0,10"  />
-
-                <Label Text="Epost Address" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" Margin="-5"/>
-                <Entry x:Name="emailEntry" Placeholder="Nils@Nilsson.com"  Keyboard="Email" HorizontalTextAlignment="Center" Margin="0,-10,0,10" />
-
-                <Label Text="Kön" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" Margin="-5"/>
-                <Entry x:Name="genderEntry" Placeholder="Man/Kvinna/Annat"  Keyboard="Chat" HorizontalTextAlignment="Center" Margin="0,-10,0,10"/>
-
-                <Label Text="Födelseår" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" Margin="-5"/>
-                <Entry x:Name="ageEntry"  Keyboard="Chat" Placeholder="1985" HorizontalTextAlignment="Center" Margin="0,-10,0,10"/>
-
-                <Label Text="TelefonNummer" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" Margin="-5" />
-                <Entry x:Name="numberEntry"  Keyboard="Numeric" Placeholder="0701234567" HorizontalTextAlignment="Center" Margin="0,-10,0,10"/>
-
-                <Label Text="Lösenord" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" Margin="-5" />
-                <Entry x:Name="passwordEntry" Placeholder="Abcd1234!" IsPassword="true" HorizontalTextAlignment="Center" Margin="0,-10,0,10"/>
-
-                <Label Text="Verifiera Lösenord" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" Margin="-5"/>
-                <Entry x:Name="confirmPasswordEntry" Placeholder="Abcd1234!" IsPassword="true" HorizontalTextAlignment="Center" Margin="0,-10,0,0" />                
+                <Entry x:Name="userEntry"  HorizontalTextAlignment="Center" Placeholder="Namn" BackgroundColor="#50FFFFFF" Margin="0,0,0,10"  />                    
+                <Entry x:Name="emailEntry" Placeholder="Epost"  Keyboard="Email" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF" Margin="0,0,0,10" />                      
+                <Entry x:Name="genderEntry" Placeholder="Kön"  Keyboard="Chat" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF" Margin="0,0,0,10"/>
+                <Entry x:Name="ageEntry"  Keyboard="Chat" Placeholder="Födelseår" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF" Margin="0,0,0,10"/>                 
+                <Entry x:Name="numberEntry"  Keyboard="Numeric" Placeholder="TelefonNummer" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF" Margin="0,0,0,10"/>
+                <Entry x:Name="passwordEntry" Placeholder="Lösenord" IsPassword="true" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF" Margin="0,0,0,10"/>
+                <Entry x:Name="confirmPasswordEntry" Placeholder="Verifiera Lösenord" IsPassword="true" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF" Margin="0,0,0,0" />                
      
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand"  HorizontalOptions="Center">
 
-                <Button Text="Registrera" VerticalOptions="Center" BackgroundColor="#ed1c24" TextColor="white" HorizontalOptions="Center" Clicked="OnSignUpButtonClicked" Style="{DynamicResource TitleStyle}"/>
+                <Button Text="Registrera" VerticalOptions="Center" BackgroundColor="#2828ff" TextColor="white" HorizontalOptions="Center" Clicked="OnSignUpButtonClicked" Style="{DynamicResource TitleStyle}"/>
 
             </StackLayout>
         </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -1,6 +1,6 @@
 ﻿using FriskaClient.Model;
 using System;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -39,9 +39,14 @@ namespace FriskaClient
             App.Current.MainPage = new NavigationPage(new LoginPage())
             {
 
-                BarBackgroundColor = Color.FromHex("#ed1c24"),
+                BarBackgroundColor = Color.FromHex("#2828ff"),
                 BarTextColor = Color.White
             };
+        }
+        public async void OnAdminClicked(object sender, EventArgs args)
+        {
+            await DisplayAlert("Todo", "Nu skulle du kommit till Admin Sidan", "Ok");
+           // await Navigation.PushAsync(new AdminPage());
         }
     }
 }

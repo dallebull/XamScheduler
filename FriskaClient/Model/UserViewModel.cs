@@ -21,6 +21,39 @@ namespace FriskaClient.Model
         }
 
         static public string url = App.url + "api/Account/GetUser";
+        static public string aurl = App.url + "api/Account/IsAdmin";
+        private string _id;
+        public string Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    _id = value;
+                    OnPropertyChanged();
+                }
+            }
+        }        
+        private bool _isAdmin;
+        public bool IsAdmin
+        {
+            get
+            {
+                return _isAdmin;
+            }
+            set
+            {
+                if (_isAdmin != value)
+                {
+                    _isAdmin = value;
+                    OnPropertyChanged();
+                }
+            }
+        }   
         private string _email;
         public string Email
         {
@@ -157,7 +190,7 @@ namespace FriskaClient.Model
 
                 // Pass the handler to httpclient(from you are calling api)
                 HttpClient client = new HttpClient(clientHandler);
-          
+
 
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Auth);
                 var apiResponse = await client.GetStringAsync(url);
@@ -167,7 +200,7 @@ namespace FriskaClient.Model
 
                 foreach (var item in user)
                 {
-                    
+                    Id = item.Id;
                     Age = item.Age;
                     CorrectAnswers = item.CorrectAnswers.ToString();
                     Email = item.Email;
@@ -175,9 +208,19 @@ namespace FriskaClient.Model
                     JoinDate = item.JoinDate;
                     PhoneNumber = item.PhoneNumber;
                     Namn = item.Namn;
-                   
+
                 }
-         
+                aurl = aurl + "?Id=" + Id;
+                StringContent scontent = new StringContent("?Id=" +Id, Encoding.UTF8, "application/json");
+                var apiAnswer = await client.PostAsync(aurl, scontent);
+                if (apiAnswer.IsSuccessStatusCode)
+                {
+                    IsAdmin = true;
+                }
+                else
+                {
+                    IsAdmin = false;
+                }
             }
             catch (Exception)
             {
