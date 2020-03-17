@@ -17,27 +17,27 @@ using System.Collections.ObjectModel;
 namespace FriskaClient
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddFacit : ContentPage
+    public partial class AddYear : ContentPage
     {
 
-        static public string url = App.url + "api/AdminApi/";
-        public AddFacit()
+        static public string url = App.url + "api/YearsApi/";
+        public AddYear()
         {         
        
             InitializeComponent();
-            kontrollEntry.Completed += (sender, args) => { tagEntry.Focus(); };
-            tagEntry.Completed += (sender, args) => { OnButtonClicked(null, null); };
+     
+            yearEntry.Completed += (sender, args) => { OnButtonClicked(null, null); };
 
         }
 
         async void OnButtonClicked(object sender, EventArgs args)
         {
-            Facit ks = new Facit();
+            Year ks = new Year();
 
             try
             {
-                ks.KontrollTag = tagEntry.Text.ToUpper();
-                ks.Kontroll = Int32.Parse(kontrollEntry.Text);
+                ks.YearName = yearEntry.Text.ToUpper();
+            
             }
             catch (Exception)
             {

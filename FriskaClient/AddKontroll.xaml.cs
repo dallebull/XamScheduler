@@ -89,7 +89,7 @@ namespace FriskaClient
                     catch (Exception)
                     {
 
-                        await DisplayAlert("Oh No!", "Något allvarligt gick fel!", "Ok");
+                        await DisplayAlert("Fel!", "Något allvarligt gick fel!", "Ok");
                     }
 
                 }

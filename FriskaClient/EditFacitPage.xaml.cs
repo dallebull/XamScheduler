@@ -1,7 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using FriskaClient.Model;
+using FriskaClient.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -10,61 +11,66 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using FriskaClient.Model;
-using FriskaClient.Models;
-using System.Collections.ObjectModel;
 
 namespace FriskaClient
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddFacit : ContentPage
+    public partial class EditFacitPage : ContentPage
     {
-
-        static public string url = App.url + "api/AdminApi/";
-        public AddFacit()
-        {         
-       
+        static public string furl = App.url + "api/AdminApi/";
+        public EditFacitPage()
+        {
             InitializeComponent();
-            kontrollEntry.Completed += (sender, args) => { tagEntry.Focus(); };
-            tagEntry.Completed += (sender, args) => { OnButtonClicked(null, null); };
+  
+
+        }   
+        public EditFacitPage(int Id)
+        {
+            var fm = new FacitViewModel();
+
+            var tmpFacit = fm.AllFacits;
+            var facit = from f in tmpFacit where f.ID == Id select f;
+            var thisfacit = facit.FirstOrDefault() as Facit;
+
+            InitializeComponent();
+            this.BindingContext = thisfacit;
 
         }
-
-        async void OnButtonClicked(object sender, EventArgs args)
+        async void OnEditClicked(object sender, EventArgs args)
         {
-            Facit ks = new Facit();
+            Facit fc = new Facit();
 
             try
             {
-                ks.KontrollTag = tagEntry.Text.ToUpper();
-                ks.Kontroll = Int32.Parse(kontrollEntry.Text);
+                fc.KontrollTag = tagEntry.Text.ToUpper();
+                fc.Kontroll = Int32.Parse(kontrollEntry.Text);
             }
             catch (Exception)
             {
                 await DisplayAlert("Fel!", "Fyll i alla Fält!", "Ok");
             }
-         
+
 
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sslsender, cert, chain, sslPolicyErrors) => { return true; };
 
             // Pass the handler to httpclient(from you are calling api)
-            HttpClient client = new HttpClient(clientHandler);                  
-     
+            HttpClient client = new HttpClient(clientHandler);
+
             //Put Answer on Site
-            var content = JsonConvert.SerializeObject(ks);
+            var content = JsonConvert.SerializeObject(fc);
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
             StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
-                var apiAnswer = await client.PostAsync(url, scontent);
-                    if (apiAnswer.IsSuccessStatusCode)
-                    {
-                        this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
-                        Navigation.InsertPageBefore(new MainPage(), this);
-                        await Navigation.PopAsync();                     
-                    }
-                    else
-                    {
+            var apiAnswer = await client.PutAsync(furl, scontent);
+            if (apiAnswer.IsSuccessStatusCode)
+            {
+                this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
+                Navigation.InsertPageBefore(new MainPage(), this);
+                await Navigation.PopAsync();
+            }
+            else
+            {
                 try
                 {
                     var ex = ApiException.CreateApiException(apiAnswer);
@@ -78,9 +84,9 @@ namespace FriskaClient
                         {
                             await DisplayAlert("Fel!", ex.Errors.ElementAt(i).ToString(), "Ok");
                         }
-                 
+
                     }
-               
+
                 }
                 catch (Exception)
                 {
@@ -90,7 +96,4 @@ namespace FriskaClient
             }
         }
     }
-  
- }
-     
-    
+}

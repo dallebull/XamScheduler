@@ -15,7 +15,7 @@ namespace FriskaClient
         public static bool Devmode = false;
 
         public static string url = "https://31.208.194.94/";
-        public App()
+         public App()
         {
 
 

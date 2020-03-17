@@ -25,15 +25,6 @@ namespace FriskaClient
 
             facList.ItemSelected += DeselectItem;
 
-         
-            //ToolbarItem item = new ToolbarItem
-            //{
-            //    Text = App.User,
-            //};
-
-            //this.ToolbarItems.Add(item);
-            //item.Clicked += OnUserDetails;
-
         }
            public AdminPage(int Id)
         {
@@ -46,14 +37,6 @@ namespace FriskaClient
 
             facList.ItemSelected += DeselectItem;
 
-         
-            //ToolbarItem item = new ToolbarItem
-            //{
-            //    Text = App.User,
-            //};
-
-            //this.ToolbarItems.Add(item);
-            //item.Clicked += OnUserDetails;
 
         }
 
@@ -63,8 +46,8 @@ namespace FriskaClient
         }
         public async void OnAddClicked(object sender, EventArgs args)
         {
-            await DisplayAlert("Todo", "Nu skulle du kommit till Lägg Till Sidan", "Ok");
-            //await Navigation.PushAsync(new AddFacit());
+            //await DisplayAlert("Todo", "Nu skulle du kommit till Lägg Till Sidan", "Ok");
+            await Navigation.PushAsync(new AddFacit());
         }
 
         public async void OnYearClicked(object sender, EventArgs args)
@@ -74,7 +57,11 @@ namespace FriskaClient
         }  
         public async void OnEditClicked(object sender, EventArgs args)
         {
-            await DisplayAlert("Todo", "Nu skulle du kommit Edit Sidan", "Ok");
+            var item = (Xamarin.Forms.ImageButton)sender;
+            var tmpId = item.CommandParameter;
+            int Id = (int)tmpId;
+            await Navigation.PushAsync(new EditFacitPage(Id));
+            //await DisplayAlert("Todo", "Nu skulle du kommit Edit Sidan", "Ok");
 
         }
         async void OnDelClicked(object sender, EventArgs e)
@@ -114,13 +101,13 @@ namespace FriskaClient
                         var ex = ApiException.CreateApiException(response);
                         if (ex.Errors.Count() == 1)
                         {
-                            await DisplayAlert("Oh No!", ex.Errors.FirstOrDefault().ToString(), "Ok");
+                            await DisplayAlert("Fel!", ex.Errors.FirstOrDefault().ToString(), "Ok");
                         }
                         else
                         {
                             for (int i = 0; i < ex.Errors.Count(); i++)
                             {
-                                await DisplayAlert("Oh No!", ex.Errors.ElementAt(i).ToString(), "Ok");
+                                await DisplayAlert("Fel!", ex.Errors.ElementAt(i).ToString(), "Ok");
                             }
 
                         }
@@ -129,7 +116,7 @@ namespace FriskaClient
                     catch (Exception)
                     {
 
-                        await DisplayAlert("Oh No!", "Något allvarligt gick fel!", "Ok");
+                        await DisplayAlert("Fel!", "Något allvarligt gick fel!", "Ok");
                     }
                 }
             }

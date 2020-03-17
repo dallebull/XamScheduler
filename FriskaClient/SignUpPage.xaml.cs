@@ -64,13 +64,13 @@ namespace FriskaClient
                         var ex = ApiException.CreateApiException(response);
                         if (ex.Errors.Count() == 1)
                         {
-                            await DisplayAlert("Oh No!", ex.Errors.FirstOrDefault().ToString(), "Ok");
+                            await DisplayAlert("Fel!", ex.Errors.FirstOrDefault().ToString(), "Ok");
                         }
                         else
                         {
                             for (int i = 0; i < ex.Errors.Count(); i++)
                             {
-                                await DisplayAlert("Oh No!", ex.Errors.ElementAt(i).ToString(), "Ok");
+                                await DisplayAlert("Fel!", ex.Errors.ElementAt(i).ToString(), "Ok");
                             }
 
                         }
@@ -79,13 +79,13 @@ namespace FriskaClient
                     catch (Exception)
                     {
 
-                        await DisplayAlert("Oh No!", "Något allvarligt gick fel!", "Ok");
+                        await DisplayAlert("Fel!", "Något allvarligt gick fel!", "Ok");
                     }
                 }
             }
             else
             {
-                await DisplayAlert("Oh No!", "Något fält är fel ifyllt", "Ok");
+                await DisplayAlert("Fel!", "Något fält är fel ifyllt", "Ok");
             }
         }
 
@@ -158,13 +158,13 @@ namespace FriskaClient
                     var ex = ApiException.CreateApiException(res);
                     if (ex.Errors.Count() == 1)
                     {
-                        await DisplayAlert("Oh No!", ex.Errors.FirstOrDefault().ToString(), "Ok");
+                        await DisplayAlert("Fel!", ex.Errors.FirstOrDefault().ToString(), "Ok");
                     }
                     else
                     {
                         for (int i = 0; i < ex.Errors.Count(); i++)
                         {
-                            await DisplayAlert("Oh No!", ex.Errors.ElementAt(i).ToString(), "Ok");
+                            await DisplayAlert("Fel!", ex.Errors.ElementAt(i).ToString(), "Ok");
                         }
 
                     }
@@ -173,7 +173,7 @@ namespace FriskaClient
                 catch (Exception)
                 {
 
-                    await DisplayAlert("Oh No!", "Något allvarligt gick fel!", "Ok");
+                    await DisplayAlert("Fel!", "Något allvarligt gick fel!", "Ok");
                 }
             }
 

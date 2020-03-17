@@ -28,6 +28,9 @@
 </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="AddYear.xaml.cs">
+      <DependentUpon>AddYear.xaml</DependentUpon>
+    </Compile>
     <Compile Update="AddFacit.xaml.cs">
       <DependentUpon>AddFacit.xaml</DependentUpon>
     </Compile>
@@ -50,6 +53,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="AdminPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EditFacitPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="LoginPage.xaml">
