@@ -27,7 +27,7 @@
                Style="{DynamicResource TitleStyle}"
                Margin="0, 20"
                HorizontalTextAlignment="Center" 
-               TextColor="White" 
+               TextColor="Black" 
                 FontAttributes="Bold"/>
 
             <Label Text="{Binding YearId, Converter={StaticResource YearIDToYearnameConverter}}"
@@ -51,12 +51,14 @@
                 <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
             </Entry.Behaviors>
         </Entry>
-        
-        
-            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="Center">
-                <Button Text="Lägg Till" FontSize="Large" BackgroundColor="#2828ff" TextColor="White" VerticalOptions="End" HorizontalOptions="Center"   Style="{DynamicResource TitleStyle}" Clicked="OnButtonClicked" />         
 
-    </StackLayout>
-    </StackLayout>
+
+        </StackLayout>
+        <StackLayout Orientation="Vertical" VerticalOptions="End" HorizontalOptions="FillAndExpand" BackgroundColor="#502828ff">
+
+                <Button Text="Lägg Till" BackgroundColor="#002828ff" TextColor="white" VerticalOptions="End" HorizontalOptions="FillAndExpand" Clicked="OnButtonClicked"  />
+
+            </StackLayout>
+   
     </Grid>
 </ContentPage>

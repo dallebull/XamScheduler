@@ -32,6 +32,8 @@ namespace FriskaClient
             ToolbarItem item = new ToolbarItem
             {
                 Text = App.User,
+              
+
             };
 
             this.ToolbarItems.Add(item);
@@ -157,7 +159,7 @@ namespace FriskaClient
                 var response = await client.DeleteAsync(_url + Id);
                 if (response.IsSuccessStatusCode)
                 {
-             
+                    await DisplayAlert("Fel!", "Kontroll Tillagd!", "Ok");
                     Navigation.InsertPageBefore(new MainPage(), this);
                     await Navigation.PopAsync();
                 }
@@ -192,9 +194,7 @@ namespace FriskaClient
 
     async void OnUserDetails(object sender, EventArgs e)
         {
-
-            await Navigation.PushAsync(new UserDetails());
-
+            await Navigation.PushAsync(new UserDetails());         
         }
     }
 }

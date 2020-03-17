@@ -72,9 +72,9 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0" Color="#2828ff" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="6"/>
-            <Button Text="Lägg Till Kontroll" BackgroundColor="#2828ff" TextColor="white" VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnAddClicked" Grid.Row="1" Grid.Column="0"   CommandParameter="{Binding YearID}" Grid.ColumnSpan="3" />
-            <Button Text="Redigera År" BackgroundColor="#2828ff" TextColor="white"  VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnYearClicked" Grid.Row="1" Grid.Column="3"  Grid.ColumnSpan="3" />
+            <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0" Color="#502828ff" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="6"/>
+            <Button Text="Lägg Till Kontroll" BackgroundColor="#002828ff" TextColor="white" VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnAddClicked" Grid.Row="1" Grid.Column="0"   CommandParameter="{Binding YearID}" Grid.ColumnSpan="3" />
+            <Button Text="Redigera År" BackgroundColor="#002828ff" TextColor="white"  VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnYearClicked" Grid.Row="1" Grid.Column="3"  Grid.ColumnSpan="3" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

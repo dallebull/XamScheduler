@@ -40,7 +40,7 @@
 
             <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="Center">
 
-                    <Button Text="Logga In" FontSize="Large" BackgroundColor="#2828ff" TextColor="white" VerticalOptions="Center" Clicked="OnLoginButtonClicked" HorizontalOptions="CenterAndExpand"   Style="{DynamicResource TitleStyle}"/>
+                    <Button Text="Logga In" FontSize="Large" BackgroundColor="#502828ff" TextColor="white" VerticalOptions="Center" Clicked="OnLoginButtonClicked" HorizontalOptions="CenterAndExpand"   Style="{DynamicResource TitleStyle}"/>
             </StackLayout>
 
         </StackLayout>

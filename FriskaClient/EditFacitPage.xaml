@@ -37,7 +37,7 @@
                 <Entry x:Name="YearidEntry" IsVisible="false" Text="{Binding YearID}"></Entry>
 
                 <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="Center">
-                    <Button Text="Ändra" FontSize="Large" BackgroundColor="#2828ff" TextColor="White" VerticalOptions="End" HorizontalOptions="Center"   Style="{DynamicResource TitleStyle}" Clicked="OnEditClicked" />
+                    <Button Text="Ändra" FontSize="Large" BackgroundColor="#502828ff" TextColor="White" VerticalOptions="End" HorizontalOptions="Center"   Style="{DynamicResource TitleStyle}" Clicked="OnEditClicked" />
 
                 </StackLayout>
             </StackLayout>

@@ -4,8 +4,8 @@
              x:Class="FriskaClient.App">
 	<Application.Resources>
         <Style TargetType="NavigationPage">
-            <Setter Property="BarBackgroundColor" Value="#2828ff"></Setter>
-            <Setter Property="BarTextColor" Value="White"></Setter>
+            <Setter Property="BarBackgroundColor" Value="#502828ff"></Setter>
+            <Setter Property="BarTextColor" Value="BLack"></Setter>
         </Style>
 
         <!-- Application resource dictionary -->

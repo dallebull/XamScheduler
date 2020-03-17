@@ -27,7 +27,7 @@
 
             <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand"  HorizontalOptions="Center">
 
-                <Button Text="Registrera" VerticalOptions="Center" BackgroundColor="#2828ff" TextColor="white" HorizontalOptions="Center" Clicked="OnSignUpButtonClicked" Style="{DynamicResource TitleStyle}"/>
+                <Button Text="Registrera" VerticalOptions="Center" BackgroundColor="#502828ff" TextColor="white" HorizontalOptions="Center" Clicked="OnSignUpButtonClicked" Style="{DynamicResource TitleStyle}"/>
 
             </StackLayout>
         </StackLayout>

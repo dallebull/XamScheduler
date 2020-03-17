@@ -12,7 +12,7 @@ namespace FriskaClient
 {
     public partial class AdminPage : ContentPage
     {
-        static public string furl = App.url + "api/AdminApi/";
+        public string furl = App.url + "api/AdminApi/";
         private ObservableCollection<Facit> AllAnswers { get; set; }
         private ObservableCollection<Year> AllYears { get; set; }
         public int YearId { get; set; }
@@ -28,7 +28,15 @@ namespace FriskaClient
             AllAnswers = sv.AllFacits;
 
             facList.ItemSelected += DeselectItem;
+            ToolbarItem item = new ToolbarItem
+            {
+                Text = App.User,
 
+
+            };
+
+            this.ToolbarItems.Add(item);
+            item.Clicked += OnUserDetails;
         }
            public AdminPage(int Id)
         {
@@ -41,7 +49,15 @@ namespace FriskaClient
             AllAnswers = sv.AllFacits;
             AllYears = yr.AllYears;
             facList.ItemSelected += DeselectItem;
+            ToolbarItem item = new ToolbarItem
+            {
+                Text = App.User,
 
+
+            };
+
+            this.ToolbarItems.Add(item);
+            item.Clicked += OnUserDetails;
         }
 
         public void DeselectItem(object sender, EventArgs e)
@@ -132,5 +148,10 @@ namespace FriskaClient
             }
 
         }
+        async void OnUserDetails(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new UserDetails());
+        }
+
     }
 }

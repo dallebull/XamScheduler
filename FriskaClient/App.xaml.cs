@@ -19,7 +19,7 @@ namespace FriskaClient
         {
 
 
-            //FriskaRöd = #2828ff
+            //FriskaRöd = #502828ff
             //NyBlå = 2828ff
 
             if (!IsUserLoggedIn)
@@ -27,8 +27,8 @@ namespace FriskaClient
                 MainPage = new NavigationPage(new LoginPage())
                 {
 				
-                    BarBackgroundColor = Color.FromHex("#2828ff"),
-                    BarTextColor = Color.White
+                    BarBackgroundColor = Color.FromHex("#502828ff"),
+                    BarTextColor = Color.Black
                 };
       
             }
@@ -37,8 +37,8 @@ namespace FriskaClient
                 MainPage = new NavigationPage(new FriskaClient.MainPage())
                 {
 				
-                    BarBackgroundColor = Color.FromHex("#2828ff"),
-                    BarTextColor = Color.White
+                    BarBackgroundColor = Color.FromHex("#502828ff"),
+                    BarTextColor = Color.Black
                 };
            
             }

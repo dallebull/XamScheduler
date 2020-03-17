@@ -31,7 +31,15 @@ namespace FriskaClient
             kontrollEntry.Completed += (sender, args) => { tagEntry.Focus(); };
             tagEntry.Completed += (sender, args) => { OnEditClicked(sender,  args); };
 
+            ToolbarItem item = new ToolbarItem
+            {
+                Text = App.User,
 
+
+            };
+
+            this.ToolbarItems.Add(item);
+            item.Clicked += OnUserDetails;
         }
 
 
@@ -102,5 +110,10 @@ namespace FriskaClient
                 }
             }
         }
+        async void OnUserDetails(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new UserDetails());
+        }
+
     }
 }

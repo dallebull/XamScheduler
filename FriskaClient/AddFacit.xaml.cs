@@ -13,6 +13,7 @@ using Xamarin.Forms.Xaml;
 using FriskaClient.Model;
 using FriskaClient.Models;
 using System.Collections.ObjectModel;
+using Android.Content.Res;
 
 namespace FriskaClient
 {
@@ -30,7 +31,17 @@ namespace FriskaClient
             this.YearId = YearId;
             this.NextKontroll = NextKontroll;
             this.BindingContext = this;
-        
+
+            ToolbarItem item = new ToolbarItem
+            {
+                Text = App.User,
+
+
+            };
+
+            this.ToolbarItems.Add(item);
+            item.Clicked += OnUserDetails;
+
             kontrollEntry.Completed += (sender, args) => { tagEntry.Focus(); };
             tagEntry.Completed += (sender, args) => { OnButtonClicked(null, null); };
 
@@ -99,8 +110,12 @@ namespace FriskaClient
                 }
             }
         }
+        async void OnUserDetails(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new UserDetails());
+        }
+
     }
-  
- }
+}
      
     

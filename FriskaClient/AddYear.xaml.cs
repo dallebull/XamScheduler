@@ -22,76 +22,96 @@ namespace FriskaClient
 
         static public string url = App.url + "api/YearsApi/";
         public AddYear()
-        {         
-       
+        {
+
             InitializeComponent();
-     
+
             yearEntry.Completed += (sender, args) => { OnButtonClicked(null, null); };
 
+            ToolbarItem item = new ToolbarItem
+            {
+                Text = App.User,
+
+
+            };
+
+            this.ToolbarItems.Add(item);
+            item.Clicked += OnUserDetails;
         }
 
         async void OnButtonClicked(object sender, EventArgs args)
         {
             Year ks = new Year();
 
-            try
+            if (yearEntry.Text == null)
             {
-                ks.YearName = yearEntry.Text.ToUpper();
-            
+                await DisplayAlert("Fel!", "Fyll i Årtal!", "Ok");
+                return;
             }
-            catch (Exception)
+
+            ks.YearName = yearEntry.Text.ToUpper();
+            var tmpcontroll = Int32.Parse(ks.YearName);
+
+            if (tmpcontroll < 2030 && tmpcontroll > 2020)
             {
-                await DisplayAlert("Fel!", "Fyll i alla Fält!", "Ok");
-            }
-         
 
-            HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (sslsender, cert, chain, sslPolicyErrors) => { return true; };
 
-            // Pass the handler to httpclient(from you are calling api)
-            HttpClient client = new HttpClient(clientHandler);                  
-     
-            //Put Answer on Site
-            var content = JsonConvert.SerializeObject(ks);
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sslsender, cert, chain, sslPolicyErrors) => { return true; };
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
-            StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
+                // Pass the handler to httpclient(from you are calling api)
+                HttpClient client = new HttpClient(clientHandler);
+
+                //Put Answer on Site
+                var content = JsonConvert.SerializeObject(ks);
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
+                StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
                 var apiAnswer = await client.PostAsync(url, scontent);
-                    if (apiAnswer.IsSuccessStatusCode)
-                    {
-                await DisplayAlert("", "År Tillagt", "Ok");
-                this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
-                        Navigation.InsertPageBefore(new YearPage(), this);
-                        await Navigation.PopAsync();                     
-                    }
-                    else
-                    {
-                try
+                if (apiAnswer.IsSuccessStatusCode)
                 {
-                    var ex = ApiException.CreateApiException(apiAnswer);
-                    if (ex.Errors.Count() == 1)
+                    await DisplayAlert("", "År Tillagt", "Ok");
+                    this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
+                    Navigation.InsertPageBefore(new YearPage(), this);
+                    await Navigation.PopAsync();
+                }
+                else
+                {
+                    try
                     {
-                        await DisplayAlert("Fel!", ex.Errors.FirstOrDefault().ToString(), "Ok");
-                    }
-                    else
-                    {
-                        for (int i = 0; i < ex.Errors.Count(); i++)
+                        var ex = ApiException.CreateApiException(apiAnswer);
+                        if (ex.Errors.Count() == 1)
                         {
-                            await DisplayAlert("Fel!", ex.Errors.ElementAt(i).ToString(), "Ok");
+                            await DisplayAlert("Fel!", ex.Errors.FirstOrDefault().ToString(), "Ok");
                         }
-                 
-                    }
-               
-                }
-                catch (Exception)
-                {
+                        else
+                        {
+                            for (int i = 0; i < ex.Errors.Count(); i++)
+                            {
+                                await DisplayAlert("Fel!", ex.Errors.ElementAt(i).ToString(), "Ok");
+                            }
 
-                    await DisplayAlert("Fel!", "Något allvarligt gick fel!", "Ok");
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+                        await DisplayAlert("Fel!", "Något allvarligt gick fel!", "Ok");
+                    }
                 }
+            }
+            else
+            {
+                DisplayAlert("Fel!", "Årtal måste vara mellan 2020 och 2030", "Ok");
+
             }
         }
+        async void OnUserDetails(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new UserDetails());
+        }
+
     }
-  
- }
+}
      
     

@@ -17,7 +17,7 @@ namespace FriskaClient
     {
         private ObservableCollection<Year> MyYears { get; set; } 
 
-        static readonly string  _url = App.url + "api/YearApi/";
+         readonly string  _url = App.url + "api/YearsApi/";
         public YearPage()
         {
             InitializeComponent();
@@ -26,7 +26,15 @@ namespace FriskaClient
             yearList.ItemsSource = vm.AllYears;
             MyYears = vm.AllYears;
             yearList.ItemSelected += DeselectItem;
+            ToolbarItem item = new ToolbarItem
+            {
+                Text = App.User,
 
+
+            };
+
+            this.ToolbarItems.Add(item);
+            item.Clicked += OnUserDetails;
         }
         public void DeselectItem(object sender, EventArgs e)
         {
@@ -45,7 +53,7 @@ namespace FriskaClient
             var tmpkontroll = from a in MyYears where a.ID.ToString() == IdString select a;
             var kontroll = tmpkontroll.First() as Year;
 
-            var action = await DisplayAlert("Ta Bort?", "Vill du ta bort Året?\n" +kontroll.YearName, "Ja", "Nej");
+            var action = await DisplayAlert("Ta Bort?", "Vill du ta bort År?!" +kontroll.YearName +"\nÄven Kontroller och Svar kommer försvinna!", "Ja", "Nej");
             if (action)
             {
 
@@ -66,7 +74,8 @@ namespace FriskaClient
                 var response = await client.DeleteAsync(_url + Id);
                 if (response.IsSuccessStatusCode)
                 {
-                    this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 1]);
+                    await DisplayAlert("", "År Borttaget", "Ok");
+            
                     Navigation.InsertPageBefore(new YearPage(), this);
                     await Navigation.PopAsync();
                 }
@@ -106,6 +115,12 @@ namespace FriskaClient
             await Navigation.PushAsync(new AdminPage(Id));
 
         }
+        async void OnUserDetails(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new UserDetails());
+        }   
+
+
     }
 }
 

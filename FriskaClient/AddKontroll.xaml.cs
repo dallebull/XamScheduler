@@ -27,7 +27,15 @@ namespace FriskaClient
             InitializeComponent();
             kontrollEntry.Completed += (sender, args) => { tagEntry.Focus(); };
             tagEntry.Completed += (sender, args) => { OnButtonClicked(null, null); };
+            ToolbarItem item = new ToolbarItem
+            {
+                Text = App.User,
 
+
+            };
+
+            this.ToolbarItems.Add(item);
+            item.Clicked += OnUserDetails;
         }
 
         async void OnButtonClicked(object sender, EventArgs args)
@@ -101,8 +109,13 @@ namespace FriskaClient
                 await DisplayAlert("Fel!", "Fyll i alla Fält!", "Ok");
             }
         }
+        async void OnUserDetails(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new UserDetails());
+        }
+
     }
-  
- }
+
+}
      
     

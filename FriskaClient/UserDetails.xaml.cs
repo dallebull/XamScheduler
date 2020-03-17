@@ -39,7 +39,7 @@ namespace FriskaClient
             App.Current.MainPage = new NavigationPage(new LoginPage())
             {
 
-                BarBackgroundColor = Color.FromHex("#2828ff"),
+                BarBackgroundColor = Color.FromHex("#502828ff"),
                 BarTextColor = Color.White
             };
         }
