@@ -1,11 +1,19 @@
-﻿
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:behaviors="clr-namespace:FriskaClient.Behaviors;assembly=FriskaClient"
+                xmlns:local="clr-namespace:FriskaClient"
              mc:Ignorable="d"
-             x:Class="FriskaClient.AddFacit">
+             x:Class="FriskaClient.AddFacit"
+                          x:Key="FriskaClient.YearIDToYearnameConverter">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:YearIDToYearnameConverter x:Key="YearIDToYearnameConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS" Value="0, 20, 0, 0" />
@@ -22,15 +30,21 @@
                TextColor="White" 
                 FontAttributes="Bold"/>
 
-        <!--<Label Text="Kontroll" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
-            <Entry x:Name="kontrollEntry" BackgroundColor="#50FFFFFF" Keyboard="Numeric" VerticalTextAlignment="Center" Placeholder="Kontroll" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+            <Label Text="{Binding YearId, Converter={StaticResource YearIDToYearnameConverter}}"
+               Style="{DynamicResource TitleStyle}"
+               Margin="0, 20"
+               HorizontalTextAlignment="Center" 
+               TextColor="Black"  FontAttributes="Bold"/>
+
+     
+            <Entry x:Name="kontrollEntry" BackgroundColor="#50FFFFFF" Text="{Binding NextKontroll}" Keyboard="Numeric" VerticalTextAlignment="Center" Placeholder="Kontroll" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
             <Entry.Behaviors>
                 <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
             </Entry.Behaviors>      
         </Entry>
 
 
-        <!--<Label Text="Kod" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
+
             <Entry x:Name="tagEntry" BackgroundColor="#50FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="Kod" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
      
             <Entry.Behaviors>

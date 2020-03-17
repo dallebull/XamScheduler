@@ -14,7 +14,7 @@ using Xamarin.Forms.Xaml;
 
 namespace FriskaClient
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+ 
     public partial class EditFacitPage : ContentPage
     {
         static public string furl = App.url + "api/AdminApi/";
@@ -24,24 +24,29 @@ namespace FriskaClient
   
 
         }   
-        public EditFacitPage(int Id)
+        public EditFacitPage(Facit facit)
         {
-            var fm = new FacitViewModel();
-
-            var tmpFacit = fm.AllFacits;
-            var facit = from f in tmpFacit where f.ID == Id select f;
-            var thisfacit = facit.FirstOrDefault() as Facit;
-
             InitializeComponent();
-            this.BindingContext = thisfacit;
+            this.BindingContext = facit;
+            kontrollEntry.Completed += (sender, args) => { tagEntry.Focus(); };
+            tagEntry.Completed += (sender, args) => { OnEditClicked(sender,  args); };
+
 
         }
+
+
         async void OnEditClicked(object sender, EventArgs args)
         {
+  
+            var Id = idEntry.Text;
+            var YearId = YearidEntry.Text;
+
             Facit fc = new Facit();
 
             try
             {
+                fc.YearID = Int32.Parse(YearId);
+                fc.ID = Int32.Parse(Id);
                 fc.KontrollTag = tagEntry.Text.ToUpper();
                 fc.Kontroll = Int32.Parse(kontrollEntry.Text);
             }
@@ -60,13 +65,15 @@ namespace FriskaClient
             //Put Answer on Site
             var content = JsonConvert.SerializeObject(fc);
 
+            var thisUrl = furl + fc.ID;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
             StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
-            var apiAnswer = await client.PutAsync(furl, scontent);
+            var apiAnswer = await client.PutAsync(thisUrl, scontent);
             if (apiAnswer.IsSuccessStatusCode)
             {
+                await DisplayAlert("", "Kontroll Ändrad!", "Ok");
                 this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
-                Navigation.InsertPageBefore(new MainPage(), this);
+                Navigation.InsertPageBefore(new AdminPage(fc.YearID), this);
                 await Navigation.PopAsync();
             }
             else

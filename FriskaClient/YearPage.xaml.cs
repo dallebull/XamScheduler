@@ -66,8 +66,8 @@ namespace FriskaClient
                 var response = await client.DeleteAsync(_url + Id);
                 if (response.IsSuccessStatusCode)
                 {
-             
-                    Navigation.InsertPageBefore(new MainPage(), this);
+                    this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 1]);
+                    Navigation.InsertPageBefore(new YearPage(), this);
                     await Navigation.PopAsync();
                 }
                 else

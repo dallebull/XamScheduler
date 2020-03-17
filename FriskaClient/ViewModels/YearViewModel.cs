@@ -4,16 +4,29 @@ using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using FriskaClient.Models;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace FriskaClient.Model
 {
-    class YearViewModel 
+    class YearViewModel: INotifyPropertyChanged
     {
 
 
         private  ObservableCollection<Year> _allYears = new ObservableCollection<Year>();
-      
-        public  ObservableCollection<Year> AllYears { get { return _allYears; } }
+
+        public ObservableCollection<Year> AllYears
+        {
+            get { return _allYears; }
+            set
+            {
+                if (value != this._allYears)
+                {
+                    this.AllYears = value;
+                    NotifyPropertyChanged();
+                } 
+            } 
+        }
        
         static public string yurl = App.url + "api/YearsApi/";
       
@@ -23,6 +36,14 @@ namespace FriskaClient.Model
 
             FillYearsAsync(App.Auth);
         }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+       
+
         async void FillYearsAsync(string Auth)
         {
            

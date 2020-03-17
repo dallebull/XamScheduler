@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace FriskaClient
@@ -13,10 +14,13 @@ namespace FriskaClient
     {
         static public string furl = App.url + "api/AdminApi/";
         private ObservableCollection<Facit> AllAnswers { get; set; }
+        private ObservableCollection<Year> AllYears { get; set; }
+        public int YearId { get; set; }
 
         public AdminPage()
         {
           
+
             InitializeComponent();
             var yr = new YearViewModel();
             var sv = new FacitViewModel();
@@ -28,15 +32,15 @@ namespace FriskaClient
         }
            public AdminPage(int Id)
         {
-     
             InitializeComponent();
+
+            YearId = Id;
             var yr = new YearViewModel();
             var sv = new FacitViewModel(Id);
             facList.ItemsSource = sv.AllFacits;
             AllAnswers = sv.AllFacits;
-
+            AllYears = yr.AllYears;
             facList.ItemSelected += DeselectItem;
-
 
         }
 
@@ -46,13 +50,14 @@ namespace FriskaClient
         }
         public async void OnAddClicked(object sender, EventArgs args)
         {
-            //await DisplayAlert("Todo", "Nu skulle du kommit till Lägg Till Sidan", "Ok");
-            await Navigation.PushAsync(new AddFacit());
+
+            int NextKontroll = AllAnswers.Count() + 1;
+            await Navigation.PushAsync(new AddFacit(YearId, NextKontroll));
         }
 
         public async void OnYearClicked(object sender, EventArgs args)
         {
-            //await DisplayAlert("Todo", "Nu skulle du kommit till Admin Sidan", "Ok");
+      
             await Navigation.PushAsync(new YearPage());
         }  
         public async void OnEditClicked(object sender, EventArgs args)
@@ -60,8 +65,11 @@ namespace FriskaClient
             var item = (Xamarin.Forms.ImageButton)sender;
             var tmpId = item.CommandParameter;
             int Id = (int)tmpId;
-            await Navigation.PushAsync(new EditFacitPage(Id));
-            //await DisplayAlert("Todo", "Nu skulle du kommit Edit Sidan", "Ok");
+            var tmpfacit = from f in AllAnswers where f.ID == Id select f;
+            Facit facit = tmpfacit.FirstOrDefault();
+
+            await Navigation.PushAsync(new EditFacitPage(facit));
+  
 
         }
         async void OnDelClicked(object sender, EventArgs e)
@@ -69,6 +77,7 @@ namespace FriskaClient
             var item = (Xamarin.Forms.ImageButton)sender;
             var Id = item.CommandParameter;
             var IdString = Id.ToString();
+     
             var tmpkontroll = from a in AllAnswers where a.ID.ToString() == IdString select a;
             var kontroll = tmpkontroll.First() as Facit;
 
@@ -90,8 +99,9 @@ namespace FriskaClient
                 var response = await client.DeleteAsync(furl + Id);
                 if (response.IsSuccessStatusCode)
                 {
+                    await DisplayAlert("", "Kontroll Borttagen", "Ok");
 
-                    Navigation.InsertPageBefore(new AdminPage(), this);
+                    Navigation.InsertPageBefore(new AdminPage(YearId), this);
                     await Navigation.PopAsync();
                 }
                 else

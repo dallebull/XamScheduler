@@ -15,7 +15,7 @@
     <Grid>
     <Image Aspect="AspectFill" Source="wallpaper.png"/>
     <StackLayout Margin="10" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
-        <Label Text="Lägg Till Kontroll"
+        <Label Text="Lägg Till År"
                Style="{DynamicResource TitleStyle}"
                Margin="0, 20"
                HorizontalTextAlignment="Center" 

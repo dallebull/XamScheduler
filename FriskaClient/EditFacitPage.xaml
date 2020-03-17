@@ -10,7 +10,7 @@
         <Grid>
             <Image Aspect="AspectFill" Source="wallpaper.png"/>
             <StackLayout Margin="10" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
-                <Label Text="Lägg Till Kontroll"
+                <Label Text="Redigera Kontroll"
                Style="{DynamicResource TitleStyle}"
                Margin="0, 20"
                HorizontalTextAlignment="Center" 
@@ -18,7 +18,7 @@
                 FontAttributes="Bold"/>
 
                 <!--<Label Text="Kontroll" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
-                <Entry x:Name="kontrollEntry" BackgroundColor="#50FFFFFF" Keyboard="Numeric" VerticalTextAlignment="Center" Placeholder="{Binding Kontroll}" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+                <Entry x:Name="kontrollEntry" Text="{Binding Kontroll}"  BackgroundColor="#50FFFFFF" Keyboard="Numeric" VerticalTextAlignment="Center" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
                     <Entry.Behaviors>
                         <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
                     </Entry.Behaviors>
@@ -26,13 +26,15 @@
 
 
                 <!--<Label Text="Kod" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
-                <Entry x:Name="tagEntry" BackgroundColor="#50FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="{Binding KontrollTag}" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+                <Entry x:Name="tagEntry" BackgroundColor="#50FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Text="{Binding KontrollTag}" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
 
                     <Entry.Behaviors>
                         <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
                     </Entry.Behaviors>
                 </Entry>
 
+                <Entry x:Name="idEntry" IsVisible="false" Text="{Binding ID}"></Entry>
+                <Entry x:Name="YearidEntry" IsVisible="false" Text="{Binding YearID}"></Entry>
 
                 <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="Center">
                     <Button Text="Ändra" FontSize="Large" BackgroundColor="#2828ff" TextColor="White" VerticalOptions="End" HorizontalOptions="Center"   Style="{DynamicResource TitleStyle}" Clicked="OnEditClicked" />

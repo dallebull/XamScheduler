@@ -30,8 +30,9 @@
             </Grid.ColumnDefinitions>
 
             <Image Grid.RowSpan="2" Grid.ColumnSpan="6" Aspect="AspectFill" Source="wallpaper.png"/>
-            
-            <ListView x:Name="facList" ItemsSource="{Binding AllAnswers}" Grid.ColumnSpan="6" HasUnevenRows="True" Margin="10" >
+
+            <ListView x:Name="facList" ItemsSource="{Binding AllFacits}" Grid.ColumnSpan="6" HasUnevenRows="True" Margin="10" >
+       
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell Height="50"  >
@@ -72,7 +73,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
             <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0" Color="#2828ff" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="6"/>
-            <Button Text="Lägg Till Kontroll" BackgroundColor="#2828ff" TextColor="white" VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnAddClicked" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="3" />
+            <Button Text="Lägg Till Kontroll" BackgroundColor="#2828ff" TextColor="white" VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnAddClicked" Grid.Row="1" Grid.Column="0"   CommandParameter="{Binding YearID}" Grid.ColumnSpan="3" />
             <Button Text="Redigera År" BackgroundColor="#2828ff" TextColor="white"  VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnYearClicked" Grid.Row="1" Grid.Column="3"  Grid.ColumnSpan="3" />
         </Grid>
     </ContentPage.Content>

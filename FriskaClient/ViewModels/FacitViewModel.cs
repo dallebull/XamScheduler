@@ -4,10 +4,16 @@ using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using FriskaClient.Models;
+using System.Threading.Tasks;
+using System;
+using System.Windows.Input;
+using Xamarin.Forms;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace FriskaClient.Model
 {
-    class FacitViewModel 
+    class FacitViewModel
     {
         static public string furl = App.url + "api/AdminApi/";
 
@@ -16,18 +22,22 @@ namespace FriskaClient.Model
         public ObservableCollection<Facit> AllFacits { get { return _allFacits; } }
 
       
-        public FacitViewModel()
+        public  FacitViewModel()
         {
-
             FillFacAsync(App.Auth);
-        }    
-        public FacitViewModel(int Id)
-        {
 
-            FillFacAsync(App.Auth, Id);
         }
-        async void FillFacAsync(string Auth)
+        public  FacitViewModel(int Id)
         {
+           
+          FillFacAsync(App.Auth, Id);
+
+        }
+
+
+
+            private async void FillFacAsync(string Auth)
+            {
             List<Facit> Answers = new List<Facit>();
 
             HttpClientHandler clientHandler = new HttpClientHandler
@@ -57,9 +67,9 @@ namespace FriskaClient.Model
                 _allFacits.Add(fac);
 
             }
-
+            
         }
-           async void FillFacAsync(string Auth, int Id)
+        private async void FillFacAsync(string Auth, int Id)
         {
             List<Facit> Answers = new List<Facit>();
 

@@ -21,23 +21,31 @@ namespace FriskaClient
     {
 
         static public string url = App.url + "api/AdminApi/";
-        public AddFacit()
-        {         
-       
-            InitializeComponent();
+
+        public int NextKontroll { get; set; }
+        public int YearId { get; set; }
+        public AddFacit( int YearId, int NextKontroll)
+        {
+            InitializeComponent();        
+            this.YearId = YearId;
+            this.NextKontroll = NextKontroll;
+            this.BindingContext = this;
+        
             kontrollEntry.Completed += (sender, args) => { tagEntry.Focus(); };
             tagEntry.Completed += (sender, args) => { OnButtonClicked(null, null); };
 
-        }
+        }    
+
 
         async void OnButtonClicked(object sender, EventArgs args)
         {
-            Facit ks = new Facit();
+            Facit fc = new Facit();
 
             try
             {
-                ks.KontrollTag = tagEntry.Text.ToUpper();
-                ks.Kontroll = Int32.Parse(kontrollEntry.Text);
+                fc.YearID = YearId;
+                fc.KontrollTag = tagEntry.Text.ToUpper();
+                fc.Kontroll = Int32.Parse(kontrollEntry.Text);
             }
             catch (Exception)
             {
@@ -52,15 +60,17 @@ namespace FriskaClient
             HttpClient client = new HttpClient(clientHandler);                  
      
             //Put Answer on Site
-            var content = JsonConvert.SerializeObject(ks);
+            var content = JsonConvert.SerializeObject(fc);
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
             StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
                 var apiAnswer = await client.PostAsync(url, scontent);
                     if (apiAnswer.IsSuccessStatusCode)
                     {
-                        this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
-                        Navigation.InsertPageBefore(new MainPage(), this);
+                          await DisplayAlert("", "Kontroll Tillagd", "Ok");
+                           this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
+
+                        Navigation.InsertPageBefore(new AdminPage(YearId), this);
                         await Navigation.PopAsync();                     
                     }
                     else

@@ -59,8 +59,9 @@ namespace FriskaClient
                 var apiAnswer = await client.PostAsync(url, scontent);
                     if (apiAnswer.IsSuccessStatusCode)
                     {
-                        this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
-                        Navigation.InsertPageBefore(new MainPage(), this);
+                await DisplayAlert("", "År Tillagt", "Ok");
+                this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
+                        Navigation.InsertPageBefore(new YearPage(), this);
                         await Navigation.PopAsync();                     
                     }
                     else
