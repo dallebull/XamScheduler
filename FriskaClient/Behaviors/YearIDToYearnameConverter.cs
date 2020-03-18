@@ -15,21 +15,27 @@ namespace FriskaClient
     {
 
         private static ObservableCollection<Year> _allYears = new ObservableCollection<Year>();
+        private static ObservableCollection<Year> _thisYear = new ObservableCollection<Year>();
+
 
 
         public ObservableCollection<Year> AllYears { get { return _allYears; } }
+        public ObservableCollection<Year> ThisYear { get { return _thisYear; } }
+
+        public YearIDToYearnameConverter()
+        {
+       
+        
+            
+        }
 
         public  object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (_allYears.Count == 0)
-            {
-                var vm = new YearViewModel();
-                _allYears = vm.AllYears;
 
-            }
+            var vm = new YearViewModel((int)value);
+            _thisYear = vm.ThisYear;
 
-
-            var yearname = from y in _allYears where y.ID == (int)value select y.YearName;
+            var yearname = from y in _thisYear where y.ID == (int)value select y.YearName;
             List<string> yearlist = yearname.ToList();
 
             return yearlist.FirstOrDefault();
@@ -42,5 +48,7 @@ namespace FriskaClient
         {
             throw new NotImplementedException();
         }
+
+      
     }
 }

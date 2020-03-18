@@ -15,7 +15,8 @@ namespace FriskaClient.Model
 {
     class FacitViewModel
     {
-        static public string furl = App.url + "api/AdminApi/";
+        static public string furl = App.url + "api/AdminApi/GetFacits";
+        static public string aurl = App.url + "api/AdminApi/GetFacit";
 
         private ObservableCollection<Facit> _allFacits = new ObservableCollection<Facit>();
   

@@ -14,7 +14,7 @@ namespace FriskaClient
     {
         public string furl = App.url + "api/AdminApi/";
         private ObservableCollection<Facit> AllAnswers { get; set; }
-        private ObservableCollection<Year> AllYears { get; set; }
+        //private ObservableCollection<Year> AllYears { get; set; }
         public int YearId { get; set; }
 
         public FacitPage()
@@ -22,7 +22,7 @@ namespace FriskaClient
           
 
             InitializeComponent();
-            var yr = new YearViewModel();
+            //var yr = new YearViewModel();
             var sv = new FacitViewModel();
             facList.ItemsSource = sv.AllFacits;
             AllAnswers = sv.AllFacits;
@@ -43,11 +43,11 @@ namespace FriskaClient
             InitializeComponent();
 
             YearId = Id;
-            var yr = new YearViewModel();
+            //var yr = new YearViewModel();
             var sv = new FacitViewModel(Id);
             facList.ItemsSource = sv.AllFacits;
             AllAnswers = sv.AllFacits;
-            AllYears = yr.AllYears;
+            //AllYears = yr.AllYears;
             facList.ItemSelected += DeselectItem;
             ToolbarItem item = new ToolbarItem
             {
@@ -112,12 +112,12 @@ namespace FriskaClient
 
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
 
-                var response = await client.DeleteAsync(furl + Id);
+                var response = await client.DeleteAsync(furl + "DeleteFacit/" + Id);
                 if (response.IsSuccessStatusCode)
                 {
                     await DisplayAlert("", "Kontroll Borttagen", "Ok");
 
-                    Navigation.InsertPageBefore(new AdminPage(YearId), this);
+                    Navigation.InsertPageBefore(new FacitPage(YearId), this);
                     await Navigation.PopAsync();
                 }
                 else

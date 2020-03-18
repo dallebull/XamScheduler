@@ -39,7 +39,7 @@ namespace FriskaClient.Model
                 }
             }
         }        
-        private static bool _isAdmin;
+        private  bool _isAdmin;
         public bool IsAdmin
         {
             get
@@ -51,6 +51,22 @@ namespace FriskaClient.Model
                 if (_isAdmin != value)
                 {
                     _isAdmin = value;
+                    OnPropertyChanged();
+                }
+            }
+        }    
+        private  bool _emailConfirmed;
+        public bool EmailConfirmed
+        {
+            get
+            {
+                return _emailConfirmed;
+            }
+            set
+            {
+                if (_emailConfirmed != value)
+                {
+                    _emailConfirmed = value;
                     OnPropertyChanged();
                 }
             }
@@ -215,6 +231,7 @@ namespace FriskaClient.Model
                     JoinDate = item.JoinDate;
                     PhoneNumber = item.PhoneNumber;
                     Namn = item.Namn;
+                    EmailConfirmed = item.EmailConfirmed;
 
                 }
                 var myurl = aurl + "?Id=" + Id;
@@ -249,7 +266,7 @@ namespace FriskaClient.Model
                 // Pass the handler to httpclient(from you are calling api)
                 HttpClient client = new HttpClient(clientHandler);
 
-                var tmpurl = url + Email;
+                var tmpurl = uurl + "?Email=" + Email;
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Auth);
                 var apiResponse = await client.GetStringAsync(tmpurl);
 
@@ -262,11 +279,12 @@ namespace FriskaClient.Model
                     Id = item.Id;
                     Age = item.Age;
                     CorrectAnswers = item.CorrectAnswers.ToString();
-                    Email = item.Email;
+                    this.Email = item.Email;
                     Gender = item.Gender;
                     JoinDate = item.JoinDate;
                     PhoneNumber = item.PhoneNumber;
                     Namn = item.Namn;
+                    EmailConfirmed = item.EmailConfirmed;
 
                 }
                 var myurl = aurl + "?Id=" + Email;

@@ -65,6 +65,7 @@ namespace FriskaClient.Model
                         JoinDate = item.JoinDate,
                     PhoneNumber = item.PhoneNumber,
                     Namn = item.Namn,
+                        EmailConfirmed = item.EmailConfirmed
 
                 };
                     var myurl = aurl + "?Id=" + item.Email;

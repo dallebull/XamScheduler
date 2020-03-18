@@ -17,9 +17,16 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -27,12 +34,11 @@
          
             </Grid.ColumnDefinitions>
 
-            <Image Grid.RowSpan="3" Aspect="AspectFill" Source="wallpaper.png"/>
+            <Image Grid.RowSpan="10" Aspect="AspectFill" Source="wallpaper.png"/>
 
            
-              <Button Text="Kontroller" BackgroundColor="#002828ff" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnKontrollClicked" Grid.Row="0" Grid.Column="0"   />
-            <Button Text="År" BackgroundColor="#002828ff" TextColor="White"  VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnYearClicked" Grid.Row="1" Grid.Column="0"  />
-            <Button Text="Användare" BackgroundColor="#002828ff" TextColor="White"  VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnUsersClicked" Grid.Row="2" Grid.Column="0"  />
+                <Button Text="Kontroller" BackgroundColor="#502828ff" TextColor="White"  VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Clicked="OnYearClicked" Grid.Row="0" Grid.Column="0"  />
+            <Button Text="Användare" BackgroundColor="#502828ff" TextColor="White"  VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Clicked="OnAllUsersClicked" Grid.Row="1" Grid.Column="0"  />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

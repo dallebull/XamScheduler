@@ -19,8 +19,8 @@ namespace FriskaClient
 
         public AdminPage()
         {
-          
 
+            YearIDToYearnameConverter yr = new YearIDToYearnameConverter();
             InitializeComponent();
 
             ToolbarItem item = new ToolbarItem
@@ -33,7 +33,9 @@ namespace FriskaClient
             this.ToolbarItems.Add(item);
             item.Clicked += OnUserDetails;
         }
-           public AdminPage(int Id)
+
+
+        public AdminPage(int Id)
         {
             InitializeComponent();
 
@@ -49,10 +51,7 @@ namespace FriskaClient
             item.Clicked += OnUserDetails;
         }
 
-        public void DeselectItem(object sender, EventArgs e)
-        {
-            ((ListView)sender).SelectedItem = null;
-        }
+
         public async void OnKontrollClicked(object sender, EventArgs args)
         {
 

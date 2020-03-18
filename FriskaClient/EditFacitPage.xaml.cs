@@ -77,7 +77,7 @@ namespace FriskaClient
             //Put Answer on Site
             var content = JsonConvert.SerializeObject(fc);
 
-            var thisUrl = furl + fc.ID;
+            var thisUrl = furl + "PutFacit/" +fc.ID;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
             StringContent scontent = new StringContent(content.ToString(), Encoding.UTF8, "application/json");
             var apiAnswer = await client.PutAsync(thisUrl, scontent);
@@ -85,7 +85,7 @@ namespace FriskaClient
             {
                 await DisplayAlert("", "Kontroll Ändrad!", "Ok");
                 this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
-                Navigation.InsertPageBefore(new AdminPage(fc.YearID), this);
+                Navigation.InsertPageBefore(new FacitPage(fc.YearID), this);
                 await Navigation.PopAsync();
             }
             else

@@ -21,6 +21,7 @@ namespace FriskaClient
     {
 
         static public string url = App.url + "api/YearsApi/";
+   
         public AddYear()
         {
 

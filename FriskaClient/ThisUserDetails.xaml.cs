@@ -27,13 +27,29 @@ namespace FriskaClient
             this.ToolbarItems.Add(item);
             item.Clicked += OnAdminClicked;
 
+        }   
+        public ThisUserDetails(string Email)
+        {
+            InitializeComponent();
+
+            this.BindingContext = new UserViewModel(Email);
+            ToolbarItem item = new ToolbarItem
+            {
+                Text = "Admin",
+
+
+            };
+
+            this.ToolbarItems.Add(item);
+            item.Clicked += OnAdminClicked;
+
         }
 
 
         public async void OnAdminClicked(object sender, EventArgs args)
         {
-            //await DisplayAlert("Todo", "Nu skulle du kommit till Admin Sidan", "Ok");
-            await Navigation.PushAsync(new YearPage());
+     
+            await Navigation.PushAsync(new AdminPage());
         }
     }
 }

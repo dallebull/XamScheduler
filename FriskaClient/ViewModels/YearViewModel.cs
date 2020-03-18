@@ -13,7 +13,8 @@ namespace FriskaClient.Model
     {
 
 
-        private  ObservableCollection<Year> _allYears = new ObservableCollection<Year>();
+        private  ObservableCollection<Year> _allYears = new ObservableCollection<Year>(); 
+        private  ObservableCollection<Year> _thisYear = new ObservableCollection<Year>();
 
         public ObservableCollection<Year> AllYears
         {
@@ -22,19 +23,36 @@ namespace FriskaClient.Model
             {
                 if (value != this._allYears)
                 {
-                    this.AllYears = value;
+                    this._allYears = value;
+                    NotifyPropertyChanged();
+                } 
+            } 
+        }
+        public ObservableCollection<Year> ThisYear
+        {
+            get { return _thisYear; }
+            set
+            {
+                if (value != this._thisYear)
+                {
+                    this._thisYear = value;
                     NotifyPropertyChanged();
                 } 
             } 
         }
        
         static public string yurl = App.url + "api/YearsApi/";
-      
-   
+        static public string tyurl = App.url + "api/YearsApi/GetYear/";
+
         public YearViewModel()
         {
 
             FillYearsAsync(App.Auth);
+        } 
+        public YearViewModel(int Id)
+        {
+
+            FillYearsAsync(App.Auth, Id);
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -73,6 +91,40 @@ namespace FriskaClient.Model
                 };
           
                     _allYears.Add(year);
+               
+
+            }
+
+        }
+        async void FillYearsAsync(string Auth, int Id)
+        {
+           
+            List<Year> Answers = new List<Year>();
+
+            HttpClientHandler clientHandler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+            };
+
+            // Pass the handler to httpclient(from you are calling api)
+            HttpClient client = new HttpClient(clientHandler);
+
+
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Auth);
+            var apiResponse = await client.GetStringAsync(tyurl + Id);
+            Answers = JsonConvert.DeserializeObject<List<Year>>(apiResponse);
+
+            foreach (var item in Answers)
+            {
+                Year year = new Year
+                {
+                    ID = item.ID,         
+                    YearName = item.YearName,
+                    YearID = item.YearID,
+                };
+          
+                    _thisYear.Add(year);
                
 
             }

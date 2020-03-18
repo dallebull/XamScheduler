@@ -98,7 +98,7 @@ namespace FriskaClient
                 var response = await client.PostAsync(_url, scontent);
                 if (response.IsSuccessStatusCode)
                 {
-                  
+                    await DisplayAlert("", "Kontroll Tillagd", "Ok");
                     Navigation.InsertPageBefore(new MainPage(), this);
                     await Navigation.PopAsync();
                 }
@@ -149,17 +149,14 @@ namespace FriskaClient
                 };
 
                 // Pass the handler to httpclient(from you are calling api)
-                HttpClient client = new HttpClient(clientHandler)
-                {
-                    Timeout = TimeSpan.FromMinutes(10)
-                };
-
+                HttpClient client = new HttpClient(clientHandler);
+        
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Auth);
           
-                var response = await client.DeleteAsync(_url + Id);
+                var response = await client.DeleteAsync(_url + "/DeleteKontrollSvar/" + Id);
                 if (response.IsSuccessStatusCode)
                 {
-                    await DisplayAlert("Fel!", "Kontroll Tillagd!", "Ok");
+                    await DisplayAlert("", "Kontroll Borttagen", "Ok");
                     Navigation.InsertPageBefore(new MainPage(), this);
                     await Navigation.PopAsync();
                 }

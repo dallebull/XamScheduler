@@ -26,7 +26,7 @@ namespace FriskaClient
             AllaUsers = vm.AllUsers;
 
 
-            usrList.ItemSelected += DeselectItem;
+            usrList.ItemSelected += OnThisUserDetails;
 
 
             ToolbarItem item = new ToolbarItem
@@ -55,9 +55,19 @@ namespace FriskaClient
             await Navigation.PushAsync(new UserDetails());
         }
 
-        async void OnThisUserDetails(object sender, EventArgs e)
+        public void OnThisUserDetails(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ThisUserDetails());         
+            if (((ListView)sender).SelectedItem != null)
+            {
+
+           
+            var selectedItem = ((ListView)sender).SelectedItem as User;
+            string Email = selectedItem.Email.ToString();
+            ((ListView)sender).SelectedItem = null;
+       
+            Navigation.PushAsync(new ThisUserDetails(Email));
+
+            }
         }
     }
 }

@@ -8,8 +8,9 @@
 
     
     <ContentPage.Resources>
-        <ResourceDictionary>
-            <local:BoolToJaNejConverter x:Key="BoolToJaNejConverter" />
+        <ResourceDictionary>  
+                    <local:AdminToImagePathConverter x:Key="AdminToImagePathConverter" />
+                    <local:MsgToImagePathConverter x:Key="MsgToImagePathConverter" /> 
         </ResourceDictionary>
     </ContentPage.Resources>
     
@@ -57,9 +58,12 @@
 
                 <Label Text="Medlem Sedan"  FontAttributes="Bold" TextColor="White" Grid.Row="7" Grid.Column="0"  Margin="10,0,0,0"/>
                 <Label Text="{Binding JoinDate,StringFormat='{0:yyyy-MM-dd}'}"  FontAttributes="Bold" TextColor="White" Grid.Row="7" Grid.Column="1"/>
-   
-                <Label Text="Admin"  FontAttributes="Bold" TextColor="White" Grid.Row="8" Grid.Column="0"  Margin="10,0,0,0"/>
-                <Label Text="{Binding IsAdmin, Converter={StaticResource BoolToJaNejConverter}}"  FontAttributes="Bold" TextColor="White" Grid.Row="8" Grid.Column="1"/>
+    
+                    <Label Text="Validerat Epost:"  FontAttributes="Bold" TextColor="White" Grid.Row="8" Grid.Column="0"  Margin="10,0,0,0"/>
+                <Image Source="{Binding EmailConfirmed, Converter={StaticResource MsgToImagePathConverter}}"  HorizontalOptions="Start"  VerticalOptions="Center" Grid.Row="8" Grid.Column="1"/>
+
+                <Label Text="Admin"  FontAttributes="Bold" TextColor="White" Grid.Row="9" Grid.Column="0" IsVisible="{Binding IsAdmin}" Margin="10,0,0,0"/>
+                <Image Source="{Binding IsAdmin, Converter={StaticResource AdminToImagePathConverter}}" IsVisible="{Binding IsAdmin}" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="9" Grid.Column="1"/>
 
 
             </Grid>

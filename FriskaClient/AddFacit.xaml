@@ -45,7 +45,7 @@
 
 
 
-            <Entry x:Name="tagEntry" BackgroundColor="#50000000" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="Kod" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+            <Entry x:Name="tagEntry" BackgroundColor="#50FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="Kod" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
      
             <Entry.Behaviors>
                 <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
