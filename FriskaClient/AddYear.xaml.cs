@@ -31,13 +31,18 @@ namespace FriskaClient
 
             ToolbarItem item = new ToolbarItem
             {
-                Text = App.User,
+                Text = "Admin",
 
 
             };
 
             this.ToolbarItems.Add(item);
             item.Clicked += OnUserDetails;
+        }
+        public async void OnAdminClicked(object sender, EventArgs args)
+        {
+            //await DisplayAlert("Todo", "Nu skulle du kommit till Admin Sidan", "Ok");
+            await Navigation.PushAsync(new AdminPage());
         }
 
         async void OnButtonClicked(object sender, EventArgs args)

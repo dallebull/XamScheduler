@@ -24,19 +24,19 @@ namespace FriskaClient
             InitializeComponent();
             //var yr = new YearViewModel();
             var sv = new FacitViewModel();
-            facList.ItemsSource = sv.AllFacits;
-            AllAnswers = sv.AllFacits;
+            facList.ItemsSource = FacitViewModel.AllFacits;
+            AllAnswers = FacitViewModel.AllFacits;
 
-            facList.ItemSelected += DeselectItem;
+            facList.ItemSelected += OnEditClicked;
             ToolbarItem item = new ToolbarItem
             {
-                Text = App.User,
+                Text = "Admin",
 
 
             };
 
             this.ToolbarItems.Add(item);
-            item.Clicked += OnUserDetails;
+            item.Clicked += OnAdminClicked;
         }
            public FacitPage(int Id)
         {
@@ -45,10 +45,10 @@ namespace FriskaClient
             YearId = Id;
             //var yr = new YearViewModel();
             var sv = new FacitViewModel(Id);
-            facList.ItemsSource = sv.AllFacits;
-            AllAnswers = sv.AllFacits;
+            facList.ItemsSource = FacitViewModel.AllFacits;
+            AllAnswers = FacitViewModel.AllFacits;
             //AllYears = yr.AllYears;
-            facList.ItemSelected += DeselectItem;
+            facList.ItemSelected += OnEditClicked;
             ToolbarItem item = new ToolbarItem
             {
                 Text = "Admin",
@@ -81,17 +81,21 @@ namespace FriskaClient
       
             await Navigation.PushAsync(new YearPage());
         }  
-        public async void OnEditClicked(object sender, EventArgs args)
-        {
-            var item = (Xamarin.Forms.ImageButton)sender;
-            var tmpId = item.CommandParameter;
-            int Id = (int)tmpId;
-            var tmpfacit = from f in AllAnswers where f.ID == Id select f;
-            Facit facit = tmpfacit.FirstOrDefault();
-
-            await Navigation.PushAsync(new EditFacitPage(facit));
   
 
+        public void OnEditClicked(object sender, EventArgs e)
+        {
+            if (((ListView)sender).SelectedItem != null)
+            {
+                var selectedItem = ((ListView)sender).SelectedItem as Facit;
+                int Id = selectedItem.ID;
+                ((ListView)sender).SelectedItem = null;
+                var tmpfacit = from f in AllAnswers where f.ID == Id select f;
+                Facit facit = tmpfacit.FirstOrDefault();
+
+                 Navigation.PushAsync(new EditFacitPage(facit));
+                
+            }
         }
         async void OnDelClicked(object sender, EventArgs e)
         {
@@ -123,7 +127,7 @@ namespace FriskaClient
                     await DisplayAlert("", "Kontroll Borttagen", "Ok");
 
                     Navigation.InsertPageBefore(new FacitPage(YearId), this);
-                    await Navigation.PopAsync();
+              
                 }
                 else
                 {

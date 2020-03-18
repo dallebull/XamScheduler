@@ -14,16 +14,20 @@
     
     <Grid>
     <Image Aspect="AspectFill" Source="wallpaper.png"/>
-    <StackLayout Margin="10" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
-        <Label Text="Lägg Till Kontroll"
+
+        <StackLayout Margin="10" HorizontalOptions="Center" VerticalOptions="Start" >
+            <Label Text="Registrera Kontroll"
                Style="{DynamicResource TitleStyle}"
                Margin="0, 20"
                HorizontalTextAlignment="Center" 
                TextColor="White" 
                 FontAttributes="Bold"/>
 
-        <!--<Label Text="Kontroll" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
-            <Entry x:Name="kontrollEntry" BackgroundColor="#50FFFFFF" Keyboard="Numeric" VerticalTextAlignment="Center" Placeholder="Kontroll" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+
+
+            <StackLayout Margin="10" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="50" >
+                <!--<Label Text="Kontroll" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
+            <Entry x:Name="kontrollEntry" BackgroundColor="#00FFFFFF" Keyboard="Numeric" VerticalTextAlignment="Center" Placeholder="#" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
             <Entry.Behaviors>
                 <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
             </Entry.Behaviors>      
@@ -31,7 +35,7 @@
 
 
         <!--<Label Text="Kod" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
-            <Entry x:Name="tagEntry" BackgroundColor="#50FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="Kod" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+            <Entry x:Name="tagEntry" BackgroundColor="#00FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="Kod" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
      
             <Entry.Behaviors>
                 <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
@@ -39,6 +43,7 @@
         </Entry>
         
 
+    </StackLayout>
     </StackLayout>
      
 

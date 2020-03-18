@@ -19,8 +19,9 @@ namespace FriskaClient
 
         public AdminPage()
         {
-
-            YearIDToYearnameConverter yr = new YearIDToYearnameConverter();
+            var vm = new YearViewModel();
+            var fc = new FacitViewModel();
+   
             InitializeComponent();
 
             ToolbarItem item = new ToolbarItem
@@ -38,7 +39,8 @@ namespace FriskaClient
         public AdminPage(int Id)
         {
             InitializeComponent();
-
+            var vm = new YearViewModel();
+            var fc = new FacitViewModel();
 
             ToolbarItem item = new ToolbarItem
             {

@@ -63,7 +63,6 @@
                                            Grid.Row="0" Grid.Column="2"/>
 
 
-                                    <ImageButton Source="edit.png" VerticalOptions="Center" WidthRequest="36" BackgroundColor="#00000000" HeightRequest="36" Aspect="AspectFit" HorizontalOptions="Center" CommandParameter="{Binding ID}" Clicked="OnEditClicked" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3"/>
                                     <ImageButton Source="delete.png" VerticalOptions="Center" BackgroundColor="#00000000" WidthRequest="36" HeightRequest="30"  Aspect="AspectFit" HorizontalOptions="Center" CommandParameter="{Binding ID}" Clicked="OnDelClicked" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="3"/>
 
                                     </StackLayout>

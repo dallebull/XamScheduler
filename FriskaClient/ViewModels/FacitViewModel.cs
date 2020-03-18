@@ -18,26 +18,47 @@ namespace FriskaClient.Model
         static public string furl = App.url + "api/AdminApi/GetFacits";
         static public string aurl = App.url + "api/AdminApi/GetFacit";
 
-        private ObservableCollection<Facit> _allFacits = new ObservableCollection<Facit>();
+        private static ObservableCollection<Facit> _allFacits = new ObservableCollection<Facit>();
   
-        public ObservableCollection<Facit> AllFacits { get { return _allFacits; } }
+        public static ObservableCollection<Facit> AllFacits { get { return _allFacits; } }
 
-      
-        public  FacitViewModel()
+        private static DateTime LastUpdate { get; set; } = DateTime.Now;
+
+        public FacitViewModel()
         {
-            FillFacAsync(App.Auth);
+            DateTime nextUpdate = LastUpdate.AddSeconds(1);
+            var Update = DateTime.Compare(nextUpdate, DateTime.Now);
+
+            if (Update < 0)
+            {
+                LastUpdate = DateTime.Now;
+                _allFacits.Clear();
+
+                FillFacAsync(App.Auth);
+            }
+
+           
 
         }
         public  FacitViewModel(int Id)
         {
-           
-          FillFacAsync(App.Auth, Id);
+            DateTime nextUpdate = LastUpdate.AddSeconds(1);
+            var Update = DateTime.Compare(nextUpdate, DateTime.Now);
+
+            if (Update < 0)
+            {
+                LastUpdate = DateTime.Now;
+                _allFacits.Clear();
+
+                FillFacAsync(App.Auth, Id);
+            }
+
 
         }
 
 
 
-            private async void FillFacAsync(string Auth)
+        private async void FillFacAsync(string Auth)
             {
             List<Facit> Answers = new List<Facit>();
 

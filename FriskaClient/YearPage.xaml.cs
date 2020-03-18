@@ -23,8 +23,8 @@ namespace FriskaClient
             InitializeComponent();
 
             var vm = new YearViewModel();
-            yearList.ItemsSource = vm.AllYears;
-            MyYears = vm.AllYears;
+            yearList.ItemsSource = YearViewModel.AllYears;
+            MyYears = YearViewModel.AllYears; 
             yearList.ItemSelected += OnEditClicked;
             ToolbarItem item = new ToolbarItem
             {
@@ -38,8 +38,9 @@ namespace FriskaClient
         }
         public async void OnAdminClicked(object sender, EventArgs args)
         {
-            //await DisplayAlert("Todo", "Nu skulle du kommit till Admin Sidan", "Ok");
+         
             await Navigation.PushAsync(new AdminPage());
+      
         }
 
         async void OnAddButtonClicked(object sender, EventArgs args)
@@ -55,7 +56,7 @@ namespace FriskaClient
             var tmpkontroll = from a in MyYears where a.ID.ToString() == IdString select a;
             var kontroll = tmpkontroll.First() as Year;
 
-            var action = await DisplayAlert("Ta Bort?", "Vill du ta bort År?!" +kontroll.YearName +"\nÄven Kontroller och Svar kommer försvinna!", "Ja", "Nej");
+            var action = await DisplayAlert("Ta Bort?", "Vill du ta bort År: " +kontroll.YearName +"?!\nÄven Kontroller och Svar kommer försvinna!", "Ja", "Nej");
             if (action)
             {
 

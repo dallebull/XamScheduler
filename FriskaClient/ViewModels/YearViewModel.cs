@@ -10,23 +10,23 @@ using System;
 
 namespace FriskaClient.Model
 {
-    class YearViewModel: INotifyPropertyChanged
+    class YearViewModel
     {
 
 
         private static ObservableCollection<Year> _allYears = new ObservableCollection<Year>();
 
-        private static DateTime LastUpdate  { get; set; }
+        private static DateTime LastUpdate { get; set; } = DateTime.Now;
  
-    public ObservableCollection<Year> AllYears
+    public static ObservableCollection<Year> AllYears
         {
             get { return _allYears; }
             set
             {
                 if (value != _allYears)
                 {
-                    this.AllYears = value;
-                    NotifyPropertyChanged();
+                    AllYears = value;
+                   
                 } 
             } 
         }
@@ -36,24 +36,22 @@ namespace FriskaClient.Model
    
         public YearViewModel()
         {
+            DateTime nextUpdate = LastUpdate.AddSeconds(1);
+            var Update = DateTime.Compare(nextUpdate, DateTime.Now);
 
-            FillYearsAsync(App.Auth);
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-       
-
-        async void FillYearsAsync(string Auth)
-        {
-
-            if (LastUpdate.CompareTo(DateTime.Now.AddSeconds(10)) > 0)
+            if (Update < 0)
             {
                 LastUpdate = DateTime.Now;
                 _allYears.Clear();
+
+                FillYearsAsync(App.Auth);
+            }
+
+        }
+       
+        async void FillYearsAsync(string Auth)
+        {
+        
             List<Year> Answers = new List<Year>();
 
             HttpClientHandler clientHandler = new HttpClientHandler
@@ -84,7 +82,7 @@ namespace FriskaClient.Model
 
             }
             }
-        }
+        
 
     } 
 
