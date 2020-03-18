@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using FriskaClient.Models;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System;
 
 namespace FriskaClient.Model
 {
@@ -13,14 +14,16 @@ namespace FriskaClient.Model
     {
 
 
-        private  ObservableCollection<Year> _allYears = new ObservableCollection<Year>();
+        private static ObservableCollection<Year> _allYears = new ObservableCollection<Year>();
 
-        public ObservableCollection<Year> AllYears
+        private static DateTime LastUpdate  { get; set; }
+ 
+    public ObservableCollection<Year> AllYears
         {
             get { return _allYears; }
             set
             {
-                if (value != this._allYears)
+                if (value != _allYears)
                 {
                     this.AllYears = value;
                     NotifyPropertyChanged();
@@ -46,7 +49,11 @@ namespace FriskaClient.Model
 
         async void FillYearsAsync(string Auth)
         {
-           
+
+            if (LastUpdate.CompareTo(DateTime.Now.AddSeconds(10)) > 0)
+            {
+                LastUpdate = DateTime.Now;
+                _allYears.Clear();
             List<Year> Answers = new List<Year>();
 
             HttpClientHandler clientHandler = new HttpClientHandler
@@ -76,7 +83,7 @@ namespace FriskaClient.Model
                
 
             }
-
+            }
         }
 
     } 
