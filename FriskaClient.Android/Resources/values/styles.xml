@@ -20,8 +20,8 @@
       <!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
       <item name="windowActionModeOverlay">true</item>
-      <!--<item name="actionMenuTextColor">#000000</item>
-      <item name="android:actionMenuTextColor">#000000</item>-->
+      <item name="actionMenuTextColor">#FFFFFF</item>
+      <item name="android:actionMenuTextColor">#FFFFFF</item>
     </style>
 
     <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">

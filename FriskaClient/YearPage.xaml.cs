@@ -28,13 +28,18 @@ namespace FriskaClient
             yearList.ItemSelected += DeselectItem;
             ToolbarItem item = new ToolbarItem
             {
-                Text = App.User,
+                Text = "Admin",
 
 
             };
 
             this.ToolbarItems.Add(item);
-            item.Clicked += OnUserDetails;
+            item.Clicked += OnAdminClicked;
+        }
+        public async void OnAdminClicked(object sender, EventArgs args)
+        {
+            //await DisplayAlert("Todo", "Nu skulle du kommit till Admin Sidan", "Ok");
+            await Navigation.PushAsync(new AdminPage());
         }
         public void DeselectItem(object sender, EventArgs e)
         {
@@ -112,12 +117,13 @@ namespace FriskaClient
         {
             var item = (Xamarin.Forms.ImageButton)sender;
             var Id = (int)item.CommandParameter;
-            await Navigation.PushAsync(new AdminPage(Id));
+            await Navigation.PushAsync(new FacitPage(Id));
 
         }
-        async void OnUserDetails(object sender, EventArgs e)
+     
+        async void OnAllUsersButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new UserDetails());
+            await Navigation.PushAsync(new AllUsers());
         }   
 
 

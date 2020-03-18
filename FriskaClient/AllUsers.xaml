@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:FriskaClient"
+             x:Class="FriskaClient.AllUsers">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:AdminToImagePathConverter x:Key="AdminToImagePathConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems/>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" /> 
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.RowSpan="2" Grid.ColumnSpan="5" Aspect="AspectFill" Source="wallpaper.png"/>
+            
+            <ListView x:Name="usrList" ItemsSource="{Binding AllUsers}" Grid.ColumnSpan="5" HasUnevenRows="false" Margin="10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="120"  >
+                            <StackLayout BackgroundColor="#50FFFFFF" Orientation="Vertical"  Padding="5,0,0,0">
+                                <StackLayout Orientation="Horizontal"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    
+                                        <StackLayout Orientation="Vertical"  VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">
+                                    
+
+                                            <Label Text="{Binding Namn}"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="StartAndExpand"
+                                                   FontAttributes="Bold"
+                                                   TextColor="White"
+                                                   Grid.Row="0" Grid.Column="0"/>
+                                    
+                                            <Label Text="{Binding Email}"
+                                                   VerticalOptions="Center" 
+                                                   HorizontalOptions="StartAndExpand"
+                                                   FontAttributes="Bold"                                           
+                                                   TextColor="White" 
+                                                   Grid.Row="0" Grid.Column="0"/>
+                                    
+                                        </StackLayout>
+                                    <StackLayout Orientation="Vertical"  VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">
+
+                                        <Label Text="{Binding JoinDate,StringFormat='{0:yyyy-MM-dd}'}"
+                                           VerticalOptions="CenterAndExpand" 
+                                           HorizontalOptions="CenterAndExpand"
+                                           FontAttributes="Bold"                                           
+                                           TextColor="White" 
+                                           Grid.Row="0" Grid.Column="1"/>
+
+                                        <Label Text="{Binding Age}"
+                                           VerticalOptions="CenterAndExpand" 
+                                           HorizontalOptions="CenterAndExpand"
+                                           FontAttributes="Bold"                                           
+                                           TextColor="White" 
+                                           Grid.Row="0" Grid.Column="1"/>
+
+
+                                    </StackLayout>
+                                    
+                                    <Image Source="{Binding IsAdmin, Converter={StaticResource AdminToImagePathConverter}}"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"
+                                       WidthRequest="15" HeightRequest="12"
+                                       Grid.Row="0" Grid.Column="2" />
+
+
+                                    <ImageButton Source="info.png" VerticalOptions="CenterAndExpand" BackgroundColor="#00000000" WidthRequest="36" HeightRequest="30"  Aspect="AspectFit" HorizontalOptions="Center" CommandParameter="{Binding Email}" Clicked="OnThisUserDetails" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="3"/>
+
+                                
+
+                                
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
+

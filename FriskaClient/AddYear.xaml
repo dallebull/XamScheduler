@@ -19,13 +19,13 @@
                Style="{DynamicResource TitleStyle}"
                Margin="0, 20"
                HorizontalTextAlignment="Center" 
-               TextColor="Black" 
+               TextColor="White" 
                 FontAttributes="Bold"/>
 
 
 
         <!--<Label Text="Kod" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
-            <Entry x:Name="yearEntry" BackgroundColor="#50FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="År" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+            <Entry x:Name="yearEntry" BackgroundColor="#50FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="År" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
      
           
         </Entry>
@@ -35,7 +35,7 @@
     </StackLayout>
         <StackLayout Orientation="Vertical" VerticalOptions="End" HorizontalOptions="FillAndExpand" BackgroundColor="#502828ff">
 
-            <Button Text="Lägg Till" BackgroundColor="#002828ff" TextColor="white" VerticalOptions="End" HorizontalOptions="FillAndExpand" Clicked="OnButtonClicked"  />
+            <Button Text="Lägg Till" BackgroundColor="#002828ff" TextColor="White" VerticalOptions="End" HorizontalOptions="FillAndExpand" Clicked="OnButtonClicked"  />
 
         </StackLayout>
     </Grid>

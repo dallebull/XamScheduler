@@ -21,6 +21,7 @@ namespace FriskaClient.Model
         }
 
         static public string url = App.url + "api/Account/GetUser";
+        static public string uurl = App.url + "api/Account/GetThisUser";
         static public string aurl = App.url + "api/Account/IsAdmin";
         private string _id;
         public string Id
@@ -176,6 +177,11 @@ namespace FriskaClient.Model
         {
 
             LoadUser(App.Auth);
+        }   
+        public UserViewModel(string Email)
+        {
+
+            LoadUser(App.Auth, Email);
         }
 
         public async void LoadUser(string Auth)
@@ -200,6 +206,7 @@ namespace FriskaClient.Model
 
                 foreach (var item in user)
                 {
+                   
                     Id = item.Id;
                     Age = item.Age;
                     CorrectAnswers = item.CorrectAnswers.ToString();
@@ -211,6 +218,58 @@ namespace FriskaClient.Model
 
                 }
                 var myurl = aurl + "?Id=" + Id;
+                StringContent scontent = new StringContent("?Id=" +Id, Encoding.UTF8, "application/json");
+                var roleAnswer = await client.PostAsync(myurl, scontent);
+                if (roleAnswer.IsSuccessStatusCode)
+                {
+                    IsAdmin = true;
+                }
+                else
+                {
+                    IsAdmin = false;
+                }
+            }
+            catch (Exception)
+            {
+
+
+            }
+
+        }
+            public async void LoadUser(string Auth, string Email)
+        {
+
+            try
+            {
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+
+                // Pass the handler to httpclient(from you are calling api)
+                HttpClient client = new HttpClient(clientHandler);
+
+                var tmpurl = url + Email;
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Auth);
+                var apiResponse = await client.GetStringAsync(tmpurl);
+
+
+                var user = JsonConvert.DeserializeObject<List<JsonUser.RootObject>>(apiResponse);
+
+                foreach (var item in user)
+                {
+                   
+                    Id = item.Id;
+                    Age = item.Age;
+                    CorrectAnswers = item.CorrectAnswers.ToString();
+                    Email = item.Email;
+                    Gender = item.Gender;
+                    JoinDate = item.JoinDate;
+                    PhoneNumber = item.PhoneNumber;
+                    Namn = item.Namn;
+
+                }
+                var myurl = aurl + "?Id=" + Email;
                 StringContent scontent = new StringContent("?Id=" +Id, Encoding.UTF8, "application/json");
                 var roleAnswer = await client.PostAsync(myurl, scontent);
                 if (roleAnswer.IsSuccessStatusCode)

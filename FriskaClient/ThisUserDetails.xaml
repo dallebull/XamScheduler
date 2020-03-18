@@ -2,14 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:FriskaClient"
-             x:Class="FriskaClient.UserDetails"
+             x:Class="FriskaClient.ThisUserDetails"
              x:Key="FriskaClient.BoolToValueConverter">
  
 
     
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:BoolToStringConverter x:Key="BooleanToStringConverter" FalseValue="Nej" TrueValue="Ja" />
+            <local:BoolToJaNejConverter x:Key="BoolToJaNejConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     
@@ -57,15 +57,9 @@
 
                 <Label Text="Medlem Sedan"  FontAttributes="Bold" TextColor="White" Grid.Row="7" Grid.Column="0"  Margin="10,0,0,0"/>
                 <Label Text="{Binding JoinDate,StringFormat='{0:yyyy-MM-dd}'}"  FontAttributes="Bold" TextColor="White" Grid.Row="7" Grid.Column="1"/>
-
-                <!--<Label Text="Admin"  FontAttributes="Bold" TextColor="White" Grid.Row="8" Grid.Column="0"  Margin="10,0,0,0"/>
-                <Label Text="{Binding IsAdmin, Converter={StaticResource BooleanToStringConverter}}"  FontAttributes="Bold" TextColor="White" Grid.Row="8" Grid.Column="1"/>-->
-
-                <StackLayout Orientation="Horizontal" BackgroundColor="#502828ff" VerticalOptions="EndAndExpand" HorizontalOptions="Fill" Grid.ColumnSpan="2" Grid.RowSpan="25">
-                   
-                    <Button Text="Admin" IsVisible="{Binding IsAdmin}" BackgroundColor="#002828ff" TextColor="White" VerticalOptions="CenterAndExpand" Grid.Row="25" Grid.Column="0" Grid.ColumnSpan="2"  HorizontalOptions="CenterAndExpand" Clicked="OnAdminClicked"/>
-
-                </StackLayout>
+   
+                <Label Text="Admin"  FontAttributes="Bold" TextColor="White" Grid.Row="8" Grid.Column="0"  Margin="10,0,0,0"/>
+                <Label Text="{Binding IsAdmin, Converter={StaticResource BoolToJaNejConverter}}"  FontAttributes="Bold" TextColor="White" Grid.Row="8" Grid.Column="1"/>
 
 
             </Grid>
