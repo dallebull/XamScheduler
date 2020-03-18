@@ -51,15 +51,20 @@ namespace FriskaClient
             facList.ItemSelected += DeselectItem;
             ToolbarItem item = new ToolbarItem
             {
-                Text = App.User,
+                Text = "Admin",
 
 
             };
 
             this.ToolbarItems.Add(item);
-            item.Clicked += OnUserDetails;
+            item.Clicked += OnAdminClicked;
         }
 
+        public async void OnAdminClicked(object sender, EventArgs args)
+        {
+            //await DisplayAlert("Todo", "Nu skulle du kommit till Admin Sidan", "Ok");
+            await Navigation.PushAsync(new AdminPage());
+        }
         public void DeselectItem(object sender, EventArgs e)
         {
             ((ListView)sender).SelectedItem = null;
@@ -148,10 +153,7 @@ namespace FriskaClient
             }
 
         }
-        async void OnUserDetails(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new UserDetails());
-        }
+
 
     }
 }
