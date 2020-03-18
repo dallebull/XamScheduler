@@ -19,11 +19,11 @@
                Style="{DynamicResource TitleStyle}"
                Margin="0, 20"
                HorizontalTextAlignment="Center" 
-               TextColor="Black" 
+               TextColor="White" 
                 FontAttributes="Bold"/>
 
         <!--<Label Text="Kontroll" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
-            <Entry x:Name="kontrollEntry" BackgroundColor="#50FFFFFF" Keyboard="Numeric" VerticalTextAlignment="Center" Placeholder="Kontroll" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+            <Entry x:Name="kontrollEntry" BackgroundColor="#50FFFFFF" Keyboard="Numeric" VerticalTextAlignment="Center" Placeholder="Kontroll" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
             <Entry.Behaviors>
                 <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
             </Entry.Behaviors>      
@@ -31,7 +31,7 @@
 
 
         <!--<Label Text="Kod" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
-            <Entry x:Name="tagEntry" BackgroundColor="#50FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="Kod" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+            <Entry x:Name="tagEntry" BackgroundColor="#50FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="Kod" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
      
             <Entry.Behaviors>
                 <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
@@ -44,7 +44,7 @@
 
         <StackLayout Orientation="Vertical" VerticalOptions="End" HorizontalOptions="FillAndExpand" BackgroundColor="#502828ff">
 
-            <Button Text="Lägg Till" BackgroundColor="#002828ff" TextColor="white" VerticalOptions="End" HorizontalOptions="FillAndExpand" Clicked="OnButtonClicked"  />
+            <Button Text="Lägg Till" BackgroundColor="#002828ff" TextColor="White" VerticalOptions="End" HorizontalOptions="FillAndExpand" Clicked="OnButtonClicked"  />
 
         </StackLayout>
  

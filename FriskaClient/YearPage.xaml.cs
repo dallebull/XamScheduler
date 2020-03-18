@@ -17,7 +17,7 @@ namespace FriskaClient
     {
         private ObservableCollection<Year> MyYears { get; set; } 
 
-         readonly string  _url = App.url + "api/YearsApi/";
+         readonly string  _url = App.url + "api/YearsApi/DeleteYear/";
         public YearPage()
         {
             InitializeComponent();
@@ -25,21 +25,23 @@ namespace FriskaClient
             var vm = new YearViewModel();
             yearList.ItemsSource = vm.AllYears;
             MyYears = vm.AllYears;
-            yearList.ItemSelected += DeselectItem;
+            yearList.ItemSelected += OnEditClicked;
             ToolbarItem item = new ToolbarItem
             {
-                Text = App.User,
+                Text = "Admin",
 
 
             };
 
             this.ToolbarItems.Add(item);
-            item.Clicked += OnUserDetails;
+            item.Clicked += OnAdminClicked;
         }
-        public void DeselectItem(object sender, EventArgs e)
+        public async void OnAdminClicked(object sender, EventArgs args)
         {
-            ((ListView)sender).SelectedItem = null;
+            //await DisplayAlert("Todo", "Nu skulle du kommit till Admin Sidan", "Ok");
+            await Navigation.PushAsync(new AdminPage());
         }
+
         async void OnAddButtonClicked(object sender, EventArgs args)
         {
             await Navigation.PushAsync(new AddYear());
@@ -108,16 +110,24 @@ namespace FriskaClient
 
         }
 
-    async void OnEditClicked(object sender, EventArgs e)
-        {
-            var item = (Xamarin.Forms.ImageButton)sender;
-            var Id = (int)item.CommandParameter;
-            await Navigation.PushAsync(new AdminPage(Id));
 
-        }
-        async void OnUserDetails(object sender, EventArgs e)
+
+        public void OnEditClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new UserDetails());
+            if (((ListView)sender).SelectedItem != null)
+            {
+                var selectedItem = ((ListView)sender).SelectedItem as Year;
+                int Id = selectedItem.ID;
+                ((ListView)sender).SelectedItem = null;
+
+                Navigation.PushAsync(new FacitPage(Id));
+
+            }
+        }
+
+        async void OnAllUsersButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AllUsers());
         }   
 
 

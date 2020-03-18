@@ -5,6 +5,7 @@
              x:Class="FriskaClient.AdminPage"
              x:Key="FriskaClient.YearIDToYearnameConverter">
 
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:YearIDToYearnameConverter x:Key="YearIDToYearnameConverter" />
@@ -16,65 +17,28 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="9*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+           
          
             </Grid.ColumnDefinitions>
 
-            <Image Grid.RowSpan="2" Grid.ColumnSpan="6" Aspect="AspectFill" Source="wallpaper.png"/>
+            <Image Grid.RowSpan="10" Aspect="AspectFill" Source="wallpaper.png"/>
 
-            <ListView x:Name="facList" ItemsSource="{Binding AllFacits}" Grid.ColumnSpan="6" HasUnevenRows="True" Margin="10" >
-       
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell Height="50"  >
-                                <StackLayout BackgroundColor="#50FFFFFF" Orientation="Vertical" Padding="10">
-                                    <StackLayout Orientation="Horizontal"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-
-
-                                        <Label Text="{Binding Kontroll}"
-                                           VerticalOptions="Center"
-                                             HorizontalOptions="CenterAndExpand"
-                                             FontAttributes="Bold"
-                                             TextColor="Black"
-                                             Grid.Row="0" Grid.Column="0"/>
-
-                                        <Label Text="{Binding KontrollTag}"
-                                           VerticalOptions="Center" 
-                                           HorizontalOptions="CenterAndExpand"
-                                           FontAttributes="Bold"                                           
-                                           TextColor="Black" 
-                                           Grid.Row="0" Grid.Column="1"/>
-
-                                        <Label Text="{Binding YearID, Converter={StaticResource YearIDToYearnameConverter}}"
-                                           VerticalOptions="Center" 
-                                           HorizontalOptions="CenterAndExpand"
-                                           FontAttributes="Bold"                                           
-                                           TextColor="Black" 
-                                           Grid.Row="0" Grid.Column="2"/>
-
-
-                                    <ImageButton Source="edit.png" VerticalOptions="Center" WidthRequest="36" BackgroundColor="#00FFFFFF" HeightRequest="36" Aspect="AspectFit" HorizontalOptions="Center" CommandParameter="{Binding ID}" Clicked="OnEditClicked" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3"/>
-                                    <ImageButton Source="delete.png" VerticalOptions="Center" BackgroundColor="#00FFFFFF" WidthRequest="36" HeightRequest="30"  Aspect="AspectFit" HorizontalOptions="Center" CommandParameter="{Binding ID}" Clicked="OnDelClicked" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="3"/>
-
-                                    </StackLayout>
-                                </StackLayout>
-                            </ViewCell>
-
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0" Color="#502828ff" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="6"/>
-            <Button Text="Lägg Till Kontroll" BackgroundColor="#002828ff" TextColor="white" VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnAddClicked" Grid.Row="1" Grid.Column="0"   CommandParameter="{Binding YearID}" Grid.ColumnSpan="3" />
-            <Button Text="Redigera År" BackgroundColor="#002828ff" TextColor="white"  VerticalOptions="Center" HorizontalOptions="Center" Clicked="OnYearClicked" Grid.Row="1" Grid.Column="3"  Grid.ColumnSpan="3" />
+           
+                <Button Text="Kontroller" BackgroundColor="#502828ff" TextColor="White"  VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Clicked="OnYearClicked" Grid.Row="0" Grid.Column="0"  />
+            <Button Text="Användare" BackgroundColor="#502828ff" TextColor="White"  VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Clicked="OnAllUsersClicked" Grid.Row="1" Grid.Column="0"  />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

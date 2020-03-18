@@ -81,7 +81,7 @@ namespace FriskaClient
                           await DisplayAlert("", "Kontroll Tillagd", "Ok");
                            this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
 
-                        Navigation.InsertPageBefore(new AdminPage(YearId), this);
+                        Navigation.InsertPageBefore(new FacitPage(YearId), this);
                         await Navigation.PopAsync();                     
                     }
                     else

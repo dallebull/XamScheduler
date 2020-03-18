@@ -100,7 +100,7 @@ namespace FriskaClient
                     !string.IsNullOrWhiteSpace(user.PhoneNumber) &&
                     user.PhoneNumber.Count() >= 10 &&
                     !string.IsNullOrWhiteSpace(user.Gender) &&
-                    (user.Age >= 1900 && user.Age <= 2020));
+                    (user.Age >= 1900 && user.Age <= (int)DateTime.Now.Year));
             }
             return false;
         }

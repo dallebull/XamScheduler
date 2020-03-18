@@ -5,7 +5,7 @@
 	<Application.Resources>
         <Style TargetType="NavigationPage">
             <Setter Property="BarBackgroundColor" Value="#502828ff"></Setter>
-            <Setter Property="BarTextColor" Value="BLack"></Setter>
+            <Setter Property="BarTextColor" Value="White"></Setter>
         </Style>
 
         <!-- Application resource dictionary -->

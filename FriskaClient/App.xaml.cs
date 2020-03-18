@@ -28,7 +28,7 @@ namespace FriskaClient
                 {
 				
                     BarBackgroundColor = Color.FromHex("#502828ff"),
-                    BarTextColor = Color.Black
+                    BarTextColor = Color.White
                 };
       
             }
@@ -38,7 +38,7 @@ namespace FriskaClient
                 {
 				
                     BarBackgroundColor = Color.FromHex("#502828ff"),
-                    BarTextColor = Color.Black
+                    BarTextColor = Color.White
                 };
            
             }

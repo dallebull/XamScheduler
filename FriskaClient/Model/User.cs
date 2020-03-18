@@ -18,9 +18,11 @@ namespace FriskaClient.Model
 
         public string Password { get; set; }
         public string Namn { get; set; }
-        public string ConfirmPassword { get; set; }
+        public string ConfirmPassword { get; set; }  
+        public bool IsAdmin { get; set; }
+        public bool EmailConfirmed { get; set; }
 
-
+        
 
         public DateTime JoinDate { get; set; } = DateTime.Now.Date;
     }
