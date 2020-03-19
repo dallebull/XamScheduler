@@ -38,7 +38,6 @@ namespace FriskaClient.Model
         {
             DateTime nextUpdate = LastUpdate.AddSeconds(1);
             var Update = DateTime.Compare(nextUpdate, DateTime.Now);
-
             if (Update < 0)
             {
                 LastUpdate = DateTime.Now;

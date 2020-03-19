@@ -1,4 +1,4 @@
-using Syncfusion.XForms.iOS.Buttons;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,6 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-using Syncfusion.SfCalendar.XForms.iOS;
 
 namespace FriskaClient.iOS
 {
@@ -26,9 +25,8 @@ namespace FriskaClient.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
 global::Xamarin.Forms.Forms.Init();
-SfButtonRenderer.Init();
-            
-			SfCalendarRenderer.Init();
+
+
 			
 			LoadApplication(new App());
 

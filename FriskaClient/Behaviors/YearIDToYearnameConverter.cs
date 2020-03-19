@@ -24,16 +24,14 @@ namespace FriskaClient
 
         public YearIDToYearnameConverter()
         {
-            
+            new YearViewModel();
         }
 
         public  object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (AllYears.Count() == 0)
-            {
-
-                _allYears = YearViewModel.AllYears;
-            }
+        
+             _allYears = YearViewModel.AllYears;
+        
           
 
             var yearname = from y in AllYears where y.ID == (int)value select y.YearName;

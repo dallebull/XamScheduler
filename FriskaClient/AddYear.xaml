@@ -30,7 +30,7 @@
 
 
                 <!--<Label Text="Kod" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
-            <Entry x:Name="yearEntry" BackgroundColor="#00FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="År" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+                <Entry x:Name="yearEntry" BackgroundColor="#00FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="År" PlaceholderColor="White" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
      
           
         </Entry>

@@ -24,7 +24,7 @@
           
             <StackLayout Margin="10" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="50" >
                 <!--<Label Text="Kontroll" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
-                <Entry x:Name="kontrollEntry" Text="{Binding Kontroll}"  BackgroundColor="#00FFFFFF" Keyboard="Numeric" VerticalTextAlignment="Center" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+                    <Entry x:Name="kontrollEntry" Text="{Binding Kontroll}"  BackgroundColor="#00FFFFFF" Keyboard="Numeric" VerticalTextAlignment="Center"  PlaceholderColor="White" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
                     <Entry.Behaviors>
                         <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
                     </Entry.Behaviors>
@@ -32,7 +32,7 @@
 
 
                 <!--<Label Text="Kod" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
-                <Entry x:Name="tagEntry" BackgroundColor="#00FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Text="{Binding KontrollTag}" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+                    <Entry x:Name="tagEntry" BackgroundColor="#00FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Text="{Binding KontrollTag}" TextColor="White"  PlaceholderColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
 
                     <Entry.Behaviors>
                         <behaviors:EntryLengthValidatorBehavior MaxLength="2" />

@@ -60,7 +60,8 @@ namespace FriskaClient
         
             await Navigation.PushAsync(new FacitPage());
         }
-
+        
+ 
         public async void OnYearClicked(object sender, EventArgs args)
         {
       

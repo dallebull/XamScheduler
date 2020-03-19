@@ -41,8 +41,8 @@
                HorizontalTextAlignment="Center" 
                TextColor="White"  FontAttributes="Bold"/>
 
-     
-            <Entry x:Name="kontrollEntry" BackgroundColor="#00FFFFFF" Text="{Binding NextKontroll}" Keyboard="Numeric" VerticalTextAlignment="Center" Placeholder="#" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+
+                <Entry x:Name="kontrollEntry" BackgroundColor="#00FFFFFF" Text="{Binding NextKontroll}" Keyboard="Numeric" VerticalTextAlignment="Center" Placeholder="#"  PlaceholderColor="White" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
             <Entry.Behaviors>
                 <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
             </Entry.Behaviors>      
