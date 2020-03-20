@@ -29,11 +29,7 @@ namespace FriskaClient
 
         public  object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (YearViewModel.AllYears.Count() == 0)
-            {
-                System.Threading.Thread.Sleep(100);
-            }
-            
+                      
             var yearname = from y in YearViewModel.AllYears where y.ID == (int)value select y.YearName;
             List<string> yearlist = yearname.ToList();
             if (yearlist.Count() > 0)

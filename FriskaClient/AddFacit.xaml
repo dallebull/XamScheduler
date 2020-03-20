@@ -35,11 +35,11 @@
             <StackLayout Margin="10" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="50" >
 
 
-                <Label Text="{Binding YearId, Converter={StaticResource YearIDToYearnameConverter}}"
+                <!--<Label Text="{Binding YearId, Converter={StaticResource YearIDToYearnameConverter}}"
                Style="{DynamicResource TitleStyle}"
                Margin="0, 20"
                HorizontalTextAlignment="Center" 
-               TextColor="White"  FontAttributes="Bold"/>
+               TextColor="White"  FontAttributes="Bold"/>-->
 
                
                 <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">

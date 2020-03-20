@@ -28,6 +28,8 @@ namespace FriskaClient
  
         public AddFacit( int YearId, int NextKontroll)
         {
+         
+
             InitializeComponent();
             this.YearId = YearId;
             this.NextKontroll = NextKontroll;
@@ -78,11 +80,19 @@ namespace FriskaClient
                 var apiAnswer = await client.PostAsync(url, scontent);
                     if (apiAnswer.IsSuccessStatusCode)
                     {
-                          await DisplayAlert("", "Kontroll Tillagd", "Ok");
-                           this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
+                        var anotherone =   await DisplayAlert("", "Kontroll Tillagd", "Lägg till en till" ,"Tillbaka");
+                        if (anotherone)
+                        {
+                            await Navigation.PushAsync(new AddFacit(YearId, fc.Kontroll +1));
+                        }
 
-                        Navigation.InsertPageBefore(new FacitPage(YearId), this);
-                        await Navigation.PopAsync();                     
+                        else
+                        {
+                            this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
+
+                            Navigation.InsertPageBefore(new FacitPage(YearId), this);
+                            await Navigation.PopAsync();
+                        }                     
                     }
                     else
                     {

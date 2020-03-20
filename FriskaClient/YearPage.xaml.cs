@@ -21,7 +21,8 @@ namespace FriskaClient
         public YearPage()
         {
             InitializeComponent();
-
+       
+            var fc = new FacitViewModel();
             var vm = new YearViewModel();
             yearList.ItemsSource = YearViewModel.AllYears;
             MyYears = YearViewModel.AllYears; 
