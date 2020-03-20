@@ -28,12 +28,13 @@
             <StackLayout Margin="10" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="50" >
 
 
+         
+                <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">
+                    <behaviors:CustomEntry x:Name="yearEntry" BackgroundColor="#00FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="År" PlaceholderColor="Gray" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                </Frame>
+             
 
-                <!--<Label Text="Kod" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
-                <Entry x:Name="yearEntry" BackgroundColor="#00FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="År" PlaceholderColor="White" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
-     
-          
-        </Entry>
+                  
 
 
         

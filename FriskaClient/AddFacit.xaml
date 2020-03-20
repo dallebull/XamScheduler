@@ -5,8 +5,7 @@
              xmlns:behaviors="clr-namespace:FriskaClient.Behaviors;assembly=FriskaClient"
                 xmlns:local="clr-namespace:FriskaClient"
              mc:Ignorable="d"
-             x:Class="FriskaClient.AddFacit"
-                          x:Key="FriskaClient.YearIDToYearnameConverter">
+             x:Class="FriskaClient.AddFacit">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -35,30 +34,34 @@
 
             <StackLayout Margin="10" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="50" >
 
+
                 <Label Text="{Binding YearId, Converter={StaticResource YearIDToYearnameConverter}}"
                Style="{DynamicResource TitleStyle}"
                Margin="0, 20"
                HorizontalTextAlignment="Center" 
                TextColor="White"  FontAttributes="Bold"/>
 
-
-                <Entry x:Name="kontrollEntry" BackgroundColor="#00FFFFFF" Text="{Binding NextKontroll}" Keyboard="Numeric" VerticalTextAlignment="Center" Placeholder="#"  PlaceholderColor="White" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+               
+                <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">
+                    <behaviors:CustomEntry x:Name="kontrollEntry" BackgroundColor="#00FFFFFF" Text="{Binding NextKontroll}" Keyboard="Numeric" VerticalTextAlignment="Center" Placeholder="#"  PlaceholderColor="Gray" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
             <Entry.Behaviors>
                 <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
             </Entry.Behaviors>      
-        </Entry>
-
-
-
-            <Entry x:Name="tagEntry" BackgroundColor="#00FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="Kod" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+        </behaviors:CustomEntry>
+                </Frame>
+            
+            
+                <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">
+                    <behaviors:CustomEntry x:Name="tagEntry" BackgroundColor="#00FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Placeholder="Kod" TextColor="Black" PlaceholderColor="Gray"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
      
             <Entry.Behaviors>
                 <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
             </Entry.Behaviors>
-        </Entry>
+        </behaviors:CustomEntry>
+                </Frame>
+         
 
-
-        </StackLayout>
+            </StackLayout>
         </StackLayout>
         <StackLayout Orientation="Vertical" VerticalOptions="End" HorizontalOptions="FillAndExpand" BackgroundColor="#502828ff">
 

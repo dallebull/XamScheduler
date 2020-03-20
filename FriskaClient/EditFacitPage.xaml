@@ -23,23 +23,25 @@
 
           
             <StackLayout Margin="10" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="50" >
-                <!--<Label Text="Kontroll" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
-                    <Entry x:Name="kontrollEntry" Text="{Binding Kontroll}"  BackgroundColor="#00FFFFFF" Keyboard="Numeric" VerticalTextAlignment="Center"  PlaceholderColor="White" TextColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+                 
+                    <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">
+                        <behaviors:CustomEntry x:Name="kontrollEntry" Text="{Binding Kontroll}"  BackgroundColor="#00FFFFFF" Keyboard="Numeric" VerticalTextAlignment="Center"  PlaceholderColor="Grey" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
                     <Entry.Behaviors>
                         <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
                     </Entry.Behaviors>
-                </Entry>
-
-
-                <!--<Label Text="Kod" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>-->
-                    <Entry x:Name="tagEntry" BackgroundColor="#00FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Text="{Binding KontrollTag}" TextColor="White"  PlaceholderColor="White"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
+                </behaviors:CustomEntry>
+                    </Frame>
+                
+                    <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">
+                        <behaviors:CustomEntry x:Name="tagEntry" BackgroundColor="#00FFFFFF" Keyboard="Chat" VerticalTextAlignment="Center" Text="{Binding KontrollTag}" TextColor="Black"  PlaceholderColor="Grey"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
 
                     <Entry.Behaviors>
                         <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
                     </Entry.Behaviors>
-                </Entry>
-
-                <Entry x:Name="idEntry" IsVisible="false" Text="{Binding ID}"></Entry>
+                </behaviors:CustomEntry>
+                    </Frame>
+             
+                        <Entry x:Name="idEntry" IsVisible="false" Text="{Binding ID}"></Entry>
                 <Entry x:Name="YearidEntry" IsVisible="false" Text="{Binding YearID}"></Entry>
 
                 </StackLayout>

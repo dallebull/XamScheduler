@@ -25,13 +25,13 @@ namespace FriskaClient
 
         public int NextKontroll { get; set; }
         public int YearId { get; set; }
+ 
         public AddFacit( int YearId, int NextKontroll)
         {
-            InitializeComponent();        
+            InitializeComponent();
             this.YearId = YearId;
             this.NextKontroll = NextKontroll;
-            this.BindingContext = this;
-
+            BindingContext = this;
             ToolbarItem item = new ToolbarItem
             {
                 Text = App.User,

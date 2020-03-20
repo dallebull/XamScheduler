@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FriskaClient.SignUpPage">
+             x:Class="FriskaClient.SignUpPage"
+               xmlns:behaviors="clr-namespace:FriskaClient.Behaviors;assembly=FriskaClient">
     <ContentPage.Content>
 
         <Grid>
@@ -13,17 +14,29 @@
          
             <StackLayout  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"  Margin="60, 0 , 60, 0" >
                 <!-- top controls -->
-                <Label Text="Registrera Konto" FontSize="Large" FontAttributes="Bold" TextColor="White" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />    
-
-                <Entry x:Name="userEntry"  HorizontalTextAlignment="Center" Placeholder="Namn" BackgroundColor="#50FFFFFF" Margin="0,0,0,10"  />
-                    <Entry x:Name="emailEntry" Placeholder="Epost"  Keyboard="Email" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF" Margin="0,0,0,10" />
-                    <Entry x:Name="genderEntry" Placeholder="Kön"  Keyboard="Chat" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF" Margin="0,0,0,10"/>
-                    <Entry x:Name="ageEntry"  Keyboard="Chat" Placeholder="Födelseår" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF" Margin="0,0,0,10"/>
-                    <Entry x:Name="numberEntry"  Keyboard="Numeric" Placeholder="TelefonNummer" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF" Margin="0,0,0,10"/>
-                    <Entry x:Name="passwordEntry" Placeholder="Lösenord" IsPassword="true" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF" Margin="0,0,0,10"/>
-                    <Entry x:Name="confirmPasswordEntry" Placeholder="Verifiera Lösenord" IsPassword="true" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF" Margin="0,0,0,0" />                
-     
-            </StackLayout>
+                <Label Text="Registrera Konto" FontSize="Large" FontAttributes="Bold" TextColor="White" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
+                    <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">
+                        <behaviors:CustomEntry  x:Name="userEntry"  HorizontalTextAlignment="Center" Placeholder="Namn" BackgroundColor="#50FFFFFF"  />
+                    </Frame>
+                    <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">
+                    <behaviors:CustomEntry x:Name="emailEntry" Placeholder="Epost"  Keyboard="Email" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF"  />
+                    </Frame>
+                    <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">
+                        <behaviors:CustomEntry x:Name="genderEntry" Placeholder="Kön"  Keyboard="Chat" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF"/>
+                    </Frame>
+                    <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">
+                        <behaviors:CustomEntry x:Name="ageEntry"  Keyboard="Chat" Placeholder="Födelseår" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF" />
+                    </Frame>
+                    <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">
+                        <behaviors:CustomEntry x:Name="numberEntry"  Keyboard="Numeric" Placeholder="Telefon Nummer" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF"/>
+                    </Frame>
+                    <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">
+                        <behaviors:CustomEntry x:Name="passwordEntry" Placeholder="Lösenord" IsPassword="true" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF" />
+                    </Frame>
+                    <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">
+                        <behaviors:CustomEntry x:Name="confirmPasswordEntry" Placeholder="Verifiera Lösenord" IsPassword="true" HorizontalTextAlignment="Center" BackgroundColor="#50FFFFFF" />
+                    </Frame>
+                </StackLayout>
 
             <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand"  HorizontalOptions="Center">
 

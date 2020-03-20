@@ -22,7 +22,7 @@ namespace FriskaClient
           
 
             InitializeComponent();
-            //var yr = new YearViewModel();
+    
             var sv = new FacitViewModel();
             facList.ItemsSource = FacitViewModel.AllFacits;
             AllAnswers = FacitViewModel.AllFacits;
@@ -43,11 +43,11 @@ namespace FriskaClient
             InitializeComponent();
 
             YearId = Id;
-            //var yr = new YearViewModel();
+       
             var sv = new FacitViewModel(Id);
             facList.ItemsSource = FacitViewModel.AllFacits;
             AllAnswers = FacitViewModel.AllFacits;
-            //AllYears = yr.AllYears;
+    
             facList.ItemSelected += OnEditClicked;
             ToolbarItem item = new ToolbarItem
             {
@@ -88,7 +88,7 @@ namespace FriskaClient
             if (((ListView)sender).SelectedItem != null)
             {
                 var selectedItem = ((ListView)sender).SelectedItem as Facit;
-                int Id = selectedItem.ID;
+                int Id = selectedItem.ID;                 
                 ((ListView)sender).SelectedItem = null;
                 var tmpfacit = from f in AllAnswers where f.ID == Id select f;
                 Facit facit = tmpfacit.FirstOrDefault();

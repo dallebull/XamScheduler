@@ -7,6 +7,8 @@ using FriskaClient.Models;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FriskaClient.Model
 {
@@ -17,8 +19,8 @@ namespace FriskaClient.Model
         private static ObservableCollection<Year> _allYears = new ObservableCollection<Year>();
 
         private static DateTime LastUpdate { get; set; } = DateTime.Now;
- 
-    public static ObservableCollection<Year> AllYears
+        public string ThisYear { get; set; }
+        public static ObservableCollection<Year> AllYears
         {
             get { return _allYears; }
             set
@@ -47,7 +49,44 @@ namespace FriskaClient.Model
             }
 
         }
-       
+         
+      public async void GetYearName(int Id)
+        {
+            var Auth = App.Auth;
+            List<Year> Answers = new List<Year>();
+
+            HttpClientHandler clientHandler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+            };
+
+            // Pass the handler to httpclient(from you are calling api)
+            HttpClient client = new HttpClient(clientHandler);
+
+
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Auth);
+            var apiResponse = await client.GetStringAsync(yurl);
+            Answers = JsonConvert.DeserializeObject<List<Year>>(apiResponse);
+
+            foreach (var item in Answers)
+            {
+                Year year = new Year
+                {
+                    ID = item.ID,         
+                    YearName = item.YearName,
+                    YearID = item.YearID,
+                };
+          
+                    _allYears.Add(year);             
+
+            }
+            var tmpreturnstring = from y in _allYears where y.ID == Id select y.YearName;
+            var areturnstring = tmpreturnstring.ToList();
+             ThisYear = areturnstring.First();
+      
+        }
+
         async void FillYearsAsync(string Auth)
         {
         
@@ -80,7 +119,7 @@ namespace FriskaClient.Model
                
 
             }
-            }
+         }
         
 
     } 

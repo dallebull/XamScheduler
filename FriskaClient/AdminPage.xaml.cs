@@ -18,8 +18,8 @@ namespace FriskaClient
 
         public AdminPage()
         {
-            var vm = new YearViewModel();
-            var fc = new FacitViewModel();
+            //var vm = new YearViewModel();
+            //var fc = new FacitViewModel();
    
             InitializeComponent();
 
