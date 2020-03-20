@@ -14,8 +14,14 @@ namespace FriskaClient.Behaviors
             typeof(CustomEntry),
             Color.Gray);
 
+
         // Gets or sets BorderColor value
-        public Color BorderColor
+        public Color NewBackgroundColor
+        {
+            get { return (Color)GetValue(BackgroundColorProperty); }
+            set { SetValue(BackgroundColorProperty, value); }
+        }
+            public Color BorderColor
         {
             get { return (Color)GetValue(BorderColorProperty); }
             set { SetValue(BorderColorProperty, value); }
@@ -62,5 +68,7 @@ namespace FriskaClient.Behaviors
             get { return (bool)GetValue(IsCurvedCornersEnabledProperty); }
             set { SetValue(IsCurvedCornersEnabledProperty, value); }
         }
+
+  
     }
 }
