@@ -4,7 +4,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FriskaClient.LoginPage">
+             x:Class="FriskaClient.LoginPage"
+    xmlns:local="clr-namespace:FriskaClient.Behaviors">
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Registrera" Clicked="OnSignUpButtonClicked" />
     </ContentPage.ToolbarItems>
@@ -31,10 +33,51 @@
 
                 <StackLayout Margin="80" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Grid.Row="0" Grid.Column="1">
                     <!--<Label Text="Email" VerticalTextAlignment="Center" FontSize="Large" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="White"/>-->
-                    <Entry x:Name="EmailnameEntry" Keyboard="Email" BackgroundColor="#50FFFFFF" VerticalTextAlignment="Center" Placeholder="Epost" HorizontalTextAlignment="Center" HorizontalOptions="Fill" FontAttributes="Bold"  Margin="0,0,0,20" />
+                    <local:CustomEntry
+                         x:Name="EmailnameEntry"
+                                CornerRadius="18"
+                                IsCurvedCornersEnabled="True"
+                                BorderColor="BlueViolet"  
+                                FontSize="17"
+                                HeightRequest="40"
+                                PlaceholderColor="Gray"
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                WidthRequest="100"
+                                Keyboard="Email"
+                                BackgroundColor="#50FFFFFF" 
+                                VerticalTextAlignment="Center" 
+                                Placeholder="Epost" 
+                                HorizontalTextAlignment="Center" 
+                                HorizontalOptions="Fill"  
+                                Margin="0,0,0,20"/>
+
+                    <!--<Entry x:Name="EmailnameEntry" Keyboard="Email" BackgroundColor="#50FFFFFF" VerticalTextAlignment="Center" Placeholder="Epost" HorizontalTextAlignment="Center" HorizontalOptions="Fill" FontAttributes="Bold"  Margin="0,0,0,20" />-->
                     
                     <!--<Label Text="Lösenord" VerticalTextAlignment="Center" FontSize="Large" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="White"/>-->
-                    <Entry x:Name="passwordEntry"  IsPassword="true"   VerticalTextAlignment="Center" BackgroundColor="#50FFFFFF" Placeholder="Lösenord" HorizontalTextAlignment="Center" HorizontalOptions="Fill" FontAttributes="Bold" />
+
+                    <local:CustomEntry
+                         x:Name="passwordEntry"
+                                CornerRadius="18"
+                                IsCurvedCornersEnabled="True"
+                                BorderColor="BlueViolet"  
+                                FontSize="17"
+                                HeightRequest="40"
+                                PlaceholderColor="Gray"
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                WidthRequest="100"
+                                Keyboard="Email"
+                                BackgroundColor="#50FFFFFF" 
+                                VerticalTextAlignment="Center" 
+                                Placeholder="Lösenord" 
+                                HorizontalTextAlignment="Center" 
+                                HorizontalOptions="Fill"  
+                                Margin="0,0,0,20"
+                                IsPassword="true"/>
+
+
+                    <!--<Entry x:Name="passwordEntry"  IsPassword="true"   VerticalTextAlignment="Center" BackgroundColor="#50FFFFFF" Placeholder="Lösenord" HorizontalTextAlignment="Center" HorizontalOptions="Fill" FontAttributes="Bold" />-->
                     <Label x:Name="messageLabel" VerticalOptions="End" HorizontalOptions="CenterAndExpand" />
                 </StackLayout>
 
