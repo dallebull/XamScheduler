@@ -30,9 +30,7 @@ namespace FriskaClient
             ToolbarItem item = new ToolbarItem
             {
                 Text = "Admin",
-
-
-            };
+            }; 
 
             this.ToolbarItems.Add(item);
             item.Clicked += OnAdminClicked;

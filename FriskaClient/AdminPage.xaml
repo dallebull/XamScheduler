@@ -37,8 +37,8 @@
             <Image Grid.RowSpan="10" Aspect="AspectFill" Source="wallpaper.png"/>
 
            
-                <Button Text="Kontroller" BackgroundColor="#502828ff" TextColor="White"  VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Clicked="OnYearClicked" Grid.Row="1" Grid.Column="0"  />
-            <Button Text="Användare" BackgroundColor="#502828ff" TextColor="White"  VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Clicked="OnAllUsersClicked" Grid.Row="2" Grid.Column="0"  />
+                <Button Text="Kontroller" BackgroundColor="#502828ff" TextColor="White" WidthRequest="120" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Clicked="OnYearClicked" Grid.Row="1" Grid.Column="0"  />
+            <Button Text="Användare" BackgroundColor="#502828ff" TextColor="White" WidthRequest="120"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Clicked="OnAllUsersClicked" Grid.Row="2" Grid.Column="0"  />
        </Grid>
     </ContentPage.Content>
 </ContentPage>

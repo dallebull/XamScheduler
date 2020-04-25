@@ -33,21 +33,13 @@
 
 
             <StackLayout Margin="10" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="50" >
-
-
-                <!--<Label Text="{Binding YearId, Converter={StaticResource YearIDToYearnameConverter}}"
-               Style="{DynamicResource TitleStyle}"
-               Margin="0, 20"
-               HorizontalTextAlignment="Center" 
-               TextColor="White"  FontAttributes="Bold"/>-->
-
                
                 <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">
                     <behaviors:CustomEntry x:Name="kontrollEntry" BackgroundColor="#00FFFFFF" Text="{Binding NextKontroll}" Keyboard="Numeric" VerticalTextAlignment="Center" Placeholder="#"  PlaceholderColor="Gray" TextColor="Black"  HorizontalTextAlignment="Center" FontAttributes="Bold" >
-            <Entry.Behaviors>
-                <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
-            </Entry.Behaviors>      
-        </behaviors:CustomEntry>
+                   <Entry.Behaviors>
+                        <behaviors:EntryLengthValidatorBehavior MaxLength="2" />
+                   </Entry.Behaviors>      
+                  </behaviors:CustomEntry>
                 </Frame>
             
             

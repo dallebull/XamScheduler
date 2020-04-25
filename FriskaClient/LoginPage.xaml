@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FriskaClient.LoginPage"
-    xmlns:behaviors="clr-namespace:FriskaClient.Behaviors">
+                 xmlns:behaviors="clr-namespace:FriskaClient.Behaviors;assembly=FriskaClient"
+             x:Class="FriskaClient.LoginPage">
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Registrera" Clicked="OnSignUpButtonClicked" />
@@ -32,54 +32,16 @@
             </StackLayout>
 
                 <StackLayout Margin="80" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Grid.Row="0" Grid.Column="1">
-                    <!--<Label Text="Email" VerticalTextAlignment="Center" FontSize="Large" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="White"/>-->
-                    <!--<local:CustomEntry
-                         x:Name="EmailnameEntry"
-                                CornerRadius="18"
-                                IsCurvedCornersEnabled="True"
-                                BorderColor="#2828ff"  
-                                FontSize="17"
-                                HeightRequest="40"
-                                PlaceholderColor="Gray"
-                                TextColor="Black"
-                                FontAttributes="Bold"
-                                WidthRequest="100"
-                                Keyboard="Email"
-                                NewBackgroundColor="#FFFFFF" 
-                                VerticalTextAlignment="Center" 
-                                Placeholder="Epost" 
-                                HorizontalTextAlignment="Center" 
-                                HorizontalOptions="Fill"  
-                                Margin="0,0,0,20"
-                         BorderWidth="4"/>-->
+
                     <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">
                         <behaviors:CustomEntry x:Name="EmailnameEntry" Keyboard="Email" BackgroundColor="#50FFFFFF" VerticalTextAlignment="Center" Placeholder="Epost" HorizontalTextAlignment="Center" HorizontalOptions="Fill" FontAttributes="Bold"  />
                     </Frame>
-                    <!--<Label Text="Lösenord" VerticalTextAlignment="Center" FontSize="Large" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="White"/>-->
-
-                    <!--<local:CustomEntry
-                         x:Name="passwordEntry"
-                                CornerRadius="18"
-                                IsCurvedCornersEnabled="True"
-                                BorderColor="#2828ff"  
-                                FontSize="17"
-                                HeightRequest="40"
-                                PlaceholderColor="Gray"
-                                TextColor="Black"
-                                FontAttributes="Bold"
-                                WidthRequest="100"
-                                Keyboard="Email"
-                                NewBackgroundColor="#FFFFFF" 
-                                VerticalTextAlignment="Center" 
-                                Placeholder="Lösenord" 
-                                HorizontalTextAlignment="Center" 
-                                HorizontalOptions="Fill"  
-                                Margin="0,0,0,20"
-                                IsPassword="true"
-                                 BorderWidth="4"/>-->
+                  
                     <Frame IsClippedToBounds="true" Padding="0" CornerRadius="18" BorderColor="#2828FF" HeightRequest="50">
                         <behaviors:CustomEntry x:Name="passwordEntry"  IsPassword="true"   VerticalTextAlignment="Center"  BackgroundColor="#50FFFFFF" Placeholder="Lösenord" HorizontalTextAlignment="Center" HorizontalOptions="Fill" FontAttributes="Bold" />
                     </Frame>
+
+     
 
                     <Label x:Name="messageLabel" VerticalOptions="End" HorizontalOptions="CenterAndExpand" />
                 </StackLayout>
@@ -94,7 +56,9 @@
 
   
 
-        </StackLayout>
-</Grid>
-        </ContentPage.Content>
+             </StackLayout>
+            
+        </Grid>
+        
+    </ContentPage.Content>
 </ContentPage>

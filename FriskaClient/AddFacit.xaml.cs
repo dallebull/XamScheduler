@@ -1,19 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using FriskaClient.Model;
 using FriskaClient.Models;
-using System.Collections.ObjectModel;
-using Android.Content.Res;
+
 
 namespace FriskaClient
 {

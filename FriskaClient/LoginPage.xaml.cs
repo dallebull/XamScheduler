@@ -14,6 +14,7 @@ namespace FriskaClient
     {
 
         static string url = App.url + "Token";
+
         public  LoginPage()
         {
       
@@ -45,12 +46,12 @@ namespace FriskaClient
           
         }
 
-        async void OnSignUpButtonClicked(object sender, EventArgs e)
+         void OnSignUpButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SignUpPage());
+            Navigation.PushAsync(new SignUpPage());
         }
 
-        async void OnLoginButtonClicked(object sender, EventArgs e)
+         void OnLoginButtonClicked(object sender, EventArgs e)
         {
             var login = new Login
             {                
@@ -58,7 +59,7 @@ namespace FriskaClient
                 Password = passwordEntry.Text,
             };
         
-                await Login(login);
+                Login(login);
 
 
         }
